@@ -13,14 +13,15 @@ const Products = () => {
         setProducts(data)
 
         return () => {
-            setProducts([]) 
+            setProducts([])  
         }
     },[])
 
     return (    
         <View>
-            <View>
+            <View style={{ marginTop: 100}}>
                 <FlatList data={products} 
+                    horizontal
                     renderItem={({item}) => <ProductDisplayItem key={item.id} 
                     item={item} /> }
                     keyExtractor={item => item.id} 

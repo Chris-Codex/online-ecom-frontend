@@ -2,11 +2,11 @@
     {
         "_id": "62d0fd145d2e2e40d25d0569",
         "productName": "Iphone",
-        "productDescription": "Quality phone",
+        "productDescription": "iPhone 13 Pro Review: Fast, Impressive But Unfinished | HotHardwareiPhone 13 Pro Review: Fast, Impressive",
         "subDescription": "Yes it is",
-        "img": "http://localhost:5000/imagesUpload/upload/CA_JPG-1657863444629.jpeg",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1656600039/OnlineShop/iphone12_lplyoc.jpg",
         "imgs": [],
-        "trademark": "Iphone Brand",
+        "trademark": "Iphone X",
         "price": 200,
         "category": {
             "_id": "62ca769696986304e648df33",
@@ -29,9 +29,9 @@
     {
         "_id": "62d0fdc30d53a24f3f1077f7",
         "productName": "Android",
-        "productDescription": "Quality phone",
+        "productDescription": "The iPhone 11 Pro will handle everything you need now, and will likely be a top performer for years to come.",
         "subDescription": "Yes it is",
-        "img": "http://localhost:5000/imagesUpload/upload/a_JPG-1657863619461.jpeg",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658178606/OnlineShop/shoe_1_mrl93o.jpg",
         "imgs": [
             "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
             "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
@@ -56,4 +56,6 @@
         "product_id": "62d0fdc30d53a24f3f1077f7",
         "id": "62d0fdc30d53a24f3f1077f7"
     }
+
+    
 ]

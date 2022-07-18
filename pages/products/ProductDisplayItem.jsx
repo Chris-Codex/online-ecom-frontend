@@ -1,30 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, FlatList, Button, Alert } from 'react-native';
 
-import Card from './Card';
+import ProductsCard from './ProductsCard';
+
+// Dimension
+const { width } = Dimensions.get('window');
 
 const ProductDisplayItem = (props) => {
     const { item } = props;
     console.log(item);
     return (
-        <View style={styles.listContainer}>
-            <View style={styles.textContainer}>
-                <Text>
-                {item.productName}
-            </Text>
+        <TouchableOpacity>
+            <View >
+                <ProductsCard item={item} />
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    listContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'red',
-        marginTop: 10,
-    },
+   
 })
 
 export default ProductDisplayItem;
