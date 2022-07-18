@@ -1,0 +1,59 @@
+[
+    {
+        "_id": "62d0fd145d2e2e40d25d0569",
+        "productName": "Iphone",
+        "productDescription": "Quality phone",
+        "subDescription": "Yes it is",
+        "img": "http://localhost:5000/imagesUpload/upload/CA_JPG-1657863444629.jpeg",
+        "imgs": [],
+        "trademark": "Iphone Brand",
+        "price": 200,
+        "category": {
+            "_id": "62ca769696986304e648df33",
+            "name": "Computers",
+            "productIcon": "computers-icon",
+            "color": "#fefefe",
+            "__v": 0,
+            "category_id": "62ca769696986304e648df33",
+            "id": "62ca769696986304e648df33"
+        },
+        "keepTrackProducts": 12,
+        "rating": 6,
+        "reviews": 0,
+        "isFeatured": true,
+        "createdAt": "2022-07-15T05:37:24.677Z",
+        "__v": 0,
+        "product_id": "62d0fd145d2e2e40d25d0569",
+        "id": "62d0fd145d2e2e40d25d0569"
+    },
+    {
+        "_id": "62d0fdc30d53a24f3f1077f7",
+        "productName": "Android",
+        "productDescription": "Quality phone",
+        "subDescription": "Yes it is",
+        "img": "http://localhost:5000/imagesUpload/upload/a_JPG-1657863619461.jpeg",
+        "imgs": [
+            "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
+            "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
+        ],
+        "trademark": "Iphone Brand",
+        "price": 200,
+        "category": {
+            "_id": "62ca769696986304e648df33",
+            "name": "Computers",
+            "productIcon": "computers-icon",
+            "color": "#fefefe",
+            "__v": 0,
+            "category_id": "62ca769696986304e648df33",
+            "id": "62ca769696986304e648df33"
+        },
+        "keepTrackProducts": 12,
+        "rating": 6,
+        "reviews": 0,
+        "isFeatured": true,
+        "createdAt": "2022-07-15T05:40:19.506Z",
+        "__v": 0,
+        "product_id": "62d0fdc30d53a24f3f1077f7",
+        "id": "62d0fdc30d53a24f3f1077f7"
+    }
+]
