@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, FlatList, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, FlatList, Button, Alert, ActivityIndicator } from 'react-native';
 
+import ProductDisplayItem from '../products/ProductDisplayItem'
 
-const data = require('../data/products.json')
+const data = require('../../data/products.json')
 
 const Products = () => {
 
@@ -12,18 +13,17 @@ const Products = () => {
         setProducts(data)
 
         return () => {
-            setProducts([])
+            setProducts([]) 
         }
     },[])
 
     return (    
         <View>
-            <Text>Product</Text>
             <View>
                 <FlatList data={products} 
                     renderItem={({item}) => <ProductDisplayItem key={item.id} 
                     item={item} /> }
-                    keyExtractor={item.name} 
+                    keyExtractor={item => item.id} 
                 />
             </View>
         </View>
