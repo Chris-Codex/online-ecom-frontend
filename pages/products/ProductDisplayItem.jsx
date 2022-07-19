@@ -10,8 +10,8 @@ const ProductDisplayItem = (props) => {
     const { item } = props;
     console.log(item);
     return (
-        <TouchableOpacity>
-            <View >
+        <TouchableOpacity style={styles.opacity}>
+            <View>
                 <ProductsCard item={item} />
             </View>
         </TouchableOpacity>
@@ -19,7 +19,10 @@ const ProductDisplayItem = (props) => {
 }
 
 const styles = StyleSheet.create({
-   
+   opacity: {
+    
+    marginBottom: 10,
+   }
 })
 
 export default ProductDisplayItem;

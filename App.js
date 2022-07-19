@@ -1,18 +1,21 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Products from "./pages/products/Products";
+import Wheader from "./pages/welcomeHeader/Wheader";
+import { NativeBaseProvider } from "native-base";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Products />
-    </View>
+    <NativeBaseProvider>
+      <View style={styles.container}>
+        <Wheader />
+        <Products />
+      </View>
+    </NativeBaseProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#FBD5D2",
     alignItems: "center",
     justifyContent: "center",

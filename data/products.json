@@ -17,7 +17,7 @@
             "category_id": "62ca769696986304e648df33",
             "id": "62ca769696986304e648df33"
         },
-        "keepTrackProducts": 12,
+        "keepTrackProducts": 0,
         "rating": 6,
         "reviews": 0,
         "isFeatured": true,
@@ -55,7 +55,30 @@
         "__v": 0,
         "product_id": "62d0fdc30d53a24f3f1077f7",
         "id": "62d0fdc30d53a24f3f1077f7"
+    },
+
+     {
+        "_id": "3",
+        "productName": "Android",
+        "productDescription": "The iPhone 11 Pro will handle everything you need now, and will likely be a top performer for years to come.",
+        "subDescription": "Yes it is",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658178606/OnlineShop/shoe_1_mrl93o.jpg",
+        "imgs": [
+            "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
+            "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
+        ],
+        "trademark": "Iphone Brand",
+        "price": 200,
+        "keepTrackProducts": 12,
+        "rating": 6,
+        "reviews": 0,
+        "isFeatured": true,
+        "createdAt": "2022-07-15T05:40:19.506Z",
+        "__v": 0,
+        "product_id": "3",
+        "id": "3"
     }
+
 
     
 ]

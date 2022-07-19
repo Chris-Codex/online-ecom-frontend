@@ -9,7 +9,7 @@ const ProductsCard = ({item}) => {
     return (
         <View style={styles.cardContainer}>
              <View style={styles.imgContainer}>
-                <Image source={{ uri:img }} style={styles.image} />
+                <Image resizeMode='contain' source={{ uri:img ? img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
              </View>
         
             <View style={styles.cardHolder}>
@@ -28,7 +28,7 @@ const ProductsCard = ({item}) => {
                     
                     {  keepTrackProducts > 0 ? (
                     <Text style={styles.addText}>ADD TO CART</Text>
-                ) : <Text style={styles.addText}>Not Available</Text>}
+                ) : <Text style={styles.notAvailable}>Not Available</Text>}
                 </View>
                 
             </View>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginTop: 55,
         alignItems: "center",
-        backgroundColor: '#F9F2F2',    
+        backgroundColor: '#F9F2F2',   
     },
 
     cardHolder: {
@@ -59,14 +59,14 @@ const styles = StyleSheet.create({
 
     imgContainer: {
         backgroundColor: 'transparent',
-        marginTop: -5,
+        marginTop: 5,
     },
 
     image: {
-        width: width - 5,
-        marginTop: 10,
+        width: 162,
+        marginTop: -4,
         borderRadius: 10,
-        height: width - 20 - 30,
+        height: width - 20 - 35,
         backgroundColor: 'transparent',
     },
 
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 
     tradeMark: {
         fontSize: 17,
-        color: '#828282',
+        color: '#8C8C8C',
         marginLeft: 10,
         fontWeight: 'bold',
         marginTop: -4,
@@ -107,6 +107,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 13,
         color: '#1662A2',
+    },
+
+    notAvailable: {
+        fontWeight: 'bold',
+        fontSize: 13,
+        color: 'red',
+        marginLeft: 10,
     }
 
 
