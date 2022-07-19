@@ -7,7 +7,7 @@ const width = Dimensions.get('screen').width / 2 - 30;
 const ProductsCard = ({item}) => {
     const {_id, img, productName, productDescription, price, trademark,  keepTrackProducts} = item;
     return (
-        <View style={styles.cardContainer}>
+            <View style={styles.cardContainer}>
              <View style={styles.imgContainer}>
                 <Image resizeMode='contain' source={{ uri:img ? img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
              </View>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 
     imgContainer: {
         backgroundColor: 'transparent',
-        marginTop: 5,
+        marginTop: 30,
     },
 
     image: {

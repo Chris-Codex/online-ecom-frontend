@@ -4,7 +4,7 @@
         "productName": "Iphone",
         "productDescription": "iPhone 13 Pro Review: Fast, Impressive But Unfinished | HotHardwareiPhone 13 Pro Review: Fast, Impressive",
         "subDescription": "Yes it is",
-        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1656600039/OnlineShop/iphone12_lplyoc.jpg",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658246569/OnlineShop/pro-11_khiuwu.png",
         "imgs": [],
         "trademark": "Iphone X",
         "price": 200,
@@ -31,7 +31,7 @@
         "productName": "Android",
         "productDescription": "The iPhone 11 Pro will handle everything you need now, and will likely be a top performer for years to come.",
         "subDescription": "Yes it is",
-        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658178606/OnlineShop/shoe_1_mrl93o.jpg",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658247701/OnlineShop/shoe_1_ovq8lb.png",
         "imgs": [
             "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
             "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
@@ -59,15 +59,15 @@
 
      {
         "_id": "3",
-        "productName": "Android",
-        "productDescription": "The iPhone 11 Pro will handle everything you need now, and will likely be a top performer for years to come.",
+        "productName": "Nike Sleveless",
+        "productDescription": "NIKE Men's M NSW Club Tee T-Shirt",
         "subDescription": "Yes it is",
-        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658178606/OnlineShop/shoe_1_mrl93o.jpg",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658247972/OnlineShop/nike_1_gfnrb0.png",
         "imgs": [
             "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
             "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
         ],
-        "trademark": "Iphone Brand",
+        "trademark": "Nike",
         "price": 200,
         "keepTrackProducts": 12,
         "rating": 6,
@@ -77,6 +77,50 @@
         "__v": 0,
         "product_id": "3",
         "id": "3"
+    },
+
+     {
+        "_id": "4",
+        "productName": "Xbox Series X",
+        "productDescription": "Experience next-gen speed and performance with the Xbox Velocity Architecture, powered by a custom SSD and integrated software",
+        "subDescription": "Yes it is",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658248194/OnlineShop/xbox_fczwjf.png",
+        "imgs": [
+            "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
+            "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
+        ],
+        "trademark": "Xbox",
+        "price": 600,
+        "keepTrackProducts": 12,
+        "rating": 6,
+        "reviews": 0,
+        "isFeatured": true,
+        "createdAt": "2022-07-15T05:40:19.506Z",
+        "__v": 0,
+        "product_id": "4",
+        "id": "4"
+    },
+
+     {
+        "_id": "5",
+        "productName": "MaaMgic Men's",
+        "productDescription": "MaaMgic Men's Swimming Shorts Quick Dry Trunks Bathing Short Casual Lounge Shorts with Mesh Lining",
+        "subDescription": "Yes it is",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658248437/OnlineShop/short_1_tsqzji.png",
+        "imgs": [
+            "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
+            "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
+        ],
+        "trademark": "Xbox",
+        "price": 18,
+        "keepTrackProducts": 12,
+        "rating": 6,
+        "reviews": 0,
+        "isFeatured": true,
+        "createdAt": "2022-07-15T05:40:19.506Z",
+        "__v": 0,
+        "product_id": "5",
+        "id": "5"
     }
 
 

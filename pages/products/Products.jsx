@@ -5,6 +5,7 @@ import {Container, Header, Item, Text, Button, Input} from 'native-base'
 
 
 import ProductDisplayItem from '../products/ProductDisplayItem'
+import ProductFilter from './ProductFilter';
 
 const data = require('../../data/products.json')
 
@@ -12,28 +13,51 @@ const Products = () => {
 
     const [products, setProducts] = useState([])
     const [search, setSearch] = useState([])
+    const [searchText, setSearchText] = useState("")
 
+    // sets the products to the data from the json file
     useEffect(() => {
         setProducts(data)
         setSearch(data)
+        setSearchText(false)
 
         return () => {
-            setProducts([])  
+            setProducts([])
+            setSearch([])
+        setSearchText()  
         }
     },[])
+
+    // filter products by search text
+    const filterProducts = (text) => {
+        setSearch(products.filter(item => item.productName.toLowerCase().includes(text.toLowerCase())))
+    }
+
+    // search bar
+    const openList = () => {
+        setSearchText(true)
+    }
+
+    // close search bar
+    const closeList = () => {
+        setSearchText(false)
+    }
 
     return (    
             <View>
                 <View style={{flexDirection: "row"}}>
                     <View style={styles.search}>
                         <Icon name="search" style={{marginTop: 18, marginLeft: 20}} size={20} color="#1662A2" />
-                        <TextInput style={styles.headerTextInput} placeholder="Search" />
+                        <TextInput onChangeText={(text) => filterProducts(text)} style={styles.headerTextInput} placeholder="Search" />
                     </View>
                     <View style={styles.searchBtn}>
-                        <Icon name="filter-list" color="white" size={20}  onPress={() =>{}}  />
+                        <Icon name="filter-list" color="white" size={20} onPress={() => openList()}    />
                     </View>
                 </View>
-                <FlatList data={products} 
+                {searchText > 0 ? (
+                    <ProductFilter search={search} />
+                ) : (
+                    <FlatList data={products} 
                     style={styles.flatList}
                     numColumns={2}
                     columnWrapperStyle={{ justifyContent: "space-between", marginVertical: -20 }}
@@ -41,6 +65,7 @@ const Products = () => {
                     item={item} /> }
                     keyExtractor={item => item.id} 
                 />
+                )}
             
         </View>
     )
