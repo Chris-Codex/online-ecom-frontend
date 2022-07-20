@@ -121,7 +121,51 @@
         "__v": 0,
         "product_id": "5",
         "id": "5"
-    }
+    },
+
+     {
+        "_id": "6",
+        "productName": "MaaMgic Men's",
+        "productDescription": "MaaMgic Men's Swimming Shorts Quick Dry Trunks Bathing Short Casual Lounge Shorts with Mesh Lining",
+        "subDescription": "Yes it is",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658248437/OnlineShop/short_1_tsqzji.png",
+        "imgs": [
+            "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
+            "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
+        ],
+        "trademark": "Xbox",
+        "price": 18,
+        "keepTrackProducts": 12,
+        "rating": 6,
+        "reviews": 0,
+        "isFeatured": true,
+        "createdAt": "2022-07-15T05:40:19.506Z",
+        "__v": 0,
+        "product_id": "6",
+        "id": "6"
+    },
+
+     {
+        "_id": "7",
+        "productName": "Nike Sleveless",
+        "productDescription": "NIKE Men's M NSW Club Tee T-Shirt",
+        "subDescription": "Yes it is",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658247972/OnlineShop/nike_1_gfnrb0.png",
+        "imgs": [
+            "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
+            "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
+        ],
+        "trademark": "Nike",
+        "price": 200,
+        "keepTrackProducts": 12,
+        "rating": 6,
+        "reviews": 0,
+        "isFeatured": true,
+        "createdAt": "2022-07-15T05:40:19.506Z",
+        "__v": 0,
+        "product_id": "7",
+        "id": "7"
+    },
 
 
     

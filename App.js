@@ -5,12 +5,10 @@ import { NativeBaseProvider } from "native-base";
 
 export default function App() {
   return (
-    <NativeBaseProvider>
-      <View style={styles.container}>
-        <Wheader />
-        <Products />
-      </View>
-    </NativeBaseProvider>
+    <View style={styles.container}>
+      <Wheader />
+      <Products />
+    </View>
   );
 }
 

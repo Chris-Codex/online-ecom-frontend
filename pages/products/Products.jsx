@@ -12,25 +12,25 @@ const data = require('../../data/products.json')
 const Products = () => {
 
     const [products, setProducts] = useState([])
-    const [search, setSearch] = useState([])
-    const [searchText, setSearchText] = useState("")
+    const [searchProducts, setSearchProducts] = useState([])
+    const [targetProduct, setSearchText] = useState("")
 
     // sets the products to the data from the json file
     useEffect(() => {
         setProducts(data)
-        setSearch(data)
+        setSearchProducts(data)
         setSearchText(false)
 
         return () => {
             setProducts([])
-            setSearch([])
+           setSearchProducts([])
         setSearchText()  
         }
     },[])
 
     // filter products by search text
     const filterProducts = (text) => {
-        setSearch(products.filter(item => item.productName.toLowerCase().includes(text.toLowerCase())))
+        setSearchProducts(products.filter(item => item.productName.toLowerCase().includes(text.toLowerCase())))
     }
 
     // search bar
@@ -43,19 +43,20 @@ const Products = () => {
         setSearchText(false)
     }
 
+    // search bar
     return (    
             <View>
                 <View style={{flexDirection: "row"}}>
                     <View style={styles.search}>
-                        <Icon name="search" style={{marginTop: 18, marginLeft: 20}} size={20} color="#1662A2" />
-                        <TextInput onChangeText={(text) => filterProducts(text)} style={styles.headerTextInput} placeholder="Search" />
+                        <TextInput onChangeText={(text) => filterProducts(text)} onFocus={openList} style={styles.headerTextInput} placeholder="Search" />
+                        <Icon name="search" style={{marginTop: 18, marginLeft: 20}}  size={20} color="#1662A2" />
                     </View>
-                    <View style={styles.searchBtn}>
+                    {/* <View style={styles.searchBtn}>
                         <Icon name="filter-list" color="white" size={20} onPress={() => openList()}    />
-                    </View>
+                    </View> */}
                 </View>
-                {searchText > 0 ? (
-                    <ProductFilter search={search} />
+                {targetProduct > 0 ? (
+                    <ProductFilter searchProducts={searchProducts} />
                 ) : (
                     <FlatList data={products} 
                     style={styles.flatList}
@@ -74,7 +75,7 @@ const Products = () => {
 const styles = StyleSheet.create({
     search: {
         flexDirection: 'row',
-        width: 320,
+        width: 360,
         height: 50,
         backgroundColor: "#fff",
         marginLeft: 10,
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
     headerTextInput: {
         height: 55,
         width: 300,
+        marginLeft: 10,
     }
 })
 

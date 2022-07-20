@@ -1,18 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, SafeAreaView} from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, ScrollView,SafeAreaView} from 'react-native';
 
 // image dimensions
 const Imagewidth = Dimensions.get('screen').width / 2 - 60;
 const mainWidth = Dimensions.get('screen').width /1.1;
 
 const ProductFilter = (props) => {
-    const {search} = props
-    console.log("Search:", search)
+    const {searchProducts} = props
+    console.log("Search:", searchProducts)
     return (
-        <View style={styles.container}>
-            {search.length > 0 ? (
-                search.map((result) => (
-                    <View style={styles.displayContainer} key={result.id}>
+       <ScrollView style={{marginBottom: 150}}>
+         <View style={styles.container}>
+            {searchProducts.length > 0 ? (
+                searchProducts.map((result) => (
+                    <TouchableOpacity style={{flex: 1}}>
+                        <View style={styles.displayContainer} key={result.id}>
                        <View style={styles.imageContainer}>
                          <Image source={{uri: result.img ? result.img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
                        </View>
@@ -24,12 +27,14 @@ const ProductFilter = (props) => {
                                 <Text style={styles.addToCartBtn}>{result.keepTrackProducts > 0 ? "ADD TO CART" : <Text style={{color: "red"}}>Not Available</Text>}</Text>
                             </View>
                        </View>
-                     </View> 
+                     </View>
+                    </TouchableOpacity> 
                 ))
             ) : (
                 <Text style={styles.text}>No Products Found</Text>
             )}
         </View>
+       </ScrollView>
     )
 }
 
@@ -49,7 +54,14 @@ const styles = StyleSheet.create({
     displayContainer: {
         flex: 1,
         flexDirection: 'row',
+        backgroundColor: '#F9F2F2',
+        marginTop: 10,
+        borderRadius: 10,
         
+    },
+
+    imageContainer: {
+        margin: 10,
     },
 
     image: {
@@ -63,7 +75,7 @@ const styles = StyleSheet.create({
 
     textContainer: {
         flex: 1,
-        marginTop: 20,
+        marginTop: 30,
     },
 
     addToCartContainer: {
@@ -90,6 +102,7 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontWeight: 'bold',
         color: '#1662A2',
+        marginRight: 10,
     }
 })
 
