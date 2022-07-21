@@ -103,15 +103,15 @@
 
      {
         "_id": "5",
-        "productName": "MaaMgic Men's",
-        "productDescription": "MaaMgic Men's Swimming Shorts Quick Dry Trunks Bathing Short Casual Lounge Shorts with Mesh Lining",
+        "productName": "Tommy Hilfiger",
+        "productDescription": "Tommy Hilfiger Men's Bathrobe: Exude charm and elegance with Tommy Hilfiger, even when it comes to men's nightwear. Tommy's collection of mens pyjamas, bathrobes and loungewear is designed with pure comfort in mind",
         "subDescription": "Yes it is",
-        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658248437/OnlineShop/short_1_tsqzji.png",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658443444/OnlineShop/night_wear_j4gfop.png",
         "imgs": [
             "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
             "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
         ],
-        "trademark": "Xbox",
+        "trademark": "Robin Satin",
         "price": 18,
         "keepTrackProducts": 12,
         "rating": 6,
@@ -125,10 +125,10 @@
 
      {
         "_id": "6",
-        "productName": "MaaMgic Men's",
+        "productName": "Illegal Halter",
         "productDescription": "MaaMgic Men's Swimming Shorts Quick Dry Trunks Bathing Short Casual Lounge Shorts with Mesh Lining",
         "subDescription": "Yes it is",
-        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658248437/OnlineShop/short_1_tsqzji.png",
+        "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658443780/OnlineShop/gown_wear_gyovjk.png",
         "imgs": [
             "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
             "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
@@ -165,7 +165,7 @@
         "__v": 0,
         "product_id": "7",
         "id": "7"
-    },
+    }
 
 
     

@@ -1,30 +1,44 @@
 import React, {useState, useEffect} from 'react';
-import { View, StyleSheet,  FlatList, TextInput } from 'react-native';
+import { View, StyleSheet,  FlatList, Text, TextInput, Image } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {Container, Header, Item, Text, Button, Input} from 'native-base'
+
 
 
 import ProductDisplayItem from '../products/ProductDisplayItem'
 import ProductFilter from './ProductFilter';
+import FectchedCategory from './FectchedCategory';
+import Caurosel from "../carousel/Carousel";
 
 const data = require('../../data/products.json')
+const cat = require('../../data/categories.json')
 
 const Products = () => {
 
-    const [products, setProducts] = useState([])
-    const [searchProducts, setSearchProducts] = useState([])
-    const [targetProduct, setSearchText] = useState("")
+    const [products, setProducts] = useState([]) // products array
+    const [searchProducts, setSearchProducts] = useState([]) // to store the filtered products
+    const [targetProduct, setSearchTarget] = useState("") // targets the search text
+    const [productCategory, setProductCategory] = useState([]) // targets the product category
+    const [isActive, setIsActive] = useState() // to check if the filter is active
+    const [initialState, setInitialState] = useState([]) // to check if the filter is active
+    const [pCat, setpCat] = useState([]) 
+
 
     // sets the products to the data from the json file
     useEffect(() => {
         setProducts(data)
         setSearchProducts(data)
-        setSearchText(false)
+        setSearchTarget(false)
+        setProductCategory(cat)
+        setIsActive(-1)
+        setInitialState(data)
 
         return () => {
             setProducts([])
-           setSearchProducts([])
-        setSearchText()  
+            setSearchProducts([])
+            setSearchTarget() 
+            setProductCategory([])
+            setIsActive()
+            setInitialState()  
         }
     },[])
 
@@ -33,28 +47,47 @@ const Products = () => {
         setSearchProducts(products.filter(item => item.productName.toLowerCase().includes(text.toLowerCase())))
     }
 
+    // filter products by category
+    const alternateCategory = (cats) => {
+        {
+            cats === "All" ? [setpCat(initialState), setIsActive(true)] : [setpCat(products.filter(item => item.category._id === cats)), setIsActive(true)]
+        }
+    }
+
     // search bar
     const openList = () => {
-        setSearchText(true)
+        setSearchTarget(true)
     }
 
     // close search bar
     const closeList = () => {
-        setSearchText(false)
+        setSearchTarget(false)
     }
 
     // search bar
     return (    
             <View>
+                <FectchedCategory productCategory={productCategory} 
+                                      pCat={pCat} active={isActive}
+                                      alternativeCategory={alternateCategory}
+                                      isActive={isActive}
+                                      setIsActive={setIsActive}
+                     />
                 <View style={{flexDirection: "row"}}>
                     <View style={styles.search}>
                         <TextInput onChangeText={(text) => filterProducts(text)} onFocus={openList} style={styles.headerTextInput} placeholder="Search" />
-                        <Icon name="search" style={{marginTop: 18, marginLeft: 20}}  size={20} color="#1662A2" />
+                         {targetProduct == true ? (
+                       <Icon name="cancel" onPress={closeList} style={{marginTop: 15, marginLeft: 20}}  size={25} color="#1662A2" />
+                    ) : null }
                     </View>
-                    {/* <View style={styles.searchBtn}>
-                        <Icon name="filter-list" color="white" size={20} onPress={() => openList()}    />
-                    </View> */}
                 </View>
+                <View style={{marginTop: 10}}>
+                    {/* <Caurosel /> */}
+                    <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: "100%", height: 200, borderRadius: 10}} />
+                </View>
+                
+                    
+                
                 {targetProduct > 0 ? (
                     <ProductFilter searchProducts={searchProducts} />
                 ) : (
@@ -75,12 +108,12 @@ const Products = () => {
 const styles = StyleSheet.create({
     search: {
         flexDirection: 'row',
-        width: 360,
+        width: 370,
         height: 50,
         backgroundColor: "#fff",
-        marginLeft: 10,
+        opacity: 0.4,
         borderRadius: 10,
-        marginTop: 15
+        marginTop: -40
     },
 
     searchBtn: {
@@ -99,6 +132,10 @@ const styles = StyleSheet.create({
         height: 55,
         width: 300,
         marginLeft: 10,
+    },
+
+    flatList: {
+        marginTop: 10,
     }
 })
 
