@@ -6,7 +6,7 @@ const FectchedCategory = (props) => {
         <ScrollView bounces={true} horizontal={true} style={{marginBottom: 40}}>
             <View style={styles.container}>
                 <TouchableOpacity key={1} onPress={() => {
-                    props.productCategory, props.setIsActive(-1);
+                    props.catFilter('app'), props.setIsActive(-1);
                 }}>
                     <View style={[ {margin: 5}, 
                     props.isActive == -1 ? styles.isActive : styles.notActive]}>
@@ -16,7 +16,7 @@ const FectchedCategory = (props) => {
                 {props.productCategory.map((results) => {
                     return (
                         <TouchableOpacity key={results._id} onPress={() => {
-                            props.productCategory, props.setIsActive(props.productCategory.indexOf(results));
+                            props.catFilter(results._id), props.setIsActive(props.productCategory.indexOf(results));
                         }}>
                             <View style={[ {margin: 5}, 
                             props.isActive == props.productCategory.indexOf(results) ? styles.isActive : styles.notActive]}>

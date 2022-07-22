@@ -21,7 +21,7 @@ const Products = () => {
     const [isActive, setIsActive] = useState() // to check if the filter is active
     const [initialState, setInitialState] = useState([]) // to check if the filter is active
     const [pCat, setpCat] = useState([]) 
-
+   
 
     // sets the products to the data from the json file
     useEffect(() => {
@@ -50,7 +50,9 @@ const Products = () => {
     // filter products by category
     const alternateCategory = (cats) => {
         {
-            cats === "All" ? [setpCat(initialState), setIsActive(true)] : [setpCat(products.filter(item => item.category._id === cats)), setIsActive(true)]
+            cats === "All" ? [setpCat(initialState), setIsActive(true)] : [
+                setpCat(products.filter(item => item.category._id === cats)), setIsActive(true)
+            ]
         }
     }
 
@@ -67,9 +69,9 @@ const Products = () => {
     // search bar
     return (    
             <View>
-                <FectchedCategory productCategory={productCategory} 
+                    <FectchedCategory productCategory={productCategory} 
                                       pCat={pCat} active={isActive}
-                                      alternativeCategory={alternateCategory}
+                                      catFilter={alternateCategory}
                                       isActive={isActive}
                                       setIsActive={setIsActive}
                      />
@@ -81,12 +83,10 @@ const Products = () => {
                     ) : null }
                     </View>
                 </View>
-                <View style={{marginTop: 10}}>
+                <View style={{marginTop: 10, marginLeft: 5, marginRight: 5}}>
                     {/* <Caurosel /> */}
                     <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: "100%", height: 200, borderRadius: 10}} />
                 </View>
-                
-                    
                 
                 {targetProduct > 0 ? (
                     <ProductFilter searchProducts={searchProducts} />
@@ -108,12 +108,13 @@ const Products = () => {
 const styles = StyleSheet.create({
     search: {
         flexDirection: 'row',
-        width: 370,
+        width: 378,
         height: 50,
         backgroundColor: "#fff",
         opacity: 0.4,
         borderRadius: 10,
-        marginTop: -40
+        marginTop: -40,
+        marginLeft: 5,
     },
 
     searchBtn: {

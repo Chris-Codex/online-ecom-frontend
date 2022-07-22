@@ -10,7 +10,7 @@ const Header = () => {
                     <Text style={styles.headerText}>Welcome to</Text>
                     <Text style={styles.headerText2}>Griffith Stores</Text>
                 </View>
-                <Icon style={{marginRight: 20}} name="menu" size={30} color="#1662A2" />
+                <Icon style={{marginRight: 10}} name="menu" size={30} color="#1662A2" />
             </View>
     )
 }
@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
 
     headerText: {
         fontSize: 20,
-        marginLeft: 20,
+        marginLeft: 5,
         fontWeight: "bold",
         color: "black",
     },
 
      headerText2: {
         fontSize: 30,
-        marginLeft: 20,
+        marginLeft: 5,
         fontWeight: "bold",
         color: "#1662A2",
     },
