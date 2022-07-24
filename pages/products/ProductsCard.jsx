@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, FlatList, Button, Alert } from 'react-native';
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
+
 // Dimesion
 const width = Dimensions.get('screen').width / 2 - 30;
 
@@ -15,7 +15,7 @@ const ProductsCard = ({item}) => {
         
             <View style={styles.cardHolder}>
                 <Text style={styles.productTitle}>
-                    {productName. length > 20 ? productName.substring(0, 20) + '...' : productName}
+                    {productName.length > 20 ? productName.substring(0, 20) + '...' : productName}
                 </Text>
                 <Text style={styles.productDescriiption}>
                     {productDescription. length > 20 ? productDescription.substring(0, 20) + '...' : productDescription}

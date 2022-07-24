@@ -31,7 +31,9 @@ const ProductFilter = (props) => {
                     </TouchableOpacity> 
                 ))
             ) : (
-                <Text style={styles.text}>No Products Found</Text>
+                <View>
+                    <Text style={styles.text}>No Products Found</Text>
+                </View>
             )}
         </View>
        </ScrollView>

@@ -8,6 +8,7 @@ import ProductDisplayItem from '../products/ProductDisplayItem'
 import ProductFilter from './ProductFilter';
 import FectchedCategory from './FectchedCategory';
 import Caurosel from "../carousel/Carousel";
+import { ScrollView } from 'native-base';
 
 const data = require('../../data/products.json')
 const cat = require('../../data/categories.json')
@@ -75,7 +76,11 @@ const Products = () => {
                                       isActive={isActive}
                                       setIsActive={setIsActive}
                      />
-                <View style={{flexDirection: "row"}}>
+                <View style={{marginTop: -44, marginLeft: 5, marginRight: 5}}>
+                    {/* <Caurosel /> */}
+                    <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: "100%", height: 200, borderRadius: 10}} />
+                </View>
+                 <View style={{flexDirection: "row"}}>
                     <View style={styles.search}>
                         <TextInput onChangeText={(text) => filterProducts(text)} onFocus={openList} style={styles.headerTextInput} placeholder="Search" />
                          {targetProduct == true ? (
@@ -83,22 +88,18 @@ const Products = () => {
                     ) : null }
                     </View>
                 </View>
-                <View style={{marginTop: 10, marginLeft: 5, marginRight: 5}}>
-                    {/* <Caurosel /> */}
-                    <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: "100%", height: 200, borderRadius: 10}} />
-                </View>
                 
-                {targetProduct > 0 ? (
+                {targetProduct == true ? (
                     <ProductFilter searchProducts={searchProducts} />
                 ) : (
-                    <FlatList data={products} 
-                    style={styles.flatList}
-                    numColumns={2}
-                    columnWrapperStyle={{ justifyContent: "space-between", marginVertical: -20 }}
-                    renderItem={({item}) => <ProductDisplayItem key={item.id} 
-                    item={item} /> }
-                    keyExtractor={item => item.id} 
-                />
+                         <FlatList data={products} 
+                                style={styles.flatList}
+                                numColumns={2}
+                                columnWrapperStyle={{ justifyContent: "space-between", marginVertical: -20 }}
+                                renderItem={({item}) => <ProductDisplayItem key={item.id} 
+                                item={item} /> }
+                                keyExtractor={item => item.id} 
+                            />
                 )}
             
         </View>
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         opacity: 0.4,
         borderRadius: 10,
-        marginTop: -40,
+        marginTop: 10,
         marginLeft: 5,
     },
 
