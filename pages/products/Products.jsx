@@ -21,7 +21,7 @@ const Products = () => {
     const [productCategory, setProductCategory] = useState([]) // targets the product category
     const [isActive, setIsActive] = useState() // to check if the filter is active
     const [initialState, setInitialState] = useState([]) // to check if the filter is active
-    const [pCat, setpCat] = useState([]) 
+    const [pCat, setpCat] = useState([])//
    
 
     // sets the products to the data from the json file
@@ -32,14 +32,17 @@ const Products = () => {
         setProductCategory(cat)
         setIsActive(-1)
         setInitialState(data)
-
+        
+        
+       
         return () => {
             setProducts([])
             setSearchProducts([])
             setSearchTarget() 
             setProductCategory([])
             setIsActive()
-            setInitialState()  
+            setInitialState() 
+            
         }
     },[])
 
@@ -51,7 +54,7 @@ const Products = () => {
     // filter products by category
     const alternateCategory = (cats) => {
         {
-            cats === "All" ? [setpCat(initialState), setIsActive(true)] : [
+            cats === "all" ? [setpCat(initialState), setIsActive(true)] : [
                 setpCat(products.filter(item => item.category._id === cats)), setIsActive(true)
             ]
         }
@@ -70,13 +73,7 @@ const Products = () => {
     // search bar
     return (    
             <View>
-                    <FectchedCategory productCategory={productCategory} 
-                                      pCat={pCat} active={isActive}
-                                      catFilter={alternateCategory}
-                                      isActive={isActive}
-                                      setIsActive={setIsActive}
-                     />
-                <View style={{marginTop: -44, marginLeft: 5, marginRight: 5}}>
+                <View style={{marginTop: 10, marginLeft: 5, marginRight: 5}}>
                     {/* <Caurosel /> */}
                     <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: "100%", height: 200, borderRadius: 10}} />
                 </View>
@@ -89,17 +86,36 @@ const Products = () => {
                     </View>
                 </View>
                 
-                {targetProduct == true ? (
-                    <ProductFilter searchProducts={searchProducts} />
+                {targetProduct > 0 ? (
+                    <View style={{flex: 1}}>
+                        <ProductFilter searchProducts={searchProducts} />
+                    </View>
                 ) : (
-                         <FlatList data={products} 
-                                style={styles.flatList}
-                                numColumns={2}
-                                columnWrapperStyle={{ justifyContent: "space-between", marginVertical: -20 }}
-                                renderItem={({item}) => <ProductDisplayItem key={item.id} 
-                                item={item} /> }
-                                keyExtractor={item => item.id} 
-                            />
+                        <>
+                        <View style={{flex: 1}}>
+                            <FectchedCategory productCategory={productCategory} 
+                                      pCat={pCat} active={isActive}
+                                      catFilter={alternateCategory}
+                                      isActive={isActive}
+                                      setIsActive={setIsActive}
+                             />
+                        </View>
+                        {pCat.length > 0 ? (
+                          <View style={{ flex: 1, marginTop: -500}}>
+                            {pCat.map((item) => {
+                                {console.log("MEGAAAAAAAAAAAA", item)}
+                                return (
+                                    <ProductDisplayItem key={item._id} item={item} />
+                                )
+                            })}
+                          </View>
+                        ): (
+                            <View>
+                                <Text>No Products</Text>
+                            </View>
+                        )}
+                       
+                </>
                 )}
             
         </View>

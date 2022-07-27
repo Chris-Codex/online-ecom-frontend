@@ -8,7 +8,6 @@ const { width } = Dimensions.get('window');
 
 const ProductDisplayItem = (props) => {
     const { item } = props;
-    console.log(item);
     return (
         <TouchableOpacity style={styles.opacity}>
             <View>

@@ -8,7 +8,7 @@ const ProductsCard = ({item}) => {
     const {_id, img, productName, productDescription, price, trademark,  keepTrackProducts} = item;
     return (
 
-             <View style={styles.cardContainer}>
+             <View style={styles.cardContainer} key={_id}>
              <View style={styles.imgContainer}>
                 <Image resizeMode='contain' source={{ uri:img ? img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
              </View>
@@ -17,7 +17,7 @@ const ProductsCard = ({item}) => {
                 <Text style={styles.productTitle}>
                     {productName.length > 20 ? productName.substring(0, 20) + '...' : productName}
                 </Text>
-                <Text style={styles.productDescriiption}>
+                <Text style={styles.productDescription}>
                     {productDescription. length > 20 ? productDescription.substring(0, 20) + '...' : productDescription}
                 </Text>
                 <Text style={styles.tradeMark}>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         width: width,
         height: 260,
         marginHorizontal: 10,
-        marginTop: 55,
+        marginTop: 40,
         alignItems: "center",
         backgroundColor: '#F9F2F2',
         
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
         width: width - 20,
         height: width - 30 - 7,
         marginTop: 10, 
-        marginBottom: 8,
     },
 
     imgContainer: {

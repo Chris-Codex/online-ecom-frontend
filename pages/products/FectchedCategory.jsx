@@ -5,7 +5,7 @@ const FectchedCategory = (props) => {
     return (
         <ScrollView bounces={true} horizontal={true} style={{marginBottom: 40}}>
             <View style={styles.container}>
-                <TouchableOpacity key={1} onPress={() => {
+                <TouchableOpacity  onPress={() => {
                     props.catFilter('app'), props.setIsActive(-1);
                 }}>
                     <View style={[ {margin: 5}, 
@@ -15,12 +15,12 @@ const FectchedCategory = (props) => {
                 </TouchableOpacity>
                 {props.productCategory.map((results) => {
                     return (
-                        <TouchableOpacity key={results._id} onPress={() => {
-                            props.catFilter(results._id), props.setIsActive(props.productCategory.indexOf(results));
+                        <TouchableOpacity  onPress={() => {
+                            props.catFilter(results.id), props.setIsActive(props.productCategory.indexOf(results));
                         }}>
-                            <View style={[ {margin: 5}, 
+                            <View key={results.id} style={[ {margin: 5}, 
                             props.isActive == props.productCategory.indexOf(results) ? styles.isActive : styles.notActive]}>
-                                <Text style={styles.renderText}>{results.name}</Text>
+                                <Text key={results.id} style={styles.renderText}>{results.name}</Text>
                             </View>
                         </TouchableOpacity>
                     )

@@ -14,12 +14,12 @@ const ProductFilter = (props) => {
          <View style={styles.container}>
             {searchProducts.length > 0 ? (
                 searchProducts.map((result) => (
-                    <TouchableOpacity style={{flex: 1}}>
-                        <View style={styles.displayContainer} key={result.id}>
+                    <TouchableOpacity style={{flex: 1}} key={result._id}>
+                        <View style={styles.displayContainer} >
                        <View style={styles.imageContainer}>
                          <Image source={{uri: result.img ? result.img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
                        </View>
-                       <View style={styles.textContainer}>
+                       <View style={styles.textContainer} key={result._id}>
                             <Text style={styles.resultText1}>{result.productName}</Text>
                             <Text style={styles.resultText2}>{result.productDescription.length > 0 ?  result.productDescription.substring(0, 50) + '...' : result.productDescription }</Text>
                             <View style={styles.addToCartContainer}>
