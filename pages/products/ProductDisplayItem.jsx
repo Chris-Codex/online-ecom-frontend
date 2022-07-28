@@ -19,8 +19,7 @@ const ProductDisplayItem = (props) => {
 
 const styles = StyleSheet.create({
    opacity: {
-    
-    marginBottom: 10,
+    marginBottom: -20,
    }
 })
 

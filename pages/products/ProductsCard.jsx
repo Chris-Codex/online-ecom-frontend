@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         marginTop: -2,
     },
 
-    productDescriiption: {
+    productDescription: {
         margin: 10,
         fontWeight: 'bold',
         marginTop: 4,

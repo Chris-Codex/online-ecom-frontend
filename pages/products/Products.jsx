@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, StyleSheet,  FlatList, Text, TextInput, Image } from 'react-native';
+import { View, StyleSheet,  ScrollView, Text, TextInput, Image } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 
@@ -8,20 +8,21 @@ import ProductDisplayItem from '../products/ProductDisplayItem'
 import ProductFilter from './ProductFilter';
 import FectchedCategory from './FectchedCategory';
 import Caurosel from "../carousel/Carousel";
-import { ScrollView } from 'native-base';
+
 
 const data = require('../../data/products.json')
-const cat = require('../../data/categories.json')
+const categories = require('../../data/categories.json')
 
 const Products = () => {
 
     const [products, setProducts] = useState([]) // products array
     const [searchProducts, setSearchProducts] = useState([]) // to store the filtered products
     const [targetProduct, setSearchTarget] = useState("") // targets the search text
-    const [productCategory, setProductCategory] = useState([]) // targets the product category
+    const [cat, setCat] = useState([]) // targets the product category
+    const [pCat, setpCat] = useState([])//
     const [isActive, setIsActive] = useState() // to check if the filter is active
     const [initialState, setInitialState] = useState([]) // to check if the filter is active
-    const [pCat, setpCat] = useState([])//
+    
    
 
     // sets the products to the data from the json file
@@ -29,7 +30,8 @@ const Products = () => {
         setProducts(data)
         setSearchProducts(data)
         setSearchTarget(false)
-        setProductCategory(cat)
+        setCat(categories)
+        setpCat(data)
         setIsActive(-1)
         setInitialState(data)
         
@@ -39,9 +41,9 @@ const Products = () => {
             setProducts([])
             setSearchProducts([])
             setSearchTarget() 
-            setProductCategory([])
+            setCat([])
             setIsActive()
-            setInitialState() 
+            setInitialState()
             
         }
     },[])
@@ -91,9 +93,11 @@ const Products = () => {
                         <ProductFilter searchProducts={searchProducts} />
                     </View>
                 ) : (
-                        <>
-                        <View style={{flex: 1}}>
-                            <FectchedCategory productCategory={productCategory} 
+                        
+                        <ScrollView>
+                            <View style={{flex: 1}}>
+                            <FectchedCategory 
+                                      cat={cat} 
                                       pCat={pCat} active={isActive}
                                       catFilter={alternateCategory}
                                       isActive={isActive}
@@ -101,7 +105,7 @@ const Products = () => {
                              />
                         </View>
                         {pCat.length > 0 ? (
-                          <View style={{ flex: 1, marginTop: -500}}>
+                          <View style={styles.displayIem}>
                             {pCat.map((item) => {
                                 {console.log("MEGAAAAAAAAAAAA", item)}
                                 return (
@@ -110,12 +114,13 @@ const Products = () => {
                             })}
                           </View>
                         ): (
-                            <View>
-                                <Text>No Products</Text>
+                            <View style={{marginTop: -70, marginLeft: 10}}>
+                                <Text style={{color: "red", fontWeight: "bold"}}>No Products found</Text>
                             </View>
                         )}
                        
-                </>
+                        </ScrollView>
+                
                 )}
             
         </View>
@@ -152,9 +157,17 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
 
-    flatList: {
-        marginTop: 10,
+    displayIem: {
+        marginTop: -100,
+        flex: 1,
+        flexDirection: "row",
+        width: "100%",
+        flexWrap: "wrap",
+        alignItems: "flex-start",
+       
     }
+
+   
 })
 
 export default Products;
