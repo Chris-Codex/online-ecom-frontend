@@ -105,7 +105,7 @@ const Products = (props) => {
                                       setIsActive={setIsActive}
                              />
                         </View>
-                        <ScrollView >
+                        <ScrollView style={{marginTop: 20}}>
                            
                         {pCat.length > 0 ? (
                           <View style={styles.displayIem}>

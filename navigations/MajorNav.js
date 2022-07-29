@@ -28,6 +28,7 @@ const AppStacks = () => {
         name="Home"
         component={HomeScreen}
         options={{
+          headerShown: false,
           tabBatIcon: ({ color }) => (
             <Icon
               name="home"
@@ -43,6 +44,7 @@ const AppStacks = () => {
         name="Cart"
         component={HomeScreen}
         options={{
+          headerShown: false,
           tabBatIcocon: ({ color }) => (
             <Icon
               name="shopping-cart"
@@ -58,6 +60,7 @@ const AppStacks = () => {
         name="Admin"
         component={HomeScreen}
         options={{
+          headerShown: false,
           tabBatIcocon: ({ color }) => (
             <Icon name="cog" size={30} color={color} />
           ),
@@ -68,6 +71,7 @@ const AppStacks = () => {
         name="User"
         component={HomeScreen}
         options={{
+          headerShown: false,
           tabBatIcon: ({ color }) => (
             <Icon name="user" size={30} color={color} />
           ),

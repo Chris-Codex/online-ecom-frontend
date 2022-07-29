@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginTop: 40,
         alignItems: "center",
-        backgroundColor: '#F9F2F2',  
+        backgroundColor: '#D5D8DA',  
     },
 
     cardHolder: {

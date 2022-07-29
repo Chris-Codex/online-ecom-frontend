@@ -2,6 +2,7 @@ import { LogBox } from "react-native";
 import Products from "./pages/products/Products";
 import Wheader from "./pages/welcomeHeader/Wheader";
 import { NavigationContainer } from "@react-navigation/native";
+import { View } from "react-native";
 
 // Navigations
 import MajorNav from "./navigations/MajorNav";

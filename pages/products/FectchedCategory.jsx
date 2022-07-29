@@ -5,7 +5,7 @@ const width = Dimensions.get('screen').width;
 
 const FectchedCategory = (props) => {
     return (
-        <ScrollView bounces={true} horizontal={true} showsVerticalScrollIndicator={false} style={{ width: width  }}>
+        <ScrollView bounces={true} horizontal={true} showsHorizontalScrollIndicator={false} style={{ width: width  }}>
             <View style={styles.container}>
                 <TouchableOpacity key={1} onPress={() => {
                     props.catFilter('all'), props.setIsActive(-1);
@@ -39,19 +39,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: 60,
     width: width,
-    marginLeft: 60,
+    marginLeft: 20,
     marginTop: 12,
    
     },
 
-    center: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F9F2F2',
-        marginTop: 10,
-        borderRadius: 10,
-    },
+   
 
     isActive: {
        color: "#1662A2",
@@ -67,12 +60,12 @@ const styles = StyleSheet.create({
     allText: {
         fontWeight: "bold",
         color: "#1662A2",
-        fontSize: 15,
+        fontSize: 17,
     },
 
     renderText: {
         fontWeight: "bold",
-         fontSize: 15,
+        fontSize: 17,
     }
 })
 
