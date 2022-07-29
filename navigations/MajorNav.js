@@ -4,11 +4,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 //stacks
-import Home_Nav from "./Home_NavStack";
+import HomeScreen from "./Home_NavStack";
 
 const Tab = createBottomTabNavigator();
 
-const MajorNav = () => {
+const AppStacks = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -26,7 +26,7 @@ const MajorNav = () => {
     >
       <Tab.Screen
         name="Home"
-        component={Home_Nav}
+        component={HomeScreen}
         options={{
           tabBatIcon: ({ color }) => (
             <Icon
@@ -39,9 +39,9 @@ const MajorNav = () => {
         }}
       />
 
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Cart"
-        component={Home_Nav}
+        component={HomeScreen}
         options={{
           tabBatIcocon: ({ color }) => (
             <Icon
@@ -52,29 +52,29 @@ const MajorNav = () => {
             />
           ),
         }}
-      /> */}
+      />
 
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Admin"
-        component={Home_Nav}
+        component={HomeScreen}
         options={{
           tabBatIcocon: ({ color }) => (
             <Icon name="cog" size={30} color={color} />
           ),
         }}
-      /> */}
+      />
 
-      {/* <Tab.Screen
+      <Tab.Screen
         name="User"
-        component={Home_Nav}
+        component={HomeScreen}
         options={{
           tabBatIcon: ({ color }) => (
             <Icon name="user" size={30} color={color} />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };
 
-export default MajorNav;
+export default AppStacks;

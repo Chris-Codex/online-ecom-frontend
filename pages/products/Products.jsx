@@ -15,7 +15,7 @@ const categories = require('../../data/categories.json')
 var {width} = Dimensions.get('window');
 const height = Dimensions.get('screen').height / 2.2;
 
-const Products = () => {
+const Products = (props) => {
 
     const [products, setProducts] = useState([]) // products array
     const [searchProducts, setSearchProducts] = useState([]) // to store the filtered products
@@ -92,7 +92,7 @@ const Products = () => {
                 
                 {targetProduct > 0 ? (
                     <View>
-                        <ProductFilter searchProducts={searchProducts} />
+                        <ProductFilter navigation={props.navigation} searchProducts={searchProducts} />
                     </View>
                 ) : (
                     <View >
@@ -112,7 +112,7 @@ const Products = () => {
                             {pCat.map((item) => {
                                 {console.log("MEGAAAAAAAAAAAA", item)}
                                 return (
-                                    <ProductDisplayItem key={item._id} item={item} />
+                                    <ProductDisplayItem navigation={props.navigation} key={item._id} item={item} />
                                 )
                             })}
                           </View>

@@ -15,7 +15,11 @@ const ProductFilter = (props) => {
          <View style={styles.container}>
             {searchProducts.length > 0 ? (
                 searchProducts.map((result) => (
-                    <TouchableOpacity style={{flex: 1}} >
+                    <TouchableOpacity 
+                        onPress={() => {
+                            props.navigation.navigate('Product Details', {productList: result})
+                        }} 
+                        style={{flex: 1}} >
                         <View style={styles.displayContainer} >
                        <View style={styles.imageContainer}>
                          <Image source={{uri: result.img ? result.img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
