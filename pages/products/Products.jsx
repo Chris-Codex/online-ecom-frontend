@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, StyleSheet,  ScrollView, Text, TextInput, Image } from 'react-native';
+import { View, StyleSheet,  ScrollView, Text, TextInput, Image, Dimensions } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 
@@ -12,6 +12,8 @@ import Caurosel from "../carousel/Carousel";
 
 const data = require('../../data/products.json')
 const categories = require('../../data/categories.json')
+var {width} = Dimensions.get('window');
+const height = Dimensions.get('screen').height / 2.2;
 
 const Products = () => {
 
@@ -74,12 +76,12 @@ const Products = () => {
 
     // search bar
     return (    
-            <View>
-                <View style={{marginTop: 10, marginLeft: 5, marginRight: 5}}>
+            <View style={{height: height}}>
+                <View style={{marginTop: 10, justifyContent: "center"}}>
                     {/* <Caurosel /> */}
-                    <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: "100%", height: 200, borderRadius: 10}} />
+                    <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: "100%", height: 200, borderRadius: 10, }} />
                 </View>
-                 <View style={{flexDirection: "row"}}>
+                 <View style={{flexDirection: "row", justifyContent: "center"}}>
                     <View style={styles.search}>
                         <TextInput onChangeText={(text) => filterProducts(text)} onFocus={openList} style={styles.headerTextInput} placeholder="Search" />
                          {targetProduct == true ? (
@@ -89,21 +91,22 @@ const Products = () => {
                 </View>
                 
                 {targetProduct > 0 ? (
-                    <View style={{flex: 1}}>
+                    <View>
                         <ProductFilter searchProducts={searchProducts} />
                     </View>
                 ) : (
-                        
-                        <ScrollView>
-                            <View style={{flex: 1}}>
+                    <View >
+                         <View style={{justifyContent: "center"}}>
                             <FectchedCategory 
                                       cat={cat} 
-                                      pCat={pCat} active={isActive}
+                                      pCat={pCat}
                                       catFilter={alternateCategory}
-                                      isActive={isActive}
+                                      active={isActive}
                                       setIsActive={setIsActive}
                              />
                         </View>
+                        <ScrollView >
+                           
                         {pCat.length > 0 ? (
                           <View style={styles.displayIem}>
                             {pCat.map((item) => {
@@ -114,12 +117,13 @@ const Products = () => {
                             })}
                           </View>
                         ): (
-                            <View style={{marginTop: -70, marginLeft: 10}}>
+                            <View style={{marginTop: 40, alignItems: "center"}}>
                                 <Text style={{color: "red", fontWeight: "bold"}}>No Products found</Text>
                             </View>
                         )}
                        
                         </ScrollView>
+                    </View>
                 
                 )}
             
@@ -130,13 +134,14 @@ const Products = () => {
 const styles = StyleSheet.create({
     search: {
         flexDirection: 'row',
-        width: 378,
+        width: width,
         height: 50,
         backgroundColor: "#fff",
         opacity: 0.4,
         borderRadius: 10,
         marginTop: 10,
         marginLeft: 5,
+       
     },
 
     searchBtn: {
@@ -158,13 +163,13 @@ const styles = StyleSheet.create({
     },
 
     displayIem: {
-        marginTop: -100,
+        marginTop: -40,
         flex: 1,
         flexDirection: "row",
-        width: "100%",
+        width: width,
         flexWrap: "wrap",
-        alignItems: "flex-start",
-       
+        justifyContent: "center",
+        marginBottom: 250
     }
 
    

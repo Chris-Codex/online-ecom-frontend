@@ -5,16 +5,17 @@ import { View, Text, StyleSheet, Image, Dimensions, ScrollView,SafeAreaView} fro
 // image dimensions
 const Imagewidth = Dimensions.get('screen').width / 2 - 60;
 const mainWidth = Dimensions.get('screen').width /1.1;
+const height = Dimensions.get('screen').height / 2.5;
 
 const ProductFilter = (props) => {
     const {searchProducts} = props
     console.log("Search:", searchProducts)
     return (
-       <ScrollView style={{marginBottom: 150}}>
+       <ScrollView style={{height: height}}>
          <View style={styles.container}>
             {searchProducts.length > 0 ? (
                 searchProducts.map((result) => (
-                    <TouchableOpacity style={{flex: 1}} key={result._id}>
+                    <TouchableOpacity style={{flex: 1}} >
                         <View style={styles.displayContainer} >
                        <View style={styles.imageContainer}>
                          <Image source={{uri: result.img ? result.img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />

@@ -48,8 +48,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginTop: 40,
         alignItems: "center",
-        backgroundColor: '#F9F2F2',
-        
+        backgroundColor: '#F9F2F2',  
     },
 
     cardHolder: {
@@ -57,6 +56,7 @@ const styles = StyleSheet.create({
         width: width - 20,
         height: width - 30 - 7,
         marginTop: 10, 
+        marginBottom: 20,
     },
 
     imgContainer: {

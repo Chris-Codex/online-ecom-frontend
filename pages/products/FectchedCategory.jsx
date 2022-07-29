@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, ScrollView} from 'react-native';
+
+const width = Dimensions.get('screen').width;
 
 const FectchedCategory = (props) => {
     return (
-        <ScrollView bounces={true} horizontal={true} style={{marginBottom: 40}}>
+        <ScrollView bounces={true} horizontal={true} showsVerticalScrollIndicator={false} style={{ width: width  }}>
             <View style={styles.container}>
                 <TouchableOpacity key={1} onPress={() => {
                     props.catFilter('all'), props.setIsActive(-1);
@@ -36,8 +38,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     height: 60,
-    marginTop: -2,
-    marginBottom: 20,
+    width: width,
+    marginLeft: 60,
+    marginTop: 12,
+   
     },
 
     center: {
