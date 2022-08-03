@@ -3,7 +3,11 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import { AntDesign } from "@expo/vector-icons";
+import {
+  AntDesign,
+  MaterialCommunityIcons,
+  FontAwesome5,
+} from "@expo/vector-icons";
 
 //stacks
 import HomeScreen from "./Home_NavStack";
@@ -32,7 +36,7 @@ const AppStacks = () => {
         options={{
           headerShown: false,
 
-          tabBatIcon: ({ color }) => (
+          tabBarIcon: ({ color }) => (
             <AntDesign
               name="home"
               size={30}
@@ -48,23 +52,24 @@ const AppStacks = () => {
         component={HomeScreen}
         options={{
           headerShown: false,
-          tabBatIcocon: ({ color }) => (
-            <Icon
-              name="shopping-cart"
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="cart-arrow-right"
               size={30}
               style={{ position: "relative" }}
-              color={color}
+              color="red"
             />
           ),
         }}
       />
+
       <Tab.Screen
         name="Admin"
         component={HomeScreen}
         options={{
           headerShown: false,
-          tabBatIcocon: ({ color }) => (
-            <Icon name="cog" size={30} color={color} />
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="amazon" size={30} color="red" />
           ),
         }}
       />
@@ -73,8 +78,8 @@ const AppStacks = () => {
         component={HomeScreen}
         options={{
           headerShown: false,
-          tabBatIcon: ({ color }) => (
-            <Icon name="user" size={30} color={color} />
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5 name="user-cog" size={30} color="red" />
           ),
         }}
       />
