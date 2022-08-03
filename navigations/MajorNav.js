@@ -3,6 +3,8 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome";
 
+import { AntDesign } from "@expo/vector-icons";
+
 //stacks
 import HomeScreen from "./Home_NavStack";
 
@@ -29,8 +31,9 @@ const AppStacks = () => {
         component={HomeScreen}
         options={{
           headerShown: false,
+
           tabBatIcon: ({ color }) => (
-            <Icon
+            <AntDesign
               name="home"
               size={30}
               style={{ position: "relative" }}
@@ -55,7 +58,6 @@ const AppStacks = () => {
           ),
         }}
       />
-
       <Tab.Screen
         name="Admin"
         component={HomeScreen}
@@ -66,7 +68,6 @@ const AppStacks = () => {
           ),
         }}
       />
-
       <Tab.Screen
         name="User"
         component={HomeScreen}

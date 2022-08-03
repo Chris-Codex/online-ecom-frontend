@@ -11,7 +11,7 @@ const ProductFilter = (props) => {
     const {searchProducts} = props
     console.log("Search:", searchProducts)
     return (
-       <ScrollView style={{height: height}}>
+       <ScrollView style={{height: height, marginLeft:10}}>
          <View style={styles.container}>
             {searchProducts.length > 0 ? (
                 searchProducts.map((result) => (
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     displayContainer: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#F9F2F2',
+        backgroundColor: '#D5D8DA',
         marginTop: 10,
         borderRadius: 10,
         

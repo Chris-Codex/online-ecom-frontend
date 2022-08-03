@@ -58,14 +58,14 @@ const Products = (props) => {
     // filter products by category
     const alternateCategory = (cats) => {
         {
-            cats === "all" ? [setpCat(initialState), setIsActive(true)] : [
+            cats === "all" ? [setpCat(initialState), setIsActive(true)] : [ 
                 setpCat(products.filter(item => item.category._id === cats)), setIsActive(true)
             ]
         }
     }
 
-    // search bar
-    const openList = () => {
+    // responsible for opening the filter modal
+    const openList = () => {//
         setSearchTarget(true)
     }
 
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: width,
         height: 50,
-        backgroundColor: "#fff",
+        backgroundColor: "#b8cad1",
         opacity: 0.4,
         borderRadius: 10,
         marginTop: 10,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     searchBtn: {
         borderRadius: 5, 
         color: "#fff", 
-        backgroundColor: "#1662A2", 
+        backgroundColor: "#D5D8DA", 
         justifyContent: "center",
         alignItems: "center",
         marginLeft: 10,
@@ -160,6 +160,8 @@ const styles = StyleSheet.create({
         height: 55,
         width: 300,
         marginLeft: 10,
+        fontSize: 18,
+        fontWeight: "bold",    
     },
 
     displayIem: {
