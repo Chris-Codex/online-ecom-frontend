@@ -37,21 +37,21 @@ const styles = StyleSheet.create({
     container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    height: 60,
+    height: 33,
     width: width,
-    marginLeft: 20,
+    marginRight: width,
     marginTop: 12,
    
     },
 
-    center: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F9F2F2',
-        marginTop: 10,
-        borderRadius: 10,
-    },
+    // center: {
+    //     flex: 1,
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     backgroundColor: '#F9F2F2',
+    //     marginTop: 10,
+    //     borderRadius: 10,
+    // },
 
     isActive: {
        color: "#1662A2",

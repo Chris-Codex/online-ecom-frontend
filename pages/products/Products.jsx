@@ -79,7 +79,7 @@ const Products = (props) => {
             <View style={{height: height}}>
                 <View style={{marginTop: 10, justifyContent: "center"}}>
                     {/* <Caurosel /> */}
-                    <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: "100%", height: 200, borderRadius: 10, }} />
+                    <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: width, height: 200, borderRadius: 10 }} />
                 </View>
                  <View style={{flexDirection: "row", justifyContent: "center"}}>
                     <View style={styles.search}>
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: width,
         height: 50,
-        backgroundColor: "#b8cad1",
+        backgroundColor: "#fff",
         opacity: 0.4,
         borderRadius: 10,
         marginTop: 10,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         width: width,
         flexWrap: "wrap",
         justifyContent: "center",
-        marginBottom: 250
+        marginBottom: 130
     }
 
    

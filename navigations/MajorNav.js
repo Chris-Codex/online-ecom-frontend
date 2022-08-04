@@ -57,7 +57,7 @@ const AppStacks = () => {
               name="cart-arrow-right"
               size={30}
               style={{ position: "relative" }}
-              color="red"
+              color="#FAC5B4"
             />
           ),
         }}
@@ -69,7 +69,7 @@ const AppStacks = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <AntDesign name="amazon" size={30} color="red" />
+            <AntDesign name="amazon" size={30} color="#FAC5B4" />
           ),
         }}
       />
@@ -79,7 +79,7 @@ const AppStacks = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="user-cog" size={30} color="red" />
+            <FontAwesome5 name="user-cog" size={30} color="#FAC5B4" />
           ),
         }}
       />

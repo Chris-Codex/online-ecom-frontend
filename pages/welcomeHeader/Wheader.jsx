@@ -18,11 +18,11 @@ const Header = () => {
 const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
-        marginTop: 30,
         justifyContent: 'space-between',
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",
+        backgroundColor: "#F7E4DE",
         
     },
 
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         fontWeight: "bold",
         color: "black",
+        marginTop: 40,
     },
 
      headerText2: {

@@ -13,7 +13,7 @@ const OneProduct = (props) => {
                 <View style={styles.namePrice}>
                 <View style={{marginTop: 20}}>
                     <Text style={{marginLeft: 15, fontSize: 25, fontWeight: "bold"}}>{productList.productName}</Text>
-                    <Text style={{marginLeft: 15, fontSize: 17, color: "#C6CCCF", fontWeight: "bold"}}>{productList.trademark}</Text>
+                    <Text style={{marginLeft: 15, fontSize: 17, color: "#1662A2", fontWeight: "bold"}}>{productList.trademark}</Text>
                 </View>
                 <View style={styles.price}>
                     <Text style={{marginRight: 15, marginTop: 36, fontSize: 20, fontWeight: "bold"}}>€ {productList.price}</Text>
@@ -52,7 +52,10 @@ const styles = StyleSheet.create({
     imageContainer: {
         backgroundColor: '#fff',
         padding: 0,
-        margin: 0
+        margin: 0,
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        marginBottom: 20,
     },
 
     image: {

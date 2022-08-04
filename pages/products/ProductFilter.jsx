@@ -55,13 +55,13 @@ const styles = StyleSheet.create({
         width: mainWidth,
         marginLeft: 10,
         marginTop: 20,
-        marginBottom: 90,
+        marginBottom: 50,
     },
 
     displayContainer: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#D5D8DA',
+        backgroundColor: '#fff',
         marginTop: 10,
         borderRadius: 10,
         
