@@ -11,6 +11,7 @@ import {
 
 //stacks
 import HomeScreen from "./Home_NavStack";
+import ProductCartScreen from "./Cart_NavStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +50,7 @@ const AppStacks = () => {
 
       <Tab.Screen
         name="Cart"
-        component={HomeScreen}
+        component={ProductCartScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (

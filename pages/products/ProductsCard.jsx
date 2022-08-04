@@ -1,6 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 
+//connect to redux to have access to the state
+import { connect } from 'react-redux';
+import * as actions from '../../App_Redux/Actions/productCartActions';
+
 // Dimesion
 const width = Dimensions.get('screen').width / 2 - 30;
 

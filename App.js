@@ -9,7 +9,7 @@ import MajorNav from "./navigations/MajorNav";
 
 // Redux
 import { Provider } from "react-redux";
-import store from "./Redux/store";
+import store from "./App_Redux/store";
 
 const MyTheme = {
   ...DefaultTheme,
