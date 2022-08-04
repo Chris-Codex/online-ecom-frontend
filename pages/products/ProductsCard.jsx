@@ -41,6 +41,12 @@ const ProductsCard = ({item}) => {
     )
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (product) => dispatch(actions.addToCart({product, quantity: 1}))
+    }
+}
+
 const styles = StyleSheet.create({
     cardContainer: {
         backgroundColor: 'transparent',
