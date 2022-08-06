@@ -4,7 +4,7 @@ import {
   CLEAR_ITEM_FROM_CART,
 } from "../constants";
 
-const cartObj = (state = {}, action) => {
+const cartList = (state = [], action) => {
   switch (action.type) {
     case ADD_ITEM_TO_CART:
       return [...state, action.payload];
@@ -16,4 +16,4 @@ const cartObj = (state = {}, action) => {
   return state;
 };
 
-export default cartObj;
+export default cartList;

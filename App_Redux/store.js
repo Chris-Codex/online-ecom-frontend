@@ -3,10 +3,10 @@ import ThunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // import reducers
-import cartObj from "./Reducers/cartObj";
+import cartList from "./Reducers/cartObj";
 
 const reducer = combineReducers({
-  cartObj: cartObj,
+  cartList: cartList,
 });
 
 const store = createStore(

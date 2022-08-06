@@ -7,14 +7,14 @@ import ProductsCard from './ProductsCard';
 const { width } = Dimensions.get('window');
 
 const ProductDisplayItem = (props) => {
-    const { item } = props;
+    const {item}  = props;
     return (
         <TouchableOpacity 
           style={styles.opacity}
           onPress={() => props.navigation.navigate('Product Details', {productList: item})}
           >
             <View>
-                <ProductsCard item={item} />
+                <ProductsCard {...item} />
             </View>
         </TouchableOpacity>
     )

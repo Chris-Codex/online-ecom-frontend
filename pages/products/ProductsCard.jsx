@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
+import { View, Text, StyleSheet, Image, Button, Dimensions} from 'react-native';
 
 //connect to redux to have access to the state
 import { connect } from 'react-redux';
@@ -8,8 +8,8 @@ import * as actions from '../../App_Redux/Actions/productCartActions';
 // Dimesion
 const width = Dimensions.get('screen').width / 2 - 30;
 
-const ProductsCard = ({item}) => {
-    const {_id, img, productName, productDescription, price, trademark,  keepTrackProducts} = item;
+const ProductsCard = (props) => {
+    const {_id, img, productName, productDescription, price, trademark,  keepTrackProducts} = props;
     return (
 
              <View style={styles.cardContainer} key={_id}>
@@ -32,7 +32,9 @@ const ProductsCard = ({item}) => {
                     <Text style={styles.priceText}>${price}</Text>
                     
                     {  keepTrackProducts > 0 ? (
-                    <Text style={styles.addText}>ADD TO CART</Text>
+                    <Button title={'ADD TO CART'} style={styles.addText} onPress={() => {
+                        props.addItemToCart(props);
+                    }} />
                 ) : <Text style={styles.notAvailable}>Not Available</Text>}
                 </View>
                 
@@ -41,11 +43,16 @@ const ProductsCard = ({item}) => {
     )
 }
 
+//
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToCart: (product) => dispatch(actions.addToCart({product, quantity: 1}))
+        addItemToCart: (product) => {
+            dispatch(actions.addToCart(product));
+        }
     }
 }
+
+
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -131,4 +138,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default ProductsCard;
+export default connect(null, mapDispatchToProps)(ProductsCard);

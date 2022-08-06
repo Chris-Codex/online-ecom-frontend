@@ -4,7 +4,7 @@ import {
   CLEAR_ITEM_FROM_CART,
 } from "../constants";
 
-export const addItemToCart = (payload) => {
+export const addToCart = (payload) => {
   return {
     type: ADD_ITEM_TO_CART,
     payload,
