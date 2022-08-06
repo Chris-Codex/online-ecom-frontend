@@ -28,7 +28,7 @@
     },
     {
         "_id": "62d0fdc30d53a24f3f1077f7",
-        "productName": "Android",
+        "productName": "Addidas Modela",
         "productDescription": "The iPhone 11 Pro will handle everything you need now, and will likely be a top performer for years to come.",
         "subDescription": "Yes it is",
         "img": "https://res.cloudinary.com/dnsvc5pcu/image/upload/v1658247701/OnlineShop/shoe_1_ovq8lb.png",
@@ -36,7 +36,7 @@
             "http://localhost:5000/imagesUpload/upload/3_JPG-1657891738210.jpeg",
             "http://localhost:5000/imagesUpload/upload/88_JPG-1657891738212.jpeg"
         ],
-        "trademark": "Iphone Brand",
+        "trademark": "Addidas 3",
         "price": 200,
         "category": {
             "_id": "62ca769696986304e648df33",
