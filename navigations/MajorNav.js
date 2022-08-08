@@ -2,6 +2,7 @@ import React from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { View } from "react-native";
 
 import {
   AntDesign,
@@ -12,6 +13,7 @@ import {
 //stacks
 import HomeScreen from "./Home_NavStack";
 import ProductCartScreen from "./Cart_NavStack";
+import IconCart from "../pages/welcomeHeader/IconCart";
 
 const Tab = createBottomTabNavigator();
 
@@ -54,12 +56,15 @@ const AppStacks = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="cart-arrow-right"
-              size={30}
-              style={{ position: "relative" }}
-              color="#FAC5B4"
-            />
+            <View>
+              <MaterialCommunityIcons
+                name="cart-arrow-right"
+                size={30}
+                style={{ position: "relative" }}
+                color="#FAC5B4"
+              />
+              {/* <IconCart /> */}
+            </View>
           ),
         }}
       />

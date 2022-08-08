@@ -6,6 +6,10 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 import * as actions from '../../App_Redux/Actions/productCartActions'
 
+// IconCart is the component that is connected to the store to selected the cartList
+import IconCart from '../welcomeHeader/IconCart'
+import ProductCartList from './ProductCartList'
+
 //Dimensions
 const {width} = Dimensions.get('window').width
 
@@ -26,47 +30,34 @@ const ProductCart = (props) => {
         <View style={styles.cartContainer}>
           <View style={styles.cartHeader}>
               <Text style={styles.headerText}>My Cart</Text>
-              <View style={styles.ClearBtn}>
-                <TouchableOpacity>
+             <TouchableOpacity onPress={() => {
+                props.clearCartList()
+               }}>
+               <View style={styles.ClearBtn}>
                   <Text style={styles.ClearBtnText}>CLEAR ITEMS</Text>
-                </TouchableOpacity>
               </View>
+             </TouchableOpacity>
           </View>
           {props.cartList.map((item) => {
             return (
-               <View style={styles.cartItem} key={Math.random()}>
-                <View style={styles.details}>
-                  <View style={styles.productImage}>
-                    <Image resizeMode='contain' source={{ uri:item.img ? item.img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
-                  </View>
-                  <View style={{marginLeft: -50}}>
-                    <Text style={{fontSize:21, fontWeight: "bold", marginTop: 10, color: "#1662A2"}}>{item.productName.length > 13 ? item.productName.substring(0, 13) + '...' : item.productName}</Text>
-                    <Text style={{fontSize:18, fontWeight: "bold", marginTop: -2, color: "#999"}}>{item.productName.length > 16 ? item.productName.substring(0, 16) + '...' : item.productName}</Text>
-                    <Text style={{fontSize:18, fontWeight: "bold", marginTop: 3, color: "#5CA2DF"}}>€ {item.price}</Text>
-                  </View>
-                  <View style={styles.orderCount}>
-                    <Text style={{fontSize:17, fontWeight: "bold", marginTop: 7}}>1</Text>
-                  </View>
-                </View>
-              </View>
+               <ProductCartList key={item._id} product={item} />
             )
-          })}
-              
+          })}     
         </View>
       ):  (
         <View style={styles.cartContainer}>
           <Image resizeMode='contain' source={{ uri : "https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png"}} style={styles.emptyCart} />
         </View>
       )}
-        <View style={{backgroundColor: "#fff", width: 400, height: 150, position: "absolute", bottom: 0, left: 0, elevation: 20}}>
+       <View style={{backgroundColor: "#fff", width: 400, height: 150, position: "absolute", bottom: 0, left: 0, elevation: 20}}>
           <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-            <Text style={{marginLeft: 20, marginTop: 20, fontSize: 20, fontWeight: "bold", color: "#1662A2"}}>Selected Item(3)</Text>
+            <Text style={{marginLeft: 20, marginTop: 20, fontSize: 20, fontWeight: "bold", color: "#1662A2"}}>Selected Item (<IconCart />) </Text>
             <Text style={{marginRight: 20, marginTop: 20, fontSize: 20, fontWeight: "bold", color: "#1662A2"}}>Total: € {getTotalPrice()}</Text>
           </View>
           <View style={{marginTop: 12}}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('ProductCheckout')}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('ProductCartScreen')}>
               <View style={{width:width, height: 60, alignItems: "center", marginLeft: 20, marginRight: 20, backgroundColor: "#1662A2", paddingBottom: 20, borderRadius: 20}}>
-                <Text style={{marginTop: 17, fontSize: 20, color: "#fff", fontWeight: "bold"}}>PROCEED TO CART</Text>
+                <Text style={{marginTop: 17, fontSize: 20, color: "#fff", fontWeight: "bold"}}>PROCEED TO CHECKOUT</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -75,13 +66,28 @@ const ProductCart = (props) => {
   )
 } 
 
-
+// get cartList from store
 const mapStateToProps = (state) => {
   const { cartList } = state
   return {
     cartList: cartList
   }
 }
+
+//clear cartList
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearCartList: () => dispatch(actions.clearItemFromCart()),
+    removeFromCart : (id) => dispatch(actions.removeItemFromCart(id))
+  }
+}
+
+// remove single item from cartList
+// const mapDispatchToProps2 = (dispatch) => {
+//   return {
+//     removeItemFromCart: (item) => dispatch(actions.removeItemFromCart(item))
+//   }
+// }
 
 const styles = StyleSheet.create({
   emptyCart: {
@@ -133,9 +139,9 @@ image: {
   height: 90,
 },
 
-orderCount: {
- width: 40,
- backgroundColor: "#EBF1F3",
+deleteItem: {
+ width: 70,
+ backgroundColor: "red",
   height: 40,
   marginRight: 20,
   marginTop: 30,
@@ -146,7 +152,9 @@ orderCount: {
 ClearBtn: {
   backgroundColor: '#5CA2DF',
   width: width,
+  height: 40,
   borderRadius: 10,
+  marginTop: 4,
   marginRight: 5,
 },
 
@@ -155,10 +163,10 @@ ClearBtnText: {
   fontSize: 15,
   marginLeft: 10,
   marginRight: 10,
-  marginTop: 12,
+  marginTop: 10,
   fontWeight: 'bold'
 }
 
 })
 
-export default connect(mapStateToProps, null)(ProductCart)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCart)

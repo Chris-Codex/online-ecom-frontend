@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import IconCart from './IconCart';
 
 const Header = () => {
     return (
@@ -10,7 +11,12 @@ const Header = () => {
                     <Text style={styles.headerText}>Welcome to</Text>
                     <Text style={styles.headerText2}>Griffith Stores</Text>
                 </View>
-                <Icon style={{marginRight: 10}} name="menu" size={30} color="#1662A2" />
+                <View style={{marginRight: 10}}>
+                    <Icon  name="shopping-cart" size={30} color="#1662A2">
+                    <IconCart />
+                </Icon>
+                </View>
+              
             </View>
     )
 }

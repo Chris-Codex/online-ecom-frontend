@@ -43,7 +43,7 @@ const ProductsCard = (props) => {
     )
 }
 
-//
+//connect to store to have access to the state
 const mapDispatchToProps = (dispatch) => {
     return {
         addItemToCart: (product) => {
