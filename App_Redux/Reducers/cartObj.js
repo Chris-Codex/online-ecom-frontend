@@ -2,6 +2,7 @@ import {
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   CLEAR_ITEM_FROM_CART,
+  INCREASE_QUANTITY,
 } from "../constants";
 
 const cartList = (state = [], action) => {
@@ -12,6 +13,17 @@ const cartList = (state = [], action) => {
       return state.filter((item) => item.id !== action.payload);
     case CLEAR_ITEM_FROM_CART:
       return (state = []);
+
+    case INCREASE_QUANTITY:
+      return state.map((item) => {
+        if (item.id === action.payload) {
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          };
+        }
+        return item;
+      });
   }
   return state;
 };

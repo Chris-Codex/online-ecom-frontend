@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, Dimensions, StyleSheet, Button, TouchableOpacity, Image, ScrollView } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
 
 //connects to store to have access to the state
 import { connect } from 'react-redux'
@@ -9,6 +8,9 @@ import * as actions from '../../App_Redux/Actions/productCartActions'
 // IconCart is the component that is connected to the store to selected the cartList
 import IconCart from '../welcomeHeader/IconCart'
 import ProductCartList from './ProductCartList'
+
+import { SwipeListView } from 'react-native-swipe-list-view';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 //Dimensions
 const {width} = Dimensions.get('window').width
@@ -38,11 +40,38 @@ const ProductCart = (props) => {
               </View>
              </TouchableOpacity>
           </View>
-          {props.cartList.map((item) => {
+          {/* {props.cartList.map((item) => {
             return (
                <ProductCartList key={item._id} product={item} />
             )
-          })}     
+          })}      */}
+
+          <SwipeListView
+            data={props.cartList}
+            renderItem={(data) => {
+                return (
+                  <ProductCartList product={data.item} />
+                )
+            }}
+            renderHiddenItem={(data) => {
+                return (
+                  <View style={styles.deleteWrapper}>
+                    <TouchableOpacity style={styles.deleteBtn} onPress={() => {
+                      props.removeFromCart(data.item._id)
+                    } }>
+                      <Icon name="trash" size={30} color={"white"} />
+                    </TouchableOpacity>
+                  </View>
+                )
+            }}
+            disableRightSwipe={true}
+            previewOpenDelay={3000}
+            friction={1000}
+            rightOpenValue={-75}
+            leftOpenValue={75}
+            stopLeftSwipe={75}
+            tension={40}
+          />
         </View>
       ):  (
         <View style={styles.cartContainer}>
@@ -82,23 +111,22 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// remove single item from cartList
-// const mapDispatchToProps2 = (dispatch) => {
-//   return {
-//     removeItemFromCart: (item) => dispatch(actions.removeItemFromCart(item))
-//   }
-// }
 
 const styles = StyleSheet.create({
-  emptyCart: {
-    width: width,
-    height: 300,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
-    marginTop: 130
-  },
+ deleteWrapper: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+ },
+
+ deleteBtn: {
+  backgroundColor: "red",
+  justifyContent: "center",
+  alignItems: "flex-end",
+  paddingRight: 25,
+  height: 110,
+  width: 500
+ },
 
 cartHeader: {
   width: width,

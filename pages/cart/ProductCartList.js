@@ -15,7 +15,7 @@ const { width } = Dimensions.get("window").width;
 
 const ProductCartList = (props) => {
   const data = props.product;
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState(props.quantity);
 
   return (
     <View style={styles.cartItem} key={Math.random()}>
@@ -34,7 +34,7 @@ const ProductCartList = (props) => {
         <View style={{ marginLeft: -50 }}>
           <Text
             style={{
-              fontSize: 21,
+              fontSize: 18,
               fontWeight: "bold",
               marginTop: 10,
               color: "#1662A2",
@@ -46,7 +46,7 @@ const ProductCartList = (props) => {
           </Text>
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 15,
               fontWeight: "bold",
               marginTop: -2,
               color: "#999",
@@ -58,7 +58,7 @@ const ProductCartList = (props) => {
           </Text>
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 17,
               fontWeight: "bold",
               marginTop: 3,
               color: "#5CA2DF",
@@ -67,24 +67,37 @@ const ProductCartList = (props) => {
             € {data.price}
           </Text>
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            props.removeFromCart(data.id);
+
+        <View
+          style={{
+            marginTop: 10,
+            marginRight: 5,
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
-          <View style={styles.deleteItem}>
-            <Text
-              style={{
-                fontSize: 17,
-                color: "#fff",
-                fontWeight: "bold",
-                marginTop: 7,
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <TouchableOpacity>
+              <View style={styles.borderBtn}>
+                <Text style={styles.borderBtnText}>-</Text>
+              </View>
+            </TouchableOpacity>
+
+            <Text style={{ marginLeft: 5, marginRight: 5, fontWeight: "bold" }}>
+              {data.quantity}
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => {
+                props.increaseQuantity(data.id);
               }}
             >
-              Delete
-            </Text>
+              <View style={styles.borderBtn}>
+                <Text style={styles.borderBtnText}>+</Text>
+              </View>
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -167,6 +180,22 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontWeight: "bold",
   },
+
+  borderBtn: {
+    borderColor: "grey",
+    borderWidth: 1,
+    borderRadius: 5,
+    width: 40,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  borderBtnText: {
+    fontWeight: "bold",
+    fontSize: 25,
+    marginTop: -3,
+  },
 });
 
 // get cartList from store
@@ -182,6 +211,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clearCartList: () => dispatch(actions.clearItemFromCart()),
     removeFromCart: (id) => dispatch(actions.removeItemFromCart(id)),
+    increaseQuantity: (id) => dispatch(actions.increaseQuantity(id)),
   };
 };
 
