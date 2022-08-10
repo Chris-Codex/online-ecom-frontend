@@ -21,8 +21,6 @@ import ProductCartList from "./ProductCartList";
 import { SwipeListView } from "react-native-swipe-list-view";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import ProductCheckout from "./ProductCheckout";
-
 //Dimensions
 const { width } = Dimensions.get("window").width;
 
@@ -52,11 +50,6 @@ const ProductCart = (props) => {
               </View>
             </TouchableOpacity>
           </View>
-          {/* {props.cartList.map((item) => {
-            return (
-               <ProductCartList key={item._id} product={item} />
-            )
-          })}      */}
 
           <SwipeListView
             data={props.cartList}

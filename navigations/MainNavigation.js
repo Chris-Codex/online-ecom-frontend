@@ -12,7 +12,6 @@ import {
 //stacks
 import HomeScreen from "./Home_NavStack";
 import ProductCartScreen from "./Cart_NavStack";
-import Cart_NavStack from "./Cart_NavStack";
 
 const Tab = createBottomTabNavigator();
 
