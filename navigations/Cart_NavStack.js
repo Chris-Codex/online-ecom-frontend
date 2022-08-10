@@ -18,7 +18,7 @@ function ProductCartScreen() {
       />
 
       <Stack.Screen
-        name="Cart Details"
+        name="CartCheckout"
         component={ProductCheckout}
         options={{
           headerShown: false,
@@ -28,6 +28,6 @@ function ProductCartScreen() {
   );
 }
 
-export default function ProductCart_NavStack() {
+export default function Cart_NavStack() {
   return <ProductCartScreen />;
 }

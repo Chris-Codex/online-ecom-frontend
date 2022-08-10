@@ -3,7 +3,7 @@ import Wheader from "./pages/welcomeHeader/Wheader";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 // Navigations
-import MajorNav from "./navigations/MajorNav";
+import MainNavigation from "./navigations/MainNavigation";
 
 // Redux
 import { Provider } from "react-redux";
@@ -23,7 +23,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer theme={MyTheme}>
         <Wheader />
-        <MajorNav />
+        <MainNavigation />
       </NavigationContainer>
     </Provider>
   );

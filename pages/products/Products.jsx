@@ -110,7 +110,6 @@ const Products = (props) => {
                         {pCat.length > 0 ? (
                           <View style={styles.displayIem}>
                             {pCat.map((item) => {
-                                {console.log("MEGAAAAAAAAAAAA", item)}
                                 return (
                                     <ProductDisplayItem navigation={props.navigation} key={item._id} item={item} />
                                 )
