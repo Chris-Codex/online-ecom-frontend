@@ -15,20 +15,26 @@ import FormError from "../welcomeHeader/ReusableForms/FormError";
 var { width } = Dimensions.get("window").width / 1.2;
 
 const Login = (props) => {
-  const [register, setRegister] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   //User Authentication
-  const submitLogin = () => {
-    if (email === "") {
+  const submitRegister = () => {
+    if (name === "") {
+      setError("name is required");
+    } else if (email === "") {
       setError("Email is required");
+    } else if (phone === "") {
+      setError("Phone number is required");
     } else if (password === "") {
       setError("Password is required");
     } else {
       setError("");
-      props.navigation.navigate("Home");
-      console.log("Login Successful");
+      props.navigation.navigate("Login");
+      console.log("Registration Successful");
     }
   };
 
@@ -44,39 +50,60 @@ const Login = (props) => {
         <Text style={styles.title}>GRIFFITH-STORE</Text>
       </View>
 
-      <FormContainer>
-        <FormInput
-          placeholder="Enter your E-mail"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          id={"email"}
-          name={"email"}
-        />
-        <FormInput
-          placeholder="Enter your Password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          id={"password"}
-          name={"password"}
-          secureTextEntry={true}
-        />
-        <View style={{ flexDirection: "row", marginLeft: 75 }}>
-          <Text>Don't have an account: </Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("Register")}
-          >
-            <View>
-              <Text style={{ fontWeight: "bold", fontSize: 15 }}>Register</Text>
+      <KeyboardAwareScrollView
+        viewIsInsideTabBar={true}
+        extraHeight={200}
+        enableOnAndroid={true}
+      >
+        <FormContainer title={"User Registration"} style={{ marginTop: 20 }}>
+          <FormInput
+            placeholder="Enter your name"
+            value={email}
+            onChangeText={(text) => setName(text.toLowerCase())}
+            id={"name"}
+            name={"name"}
+          />
+          <FormInput
+            placeholder="Enter your E-mail"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            id={"email"}
+            name={"email"}
+          />
+          <FormInput
+            placeholder="Enter your Phone number"
+            value={phone}
+            onChangeText={(text) => setPhone(text)}
+            id={"phone"}
+            keyboardType={"numberic"}
+            name={"phone"}
+          />
+          <FormInput
+            placeholder="Enter your Password"
+            value={phone}
+            onChangeText={(text) => setPassword(text)}
+            id={"password"}
+            secureTextEntry={true}
+            name={"password"}
+          />
+          <View style={{ flexDirection: "row", marginLeft: 75 }}>
+            <Text>If account exist: </Text>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("Login")}
+            >
+              <View>
+                <Text style={{ fontWeight: "bold", fontSize: 15 }}>Login</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          {error ? <FormError error={error} /> : null}
+          <TouchableOpacity onPress={() => submitRegister()}>
+            <View style={styles.registerBtn}>
+              <Text style={styles.logText}>REGISTER</Text>
             </View>
           </TouchableOpacity>
-        </View>
-        {error ? <FormError error={error} /> : null}
-        <TouchableOpacity onPress={() => submitLogin()}>
-          <View style={styles.loginContainer}>
-            <Text style={styles.logText}>LOG IN</Text>
-          </View>
-        </TouchableOpacity>
-      </FormContainer>
+        </FormContainer>
+      </KeyboardAwareScrollView>
     </View>
   );
 };
@@ -107,7 +134,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
 
-  loginContainer: {
+  registerBtn: {
     marginTop: 10,
     width: 200,
     height: 50,

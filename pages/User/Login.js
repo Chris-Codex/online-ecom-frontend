@@ -43,11 +43,11 @@ const Login = (props) => {
         <Text style={styles.title}>GRIFFITH-STORE</Text>
       </View>
 
-      <FormContainer>
+      <FormContainer title={"User Login"}>
         <FormInput
           placeholder="Enter your E-mail"
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => setEmail(text.toLowerCase())}
           id={"email"}
           name={"email"}
         />
