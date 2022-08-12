@@ -22,15 +22,15 @@ const { width } = Dimensions.get("window").width;
 const countries = require("../../../data/countries.json");
 
 const ProductCheckout = (props) => {
-  const [orders, setOrders] = useState("");
-  const [address, setAddress] = useState("");
-  const [secondAddress, setSecondAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
+  const [orders, setOrders] = useState();
+  const [address, setAddress] = useState();
+  const [secondAddress, setSecondAddress] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [zip, setZip] = useState();
   const [country, setCountry] = useState();
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState();
+  const [email, setEmail] = useState();
 
   useEffect(() => {
     setOrders(props.cartList);
@@ -77,13 +77,13 @@ const ProductCheckout = (props) => {
         enableOnAndroid={true}
       >
         <FormContainer title="Shipping/Delivery Address">
-          <FormInput
+          {/* <FormInput
             placeholder={"Phone"}
             onChangeText={(text) => setPhone(text)}
             value={phone}
             keyboardType={"numeric"}
             name={"phone"}
-          />
+          /> */}
 
           <FormInput
             placeholder={"Address 1"}
@@ -106,12 +106,12 @@ const ProductCheckout = (props) => {
             name={"City"}
           />
 
-          <FormInput
+          {/* <FormInput
             placeholder={"State"}
             onChangeText={(text) => setState(text)}
             value={state}
             name={"State"}
-          />
+          /> */}
 
           <FormInput
             placeholder={"Zip Code"}
@@ -121,12 +121,12 @@ const ProductCheckout = (props) => {
             name={"Zip Code"}
           />
 
-          <FormInput
+          {/* <FormInput
             placeholder={"Email"}
             onChangeText={(text) => setEmail(text)}
             value={email}
             name={"Email"}
-          />
+          /> */}
 
           <FormInput
             placeholder={"Country"}

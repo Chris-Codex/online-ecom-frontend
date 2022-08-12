@@ -17,8 +17,8 @@ const FectchedCategory = (props) => {
                 </TouchableOpacity>
                 {props.cat.map((results) => { 
                     return (
-                        <TouchableOpacity key={results.id}  onPress={() => {
-                            props.catFilter(results.id), props.setIsActive(props.cat.indexOf(results));
+                        <TouchableOpacity key={results._id}  onPress={() => {
+                            props.catFilter(results._id), props.setIsActive(props.cat.indexOf(results));
                         }}>
                             <View style={[ {margin: 5}, 
                             props.isActive == props.cat.indexOf(results) ? styles.isActive : styles.notActive]}>

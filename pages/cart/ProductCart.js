@@ -37,48 +37,118 @@ const ProductCart = (props) => {
   return (
     <React.Fragment>
       {props.cartList.length > 0 ? (
-        <View style={styles.cartContainer}>
-          <View style={styles.cartHeader}>
-            <Text style={styles.headerText}>My Cart</Text>
-            <TouchableOpacity
-              onPress={() => {
-                props.clearCartList();
+        <>
+          <View style={styles.cartContainer}>
+            <View style={styles.cartHeader}>
+              <Text style={styles.headerText}>My Cart</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  props.clearCartList();
+                }}
+              >
+                <View style={styles.ClearBtn}>
+                  <Text style={styles.ClearBtnText}>CLEAR ITEMS</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <SwipeListView
+              data={props.cartList}
+              renderItem={(data) => {
+                return <ProductCartList product={data.item} />;
               }}
-            >
-              <View style={styles.ClearBtn}>
-                <Text style={styles.ClearBtnText}>CLEAR ITEMS</Text>
-              </View>
-            </TouchableOpacity>
+              renderHiddenItem={(data) => {
+                return (
+                  <View style={styles.deleteWrapper}>
+                    <TouchableOpacity
+                      style={styles.deleteBtn}
+                      onPress={() => {
+                        props.removeFromCart(data.item._id);
+                      }}
+                    >
+                      <Icon name="trash" size={30} color={"white"} />
+                    </TouchableOpacity>
+                  </View>
+                );
+              }}
+              disableRightSwipe={true}
+              previewOpenDelay={3000}
+              friction={1000}
+              rightOpenValue={-75}
+              leftOpenValue={75}
+              stopLeftSwipe={75}
+              tension={40}
+            />
           </View>
 
-          <SwipeListView
-            data={props.cartList}
-            renderItem={(data) => {
-              return <ProductCartList product={data.item} />;
+          <View
+            style={{
+              backgroundColor: "#fff",
+              width: 400,
+              height: 150,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              elevation: 20,
             }}
-            renderHiddenItem={(data) => {
-              return (
-                <View style={styles.deleteWrapper}>
-                  <TouchableOpacity
-                    style={styles.deleteBtn}
-                    onPress={() => {
-                      props.removeFromCart(data.item._id);
+          >
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text
+                style={{
+                  marginLeft: 20,
+                  marginTop: 20,
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  color: "#1662A2",
+                }}
+              >
+                Selected Item (<IconCart />)
+              </Text>
+              <Text
+                style={{
+                  marginRight: 20,
+                  marginTop: 20,
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  color: "#1662A2",
+                }}
+              >
+                Total: € {getTotalPrice()}
+              </Text>
+            </View>
+            <View style={{ marginTop: 12 }}>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate("CartCheckout")}
+              >
+                <View
+                  style={{
+                    width: width,
+                    height: 60,
+                    alignItems: "center",
+                    marginLeft: 20,
+                    marginRight: 20,
+                    backgroundColor: "#1662A2",
+                    paddingBottom: 20,
+                    borderRadius: 20,
+                  }}
+                >
+                  <Text
+                    style={{
+                      marginTop: 17,
+                      fontSize: 20,
+                      color: "#fff",
+                      fontWeight: "bold",
                     }}
                   >
-                    <Icon name="trash" size={30} color={"white"} />
-                  </TouchableOpacity>
+                    PROCEED TO CHECKOUT
+                  </Text>
                 </View>
-              );
-            }}
-            disableRightSwipe={true}
-            previewOpenDelay={3000}
-            friction={1000}
-            rightOpenValue={-75}
-            leftOpenValue={75}
-            stopLeftSwipe={75}
-            tension={40}
-          />
-        </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </>
       ) : (
         <View style={styles.cartContainer}>
           <Image
@@ -90,71 +160,6 @@ const ProductCart = (props) => {
           />
         </View>
       )}
-      <View
-        style={{
-          backgroundColor: "#fff",
-          width: 400,
-          height: 150,
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          elevation: 20,
-        }}
-      >
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text
-            style={{
-              marginLeft: 20,
-              marginTop: 20,
-              fontSize: 20,
-              fontWeight: "bold",
-              color: "#1662A2",
-            }}
-          >
-            Selected Item (<IconCart />)
-          </Text>
-          <Text
-            style={{
-              marginRight: 20,
-              marginTop: 20,
-              fontSize: 20,
-              fontWeight: "bold",
-              color: "#1662A2",
-            }}
-          >
-            Total: € {getTotalPrice()}
-          </Text>
-        </View>
-        <View style={{ marginTop: 12 }}>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("CartCheckout")}
-          >
-            <View
-              style={{
-                width: width,
-                height: 60,
-                alignItems: "center",
-                marginLeft: 20,
-                marginRight: 20,
-                backgroundColor: "#1662A2",
-                paddingBottom: 20,
-                borderRadius: 20,
-              }}
-            >
-              <Text
-                style={{
-                  marginTop: 17,
-                  fontSize: 20,
-                  color: "#fff",
-                  fontWeight: "bold",
-                }}
-              >
-                PROCEED TO CHECKOUT
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
     </React.Fragment>
   );
 };

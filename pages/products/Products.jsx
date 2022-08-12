@@ -1,6 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import { View, StyleSheet,  ScrollView, Text, TextInput, Image, Dimensions } from 'react-native';
+import React, {useState, useCallback} from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { View, StyleSheet,  ScrollView, Text, TextInput, Image, Dimensions, ActivityIndicator } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
+
+
+import baseUrlGenerator from "../../generator/baseUrlGenerator"
+import axios from "axios"
 
 
 
@@ -10,13 +15,13 @@ import FectchedCategory from './FectchedCategory';
 import Caurosel from "../carousel/Carousel";
 
 
-const data = require('../../data/products.json')
+// const data = require('../../data/products.json')
 const categories = require('../../data/categories.json')
 var {width} = Dimensions.get('window');
 const height = Dimensions.get('screen').height / 2.2;
 
 const Products = (props) => {
-
+    const [loading , setLoading] = useState(true)
     const [products, setProducts] = useState([]) // products array
     const [searchProducts, setSearchProducts] = useState([]) // to store the filtered products
     const [targetProduct, setSearchTarget] = useState("") // targets the search text
@@ -28,16 +33,30 @@ const Products = (props) => {
    
 
     // sets the products to the data from the json file
-    useEffect(() => {
-        setProducts(data)
-        setSearchProducts(data)
-        setSearchTarget(false)
-        setCat(categories)
-        setpCat(data)
-        setIsActive(-1)
-        setInitialState(data)
-        
-        
+    useFocusEffect((
+        useCallback(() => {
+             setSearchTarget(false)
+             setIsActive(-1)
+
+    // gets the products from the server  
+     axios.get(`${baseUrlGenerator}products`) 
+        .then(res => {
+            setLoading(false)
+            setProducts(res.data)
+            setSearchProducts(res.data)
+            setpCat(res.data) 
+            setInitialState(res.data)
+        }).catch(err => {
+            console.log('Product API Error: ', err)
+        }) 
+     
+     // gets the products by category from the server
+         axios.get(`${baseUrlGenerator}onlineCategory`) 
+        .then(res => {
+            setCat(res.data)
+        }).catch(err => {
+            console.log('Product API Error: ', err)
+        })
        
         return () => {
             setProducts([])
@@ -48,14 +67,15 @@ const Products = (props) => {
             setInitialState()
             
         }
-    },[])
+        }, [])
+    ) )
 
     // filter products by search text
     const filterProducts = (text) => {
         setSearchProducts(products.filter(item => item.productName.toLowerCase().includes(text.toLowerCase())))
     }
 
-    // filter products by category
+    // filter products by categories
     const alternateCategory = (cats) => {
         {
             cats === "all" ? [setpCat(initialState), setIsActive(true)] : [ 
@@ -76,7 +96,9 @@ const Products = (props) => {
 
     // search bar
     return (    
-            <View style={{height: height}}>
+            <>
+                {loading == false ? (
+                    <View style={{height: height}}>
                 <View style={{marginTop: 10, justifyContent: "center"}}>
                     {/* <Caurosel /> */}
                     <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: width, height: 200, borderRadius: 10 }} />
@@ -106,7 +128,6 @@ const Products = (props) => {
                              />
                         </View>
                         <ScrollView style={{marginTop: 20}}>
-                           
                         {pCat.length > 0 ? (
                           <View style={styles.displayIem}>
                             {pCat.map((item) => {
@@ -119,14 +140,17 @@ const Products = (props) => {
                             <View style={{marginTop: 40, alignItems: "center"}}>
                                 <Text style={{color: "red", fontWeight: "bold"}}>No Products found</Text>
                             </View>
-                        )}
-                       
+                        )} 
                         </ScrollView>
-                    </View>
-                
-                )}
-            
+                    </View>    
+                )}  
         </View>
+                ) : (
+                    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+                        <ActivityIndicator size="large" color="#1662A2" />
+                    </View>
+                )}
+            </>
     )
 }
 
