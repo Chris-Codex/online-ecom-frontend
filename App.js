@@ -1,9 +1,13 @@
 import { LogBox } from "react-native";
+import Toast from "react-native-toast-message";
 import Wheader from "./pages/welcomeHeader/Wheader";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 // Navigations
 import MainNavigation from "./navigations/MainNavigation";
+
+// Contexts
+import Authentication from "./ContextApi/store/Authentication";
 
 // Redux
 import { Provider } from "react-redux";
@@ -20,11 +24,14 @@ const MyTheme = {
 LogBox.ignoreAllLogs(true);
 export default function App() {
   return (
-    <Provider store={store}>
-      <NavigationContainer theme={MyTheme}>
-        <Wheader />
-        <MainNavigation />
-      </NavigationContainer>
-    </Provider>
+    <Authentication>
+      <Provider store={store}>
+        <NavigationContainer theme={MyTheme}>
+          <Wheader />
+          <MainNavigation />
+          <Toast forwardRef={(forwardRef) => Toast.setRef(forwardRef)} />
+        </NavigationContainer>
+      </Provider>
+    </Authentication>
   );
 }

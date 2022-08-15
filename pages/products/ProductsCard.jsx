@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Button, Dimensions} from 'react-native';
+import Toast from 'react-native-toast-message';
 
 //connect to redux to have access to the state
 import { connect } from 'react-redux';
@@ -33,7 +34,13 @@ const ProductsCard = (props) => {
                     
                     {  keepTrackProducts > 0 ? (
                     <Button title={'ADD TO CART'} style={styles.addText} onPress={() => {
-                        props.addItemToCart(props);
+                        props.addItemToCart(props),
+                        Toast.show({
+                            type: 'success',
+                            position: 'bottom',
+                            text1: `${productName} added to cart`,
+                            text2: 'Complete your purchase in the cart',
+                        })
                     }} />
                 ) : <Text style={styles.notAvailable}>Not Available</Text>}
                 </View>

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import Toast from 'react-native-toast-message';
 import { View, Text, StyleSheet, Image, Dimensions, Button, ScrollView} from 'react-native';
-
+import { connect } from 'react-redux';
+import * as actions from '../../App_Redux/Actions/productCartActions';
 const OneProduct = (props) => {
     const [productList, setProductList] = useState(props.route.params.productList) 
     const [isAvailable, setIsAvailable] = useState(null) 
@@ -32,7 +34,16 @@ const OneProduct = (props) => {
            </ScrollView>
 
            <View style={{marginLeft: 20, marginRight: 20, marginBottom: 20}}>
-            <Button style={styles.addBtn} title="Add to Cart" onPress={() => {}} />
+            <Button style={styles.addBtn} title="Add to Cart" onPress={() => {
+                {props.addItemToCart(productList),
+                    Toast.show({
+                    type: 'success',
+                    position: 'top',
+                    text1: `${productList.productName} added to cart`,
+                    text2: 'Complete your purchase in the cart',
+                })
+                }
+            }} />
            </View>
         </View>
     )
@@ -81,4 +92,14 @@ const styles = StyleSheet.create({
     }
 })
 
-export default OneProduct;
+//connect to store to have access to the state
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItemToCart: (product) => {
+            dispatch(actions.addToCart(product));
+        }
+    }
+}
+
+
+export default connect(null, mapDispatchToProps)(OneProduct);

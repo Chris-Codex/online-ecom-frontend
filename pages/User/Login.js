@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import {
   View,
   Text,
@@ -11,23 +11,38 @@ import FormContainer from "../welcomeHeader/ReusableForms/FormContainer";
 import FormInput from "../welcomeHeader/ReusableForms/FormInput";
 import FormError from "../welcomeHeader/ReusableForms/FormError";
 
+// Conetx API
+import AuthenticateGlobal from "../../ContextApi/store/AuthenticateGlobal";
+import { login } from "../../ContextApi/actions/Authentication";
+
 var { width } = Dimensions.get("window").width / 1.2;
 
 const Login = (props) => {
+  const context = useContext(AuthenticateGlobal);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    props.navigation.navigate("UserProfile");
+    if (context.userState.isAuth === true) {
+      // if user is already logged in, redirect to user profile page
+      console.log("User is authenticated", context.userState.user);
+      props.navigation.navigate("UserProfile");
+    }
+  }, [context.userState.isAuth]);
+
   //User Authentication
   const submitLogin = () => {
-    if (email === "") {
-      setError("Email is required");
-    } else if (password === "") {
-      setError("Password is required");
+    const user = {
+      email: email,
+      password: password,
+    };
+
+    if (email === "" || password === "") {
+      setError("Please fill all fields");
     } else {
-      setError("");
-      props.navigation.navigate("Home");
-      console.log("Login Successful");
+      login(user, context.dispatch);
     }
   };
 

@@ -7,6 +7,9 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
+import axios from "axios";
+import baseUrlGenerator from "../../generator/baseUrlGenerator";
+import Toast from "react-native-toast-message";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import FormContainer from "../welcomeHeader/ReusableForms/FormContainer";
 import FormInput from "../welcomeHeader/ReusableForms/FormInput";
@@ -23,19 +26,47 @@ const Login = (props) => {
 
   //User Authentication
   const submitRegister = () => {
-    if (name === "") {
-      setError("name is required");
-    } else if (email === "") {
-      setError("Email is required");
-    } else if (phone === "") {
-      setError("Phone number is required");
-    } else if (password === "") {
-      setError("Password is required");
-    } else {
-      setError("");
-      props.navigation.navigate("Login");
-      console.log("Registration Successful");
+    if (name === "" || email === "" || phone === "" || password === "") {
+      setError("Please fill all fields");
     }
+
+    let userDetails = {
+      name: name,
+      email: email,
+      phone: phone,
+      password: password,
+      isAdmin: false,
+    };
+
+    axios
+      .post(`${baseUrlGenerator}onlineUser/register`, userDetails)
+      .then((res) => {
+        if (res.status == 200) {
+          Toast.show({
+            type: "success",
+            position: "top",
+            text1: "Registration Successful",
+            text2: "Please Login",
+            visibilityTime: 3000,
+            topOffset: 50,
+          });
+          setTimeout(() => {
+            props.navigation.navigate("Login");
+          }, 500);
+        }
+      })
+      .catch((err) => {
+        console.log("ERROR ERROR", err);
+        Toast.show({
+          type: "error",
+          position: "top",
+          text1: "Registration Failed",
+          text2: "Please Try Again",
+          visibilityTime: 3000,
+          autoHide: true,
+          topOffset: 50,
+        });
+      });
   };
 
   return (
@@ -58,7 +89,7 @@ const Login = (props) => {
         <FormContainer title={"User Registration"} style={{ marginTop: 20 }}>
           <FormInput
             placeholder="Enter your name"
-            value={email}
+            value={name}
             onChangeText={(text) => setName(text.toLowerCase())}
             id={"name"}
             name={"name"}
@@ -66,7 +97,7 @@ const Login = (props) => {
           <FormInput
             placeholder="Enter your E-mail"
             value={email}
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => setEmail(text.toLowerCase())}
             id={"email"}
             name={"email"}
           />
@@ -75,12 +106,12 @@ const Login = (props) => {
             value={phone}
             onChangeText={(text) => setPhone(text)}
             id={"phone"}
-            keyboardType={"numberic"}
+            keyboardType={"number-pad"}
             name={"phone"}
           />
           <FormInput
             placeholder="Enter your Password"
-            value={phone}
+            value={password}
             onChangeText={(text) => setPassword(text)}
             id={"password"}
             secureTextEntry={true}
