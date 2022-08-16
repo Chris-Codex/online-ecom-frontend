@@ -2,6 +2,7 @@ import React, {useState, useCallback} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { View, StyleSheet,  ScrollView, Text, TextInput, Image, Dimensions, ActivityIndicator } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import IconCart from "../welcomeHeader/IconCart";
 
 
 import baseUrlGenerator from "../../generator/baseUrlGenerator"
@@ -13,6 +14,7 @@ import ProductDisplayItem from '../products/ProductDisplayItem'
 import ProductFilter from './ProductFilter';
 import FectchedCategory from './FectchedCategory';
 import Caurosel from "../carousel/Carousel";
+
 
 
 // const data = require('../../data/products.json')
@@ -98,10 +100,23 @@ const Products = (props) => {
     return (    
             <>
                 {loading == false ? (
-                    <View style={{height: height}}>
-                <View style={{marginTop: 10, justifyContent: "center"}}>
+            <View style={{height: height}}>
+                 <View style={styles.header}>
+                 
+                <View>
+                    <Text style={styles.headerText}>Welcome to</Text>
+                    <Text style={styles.headerText2}>Griffith Stores</Text>
+                </View>
+                <View style={{marginRight: 10}}>
+                    <Icon  name="shopping-cart" size={30} color="#1662A2">
+                    <IconCart />
+                </Icon>
+                </View>
+            </View>
+                <View style={{marginTop: 30, marginLeft: 30, marginRight: 20, justifyContent: "center"}}>
+                  
                     {/* <Caurosel /> */}
-                    <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: width, height: 200, borderRadius: 10 }} />
+                    <Image source={{uri: "https://downloadmobilebankingapp.com/wp-content/uploads/2022/02/Global-Virtual-Visa-and-Mastercard-Bangladesh.jpg"}} style={{width: 370, height: 200, marginLeft: -18, borderRadius: 10 }} />
                 </View>
                  <View style={{flexDirection: "row", justifyContent: "center"}}>
                     <View style={styles.search}>
@@ -155,6 +170,31 @@ const Products = (props) => {
 }
 
 const styles = StyleSheet.create({
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+        backgroundColor: "#F7E4DE",
+        
+    },
+
+    headerText: {
+        fontSize: 20,
+        marginLeft: 5,
+        fontWeight: "bold",
+        color: "black",
+        marginTop: 40,
+    },
+
+     headerText2: {
+        fontSize: 30,
+        marginLeft: 5,
+        fontWeight: "bold",
+        color: "#1662A2",
+    },
+
     search: {
         flexDirection: 'row',
         width: width,
@@ -163,7 +203,7 @@ const styles = StyleSheet.create({
         opacity: 0.4,
         borderRadius: 10,
         marginTop: 10,
-        marginLeft: 5,
+        marginLeft: 15,
        
     },
 

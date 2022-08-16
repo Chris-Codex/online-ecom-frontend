@@ -24,6 +24,7 @@ const Login = (props) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    console.log("LOGIN", context.userState.userProfile);
     props.navigation.navigate("UserProfile");
     if (context.userState.isAuth === true) {
       // if user is already logged in, redirect to user profile page

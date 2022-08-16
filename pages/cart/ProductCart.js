@@ -181,6 +181,10 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const styles = StyleSheet.create({
+  cartContainer: {
+    flex: 1,
+    marginTop: 10,
+  },
   emptyCart: {
     width: width,
     height: 300,
@@ -208,7 +212,7 @@ const styles = StyleSheet.create({
 
   cartHeader: {
     width: width,
-    height: 50,
+    height: 80,
     backgroundColor: "#1662A2",
     marginTop: 10,
     flexDirection: "row",
@@ -220,7 +224,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     fontWeight: "bold",
     textAlign: "center",
-    paddingTop: 10,
+    paddingTop: 25,
     marginLeft: 20,
   },
 
@@ -260,7 +264,7 @@ const styles = StyleSheet.create({
     width: width,
     height: 40,
     borderRadius: 10,
-    marginTop: 4,
+    marginTop: 25,
     marginRight: 5,
   },
 

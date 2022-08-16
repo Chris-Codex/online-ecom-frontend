@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View } from "react-native";
@@ -13,10 +13,13 @@ import {
 import HomeScreen from "./Home_NavStack";
 import ProductCartScreen from "./Cart_NavStack";
 import UserNavigation from "./User_NavStack";
+import AdminNavigation from "./Admin_NavStack";
+import AuthenticateGlobal from "../ContextApi/store/AuthenticateGlobal";
 
 const Tab = createBottomTabNavigator();
 
 const AppStacks = () => {
+  const context = useContext(AuthenticateGlobal);
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -68,16 +71,19 @@ const AppStacks = () => {
         }}
       />
 
-      <Tab.Screen
-        name="Admin"
-        component={HomeScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="amazon" size={30} color="#FAC5B4" />
-          ),
-        }}
-      />
+      {context.userState.userProfile.isAdmin == true ? (
+        <Tab.Screen
+          name="Admin"
+          component={AdminNavigation}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="amazon" size={30} color="#FAC5B4" />
+            ),
+          }}
+        />
+      ) : null}
+
       <Tab.Screen
         name="User"
         component={UserNavigation}

@@ -27,7 +27,6 @@ export default function App() {
     <Authentication>
       <Provider store={store}>
         <NavigationContainer theme={MyTheme}>
-          <Wheader />
           <MainNavigation />
           <Toast forwardRef={(forwardRef) => Toast.setRef(forwardRef)} />
         </NavigationContainer>

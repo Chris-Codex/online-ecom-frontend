@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import reducerAuth from "../reducers/reducerAuth";
-import { setCurrentUser } from "../actions/Authentication";
+import setCurrentUser from "../actions/Authentication";
 import AuthenticateGlobal from "./AuthenticateGlobal";
 
 // run authentication check

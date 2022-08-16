@@ -37,8 +37,8 @@ export const login = (user, dispatch) => {
     });
 };
 
-export const fetchUserProfile = (id) => {
-  fetch(`${baseUrlGenerator}onlineUser/${id}`, {
+export const fetchUserProfile = (_id) => {
+  fetch(`${baseUrlGenerator}onlineUser/${_id}`, {
     method: "GET",
     body: JSON.stringify(user),
     headers: {
