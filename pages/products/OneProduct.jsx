@@ -1,14 +1,91 @@
 import React, {useState, useEffect} from 'react';
 import Toast from 'react-native-toast-message';
-import { View, Text, StyleSheet, Image, Dimensions, Button, ScrollView} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, Button, ScrollView} from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../../App_Redux/Actions/productCartActions';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Highlight from '../welcomeHeader/css/Highlight';
+
+
+
 const OneProduct = (props) => {
     const [productList, setProductList] = useState(props.route.params.productList) 
     const [isAvailable, setIsAvailable] = useState(null) 
+    const [availText, setAvailText] = useState("")
+
+    useEffect(() => { //check if product is available
+        if(props.route.params.productList.keepTrackProducts == 0){
+            setIsAvailable(<Highlight unavailable></Highlight>)
+            setAvailText("Product is not available")
+        } else if (props.route.params.productList.keepTrackProducts <= 5 ) {
+            setIsAvailable(<Highlight limited></Highlight>)
+            setAvailText("Limited Stock")
+        } else {
+            setIsAvailable(<Highlight available></Highlight>)
+            setAvailText("Product is Available")
+        }
+
+        return () => {
+            setIsAvailable(null)
+            setAvailText("")
+        }
+    },[])
 
 
     return (
+        <>
+        <View style={styles.header}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()} >
+                <Icon name="ios-arrow-back" style={{marginTop: 22, marginLeft: 14}} size={25} color="#1662A2" />
+            </TouchableOpacity>
+            <Text
+            style={{
+                marginTop: 23,
+                marginLeft: 10,
+                fontSize: 18,
+                fontWeight: "bold",
+            }}
+            >
+            Home
+            </Text>
+        
+
+        <TouchableOpacity
+            onPress={() => {
+                props.addItemToCart(props.route.params.productList),
+                Toast.show({
+                    type: 'success',
+                    position: 'bottom',
+                    text1: `${productList.productName} added to cart`,
+                    text2: 'Complete your purchase in the cart',
+                })
+            }}
+        >
+          <View
+            style={{
+              width: 130,
+              height: 40,
+              marginLeft: 120,
+              backgroundColor: "#1662A2",
+              marginTop: 28,
+              borderRadius: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                color: "#fff",
+                marginLeft: 20,
+                marginTop: 7,
+              }}
+            >
+              Add to Cart
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+
         <View style={styles.container}>
            <ScrollView style={styles.scrollview}>
              <View style={styles.imageContainer}>
@@ -27,25 +104,19 @@ const OneProduct = (props) => {
                  resizeMode="contain"
             />
              <View style={styles.infoContainer}>
-                <Text style={{fontWeight: "bold", fontSize: 15, marginBottom: 10}}>Descriptions</Text>
+                <View>
+                    {isAvailable}
+                    <Text>
+                        <Text style={{fontWeight: "bold"}}>Available:</Text> {availText}
+                    </Text>
+                </View>
+                <Text style={{fontWeight: "bold", fontSize: 15, marginTop: 10, marginBottom: 10}}>Descriptions</Text>
                 <Text style={styles.productDescription}>{productList.productDescription}</Text>
             </View>
             </View>
            </ScrollView>
-
-           <View style={{marginLeft: 20, marginRight: 20, marginBottom: 20}}>
-            <Button style={styles.addBtn} title="Add to Cart" onPress={() => {
-                {props.addItemToCart(productList),
-                    Toast.show({
-                    type: 'success',
-                    position: 'top',
-                    text1: `${productList.productName} added to cart`,
-                    text2: 'Complete your purchase in the cart',
-                })
-                }
-            }} />
-           </View>
         </View>
+        </>
     )
 }
 
@@ -56,6 +127,7 @@ const styles = StyleSheet.create({
     },
 
     scrollview: {
+        marginTop: 20,
         marginBottom: 80,
         padding: 10,
     },
@@ -88,7 +160,42 @@ const styles = StyleSheet.create({
     },
 
     productDescription: {
-        fontSize: 17,
+        fontSize: 16,
+        marginRight: 7
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: "center",
+        width: "100%",
+        height: 80,
+        backgroundColor: "#fff",
+        
+    },
+
+    headerText: {
+        fontSize: 20,
+        marginLeft: 5,
+        fontWeight: "bold",
+        color: "black",
+        marginTop: 40,
+    },
+
+     headerText2: {
+        fontSize: 30,
+        marginLeft: 5,
+        fontWeight: "bold",
+        color: "#1662A2",
+    },
+
+    singleAddToCart: {
+        backgroundColor: "#1662A2",
+        marginTop: -190,
+        width: 150,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 10,
+        alignSelf: "center",
     }
 })
 

@@ -38,20 +38,29 @@ const ProductCart = (props) => {
     <React.Fragment>
       {props.cartList.length > 0 ? (
         <>
-          <View style={styles.cartContainer}>
-            <View style={styles.cartHeader}>
-              <Text style={styles.headerText}>My Cart</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  props.clearCartList();
-                }}
-              >
-                <View style={styles.ClearBtn}>
-                  <Text style={styles.ClearBtnText}>CLEAR ITEMS</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+          <View style={styles.header}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                marginLeft: 15,
+                marginTop: 20,
+              }}
+            >
+              My Cart
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                props.clearCartList();
+              }}
+            >
+              <View style={styles.ClearBtn}>
+                <Text style={styles.ClearBtnText}>Clear Items</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
 
+          <View style={styles.cartContainer}>
             <SwipeListView
               data={props.cartList}
               renderItem={(data) => {
@@ -108,7 +117,7 @@ const ProductCart = (props) => {
               </Text>
               <Text
                 style={{
-                  marginRight: 20,
+                  marginRight: 70,
                   marginTop: 20,
                   fontSize: 20,
                   fontWeight: "bold",
@@ -124,7 +133,7 @@ const ProductCart = (props) => {
               >
                 <View
                   style={{
-                    width: width,
+                    width: 320,
                     height: 60,
                     alignItems: "center",
                     marginLeft: 20,
@@ -142,7 +151,7 @@ const ProductCart = (props) => {
                       fontWeight: "bold",
                     }}
                   >
-                    PROCEED TO CHECKOUT
+                    Proceed to Cart
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -183,7 +192,7 @@ const mapDispatchToProps = (dispatch) => {
 const styles = StyleSheet.create({
   cartContainer: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 3,
   },
   emptyCart: {
     width: width,
@@ -275,6 +284,30 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 10,
     fontWeight: "bold",
+  },
+
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    height: 80,
+    backgroundColor: "#fff",
+  },
+
+  headerText: {
+    fontSize: 20,
+    marginLeft: 5,
+    fontWeight: "bold",
+    color: "black",
+    marginTop: 40,
+  },
+
+  headerText2: {
+    fontSize: 30,
+    marginLeft: 5,
+    fontWeight: "bold",
+    color: "#1662A2",
   },
 });
 

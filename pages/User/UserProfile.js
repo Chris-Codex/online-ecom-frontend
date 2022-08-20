@@ -15,6 +15,7 @@ import {
 import AuthenticateGlobal from "../../ContextApi/store/AuthenticateGlobal";
 import { userLogout } from "../../ContextApi/actions/Authentication";
 import { useEffect } from "react/cjs/react.development";
+import Header from "../welcomeHeader/Header";
 
 const UserProfile = (props) => {
   const { userState } = useContext(AuthenticateGlobal);
@@ -46,48 +47,7 @@ const UserProfile = (props) => {
 
   return (
     <>
-      <View style={styles.header}>
-        <Text
-          style={{
-            marginTop: 38,
-            marginLeft: 20,
-            fontSize: 20,
-            fontWeight: "bold",
-          }}
-        >
-          My Profile
-        </Text>
-
-        <TouchableOpacity
-        // onPress={() => {
-        //   AsyncStorage.removeItem("token");
-        //   userLogout(userState.dispatch);
-        // }}
-        >
-          <View
-            style={{
-              width: 130,
-              height: 40,
-              marginRight: 20,
-              backgroundColor: "#1662A2",
-              marginTop: 33,
-              borderRadius: 10,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 17,
-                fontWeight: "bold",
-                color: "#fff",
-                marginLeft: 30,
-                marginTop: 7,
-              }}
-            >
-              Log Out
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <Header />
 
       <View
         style={{

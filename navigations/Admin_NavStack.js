@@ -12,19 +12,21 @@ const Admin_NavStack = () => {
   return (
     <stack.Navigator>
       <stack.Screen
-        name="Categories"
-        component={Categories}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <stack.Screen
         name="Products"
         component={Products}
         options={{
           headerShown: false,
         }}
       />
+
+      <stack.Screen
+        name="Categories"
+        component={Categories}
+        options={{
+          headerShown: false,
+        }}
+      />
+
       <stack.Screen
         name="Orders"
         component={Orders}

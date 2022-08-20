@@ -40,8 +40,8 @@ const ProductCartList = (props) => {
               color: "#1662A2",
             }}
           >
-            {data.productName.length > 13
-              ? data.productName.substring(0, 13) + "..."
+            {data.productName.length > 20
+              ? data.productName.substring(0, 20) + "..."
               : data.productName}
           </Text>
           <Text
@@ -52,9 +52,9 @@ const ProductCartList = (props) => {
               color: "#999",
             }}
           >
-            {data.productName.length > 16
-              ? data.productName.substring(0, 16) + "..."
-              : data.productName}
+            {data.productDescription.length > 20
+              ? data.productDescription.substring(0, 20) + "..."
+              : data.productDescription}
           </Text>
           <Text
             style={{

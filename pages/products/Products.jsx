@@ -172,7 +172,6 @@ const Products = (props) => {
 const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",

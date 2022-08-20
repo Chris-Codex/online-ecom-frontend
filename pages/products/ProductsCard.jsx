@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button, Dimensions} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Toast from 'react-native-toast-message';
 
 //connect to redux to have access to the state
@@ -15,7 +16,7 @@ const ProductsCard = (props) => {
 
              <View style={styles.cardContainer} key={_id}>
              <View style={styles.imgContainer}>
-                <Image resizeMode='contain' source={{ uri:img ? img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
+                <Image resizeMode='contain' source={{ uri: img ? img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
              </View>
         
             <View style={styles.cardHolder}>
@@ -33,7 +34,7 @@ const ProductsCard = (props) => {
                     <Text style={styles.priceText}>${price}</Text>
                     
                     {  keepTrackProducts > 0 ? (
-                    <Button title={'ADD TO CART'} style={styles.addText} onPress={() => {
+                    <TouchableOpacity onPress={() => {
                         props.addItemToCart(props),
                         Toast.show({
                             type: 'success',
@@ -41,7 +42,12 @@ const ProductsCard = (props) => {
                             text1: `${productName} added to cart`,
                             text2: 'Complete your purchase in the cart',
                         })
-                    }} />
+                    }}>
+                        <View style={{marginTop: 17, flexDirection: "row", backgroundColor: "#1662A2", width: 90, height: 24, borderRadius: 7, justifyContent: "center"}}>
+                            <Icon name="plus" style={{marginTop:4}} size={16} color="#fff" />
+                            <Text style={styles.addProduct}>Add</Text>
+                        </View>
+                    </TouchableOpacity>
                 ) : <Text style={styles.notAvailable}>Not Available</Text>}
                 </View>
                 
@@ -81,18 +87,22 @@ const styles = StyleSheet.create({
         height: width - 30 - 7,
         marginTop: 10, 
         marginBottom: 20,
+        
     },
 
     imgContainer: {
-        backgroundColor: 'transparent',
+        backgroundColor: 'red',
         marginTop: 30,
+        width: width - 20,
+        resizeMode: 'contain',
+
     },
 
     image: {
         width: 162,
-        marginTop: -4,
+        marginTop: 10,
         borderRadius: 10,
-        height: width - 20 - 35,
+        height: width - 20 - 49,
         backgroundColor: 'transparent',
     },
 
@@ -107,6 +117,14 @@ const styles = StyleSheet.create({
         margin: 10,
         fontWeight: 'bold',
         marginTop: 4,
+    },
+
+    addProduct: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#fff',
+        marginLeft: 5,
+        marginTop: 3
     },
 
     tradeMark: {
