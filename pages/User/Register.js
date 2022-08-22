@@ -20,20 +20,20 @@ var { width } = Dimensions.get("window").width / 1.2;
 const Login = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   //User Authentication
   const submitRegister = () => {
-    if (name === "" || email === "" || phone === "" || password === "") {
+    if (name === "" || email === "" || phoneNumber === "" || password === "") {
       setError("Please fill all fields");
     }
 
     let userDetails = {
       name: name,
       email: email,
-      phone: phone,
+      phoneNumber: phoneNumber,
       password: password,
       isAdmin: false,
     };
@@ -94,6 +94,7 @@ const Login = (props) => {
             id={"name"}
             name={"name"}
           />
+
           <FormInput
             placeholder="Enter your E-mail"
             value={email}
@@ -101,14 +102,16 @@ const Login = (props) => {
             id={"email"}
             name={"email"}
           />
+
           <FormInput
             placeholder="Enter your Phone number"
-            value={phone}
+            value={phoneNumber}
             onChangeText={(text) => setPhone(text)}
-            id={"phone"}
+            id={"phoneNumber"}
             keyboardType={"number-pad"}
-            name={"phone"}
+            name={"phoneNumber"}
           />
+
           <FormInput
             placeholder="Enter your Password"
             value={password}
@@ -117,6 +120,7 @@ const Login = (props) => {
             secureTextEntry={true}
             name={"password"}
           />
+
           <View style={{ flexDirection: "row", marginLeft: 75 }}>
             <Text>If account exist: </Text>
             <TouchableOpacity

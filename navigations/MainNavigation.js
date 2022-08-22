@@ -19,7 +19,9 @@ import AuthenticateGlobal from "../ContextApi/store/AuthenticateGlobal";
 const Tab = createBottomTabNavigator();
 
 const AppStacks = () => {
-  const context = useContext(AuthenticateGlobal);
+  const { userState } = useContext(AuthenticateGlobal);
+  const userProfile = userState.userProfile;
+  // console.log(userState.userProfile.isAdmin);
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -51,7 +53,6 @@ const AppStacks = () => {
           ),
         }}
       />
-
       <Tab.Screen
         name="Cart"
         component={ProductCartScreen}
@@ -71,18 +72,18 @@ const AppStacks = () => {
         }}
       />
 
-      {/* {context.userState.userProfile.isAdmin == true ? ( */}
-      <Tab.Screen
-        name="Admin"
-        component={AdminNavigation}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="amazon" size={30} color="#FAC5B4" />
-          ),
-        }}
-      />
-      {/* ) : null} */}
+      {userState?.userProfile?.isAdmin !== undefined && (
+        <Tab.Screen
+          name="Admin"
+          component={AdminNavigation}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="amazon" size={30} color="#FAC5B4" />
+            ),
+          }}
+        />
+      )}
 
       <Tab.Screen
         name="User"

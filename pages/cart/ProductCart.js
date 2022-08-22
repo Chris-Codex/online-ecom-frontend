@@ -93,9 +93,10 @@ const ProductCart = (props) => {
           <View
             style={{
               backgroundColor: "#fff",
-              width: 400,
+              width: 410,
               height: 150,
               position: "absolute",
+              alignSelf: "center",
               bottom: 0,
               left: 0,
               elevation: 20,
@@ -106,7 +107,7 @@ const ProductCart = (props) => {
             >
               <Text
                 style={{
-                  marginLeft: 20,
+                  marginLeft: 40,
                   marginTop: 20,
                   fontSize: 20,
                   fontWeight: "bold",
@@ -136,7 +137,7 @@ const ProductCart = (props) => {
                     width: 320,
                     height: 60,
                     alignItems: "center",
-                    marginLeft: 20,
+                    marginLeft: 40,
                     marginRight: 20,
                     backgroundColor: "#1662A2",
                     paddingBottom: 20,
@@ -292,6 +293,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     height: 80,
+    marginTop: 20,
     backgroundColor: "#fff",
   },
 

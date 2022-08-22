@@ -12,6 +12,7 @@ import {
 import { RadioButton } from "react-native-paper";
 import { Picker, Item } from "@react-native-picker/picker";
 import * as imagePicker from "expo-image-picker";
+import mime from "mime";
 
 import FormContainer from "../welcomeHeader/ReusableForms/FormContainer";
 import FormInput from "../welcomeHeader/ReusableForms/FormInput";
@@ -43,8 +44,15 @@ const CustomisedForm = (props) => {
   const [item, setItem] = useState(null);
 
   useEffect(() => {
+    AsyncStorage.getItem("token")
+      .then((res) => {
+        setToken(res);
+      })
+      .catch((err) => console.log("TOKEN", err));
+
+    // get categories from api
     axios
-      .get(`${baseUrlGenerator}categories`)
+      .get(`${baseUrlGenerator}onlineCategory`)
       .then((res) => {
         setCategories(res.data);
         console.log("CATEGORIES", res.data);
@@ -56,6 +64,7 @@ const CustomisedForm = (props) => {
       if (Platform.OS !== "web") {
         const { status } =
           await imagePicker.requestCameraRollPermissionsAsync();
+        // await imagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== "granted") {
           alert("Sorry, we need camera roll permissions to make this work!");
         }
@@ -81,20 +90,119 @@ const CustomisedForm = (props) => {
     }
   };
 
+  // Add product to api
+  const addProduct = () => {
+    if (
+      name === "" ||
+      price === "" ||
+      description === "" ||
+      category === "" ||
+      image === "" ||
+      subDescription === ""
+    ) {
+      setErrorMessage("Please fill all fields");
+    }
+
+    let formData = new FormData();
+
+    const newImageUrl = "file:///" + image.split("file:/").join("");
+
+    formData.append("productName", name);
+    formData.append("productDescription", description);
+    formData.append("subDescription", subDescription);
+    formData.append("img", {
+      uri: newImageUrl,
+      name: newImageUrl.split("/").pop(),
+      type: mime.getType(newImageUrl),
+    });
+    formData.append("trademark", trademark);
+    formData.append("price", price);
+    formData.append("category", category);
+    formData.append("keepTrackProducts", keepTrackStock);
+    formData.append("rating", rating);
+    formData.append("isFeatured", isFeatured);
+    formData.append("reviews", reviews);
+
+    console.log("FORM DATA", formData);
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    // axios
+    //   .post(`${baseUrlGenerator}products`, formData, config)
+    //   .then((res) => {
+    //     if (res.status == 200 || res.status == 201) {
+    //       Toast.show({
+    //         type: "success",
+    //         position: "top",
+    //         text1: "Product added successfully",
+    //         text2: "",
+    //       });
+    //       console.log("PRODUCT ADDED", res);
+    //       setTimeout(() => {
+    //         props.navigation.navigate("Products");
+    //       }, 500);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("ERROR", err);
+    //     Toast.show({
+    //       topOffset: 30,
+    //       type: "error",
+    //       position: "top",
+    //       text1: "Something went wrong",
+    //       text2: "Please try again",
+    //     });
+    //   });
+    console.log("ive been clicked");
+    fetch(`${baseUrlGenerator}products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("RES", res);
+        // if (res.status == 200 || res.status == 201) {
+        //   Toast.show({
+        //     type: "success",
+        //     position: "top",
+        //     text1: "Product added successfully",
+        //     text2: "",
+        //   });
+        //   console.log("PRODUCT ADDED", res);
+        //   setTimeout(() => {
+        //     props.navigation.navigate("Products");
+        //   }, 500);
+        // }
+      })
+      .catch((err) => {
+        console.log("ERROR", err);
+      });
+  };
+
   return (
     <>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
           <Icon
             name="arrow-left"
-            style={{ marginTop: 39, marginLeft: 14 }}
+            style={{ marginTop: 53, marginLeft: 14 }}
             size={18}
             color="#1662A2"
           />
         </TouchableOpacity>
         <Text
           style={{
-            marginTop: 37,
+            marginTop: 50,
             marginLeft: -80,
             fontSize: 18,
             fontWeight: "bold",
@@ -103,24 +211,14 @@ const CustomisedForm = (props) => {
           Products
         </Text>
 
-        <TouchableOpacity
-          onPress={() => {
-            props.addItemToCart(props.route.params.productList),
-              Toast.show({
-                type: "success",
-                position: "bottom",
-                text1: `${productList.productName} added to cart`,
-                text2: "Complete your purchase in the cart",
-              });
-          }}
-        >
+        <TouchableOpacity onPress={() => addProduct()}>
           <View
             style={{
-              width: 130,
+              width: 150,
               height: 40,
               marginRight: 20,
               backgroundColor: "#1662A2",
-              marginTop: 28,
+              marginTop: 40,
               borderRadius: 10,
             }}
           >
@@ -129,11 +227,11 @@ const CustomisedForm = (props) => {
                 fontSize: 17,
                 fontWeight: "bold",
                 color: "#fff",
-                marginLeft: 20,
+                alignSelf: "center",
                 marginTop: 7,
               }}
             >
-              Add to Cart
+              Add Products
             </Text>
           </View>
         </TouchableOpacity>
@@ -151,7 +249,7 @@ const CustomisedForm = (props) => {
           <Text style={{ marginLeft: 10 }}>
             <Text style={{ fontWeight: "bold", fontSize: 16 }}>
               Add Products:
-            </Text>{" "}
+            </Text>
             &nbsp;&nbsp;
             <Text style={{ marginLeft: 10, color: "red" }}>
               All fields are neccessary
@@ -162,8 +260,8 @@ const CustomisedForm = (props) => {
           placeholder="Enter TradeMark"
           onChangeText={(text) => setTrademark(text)}
           value={trademark}
-          id="tradeMark"
-          name="tradeMark"
+          id="trademark"
+          name="trademark"
         />
 
         <FormInput
@@ -200,39 +298,27 @@ const CustomisedForm = (props) => {
           name="keepTrackStock"
         />
 
-        <FormInput
-          placeholder="Accepted Category: Clothing, Electronics, etc"
-          onChangeText={(text) => setCategory(text)}
-          value={category}
-          id="category"
-          name="category"
-        />
-
         {errorMessage ? <FormError errorMessage={errorMessage} /> : null}
 
-        <View style={styles.btn}>
-          <Text style={styles.btnText}>Add Product</Text>
-        </View>
-
-        {/* <Picker
-            selectedValue={picker}
-            iosIcon={<Icon name="arrow-down" color="#1662A2" />}
-            style={{
-              width: 300,
-              marginLeft: 10,
-              backgroundColor: "#FBDDC7",
-              marginTop: 20,
-            }}
-            onValueChange={(e) => [setPicker(e), setCategory(e)]}
-            headerBackButtonTextStyle="white"
-          >
-            {categories.map((cat) => {
-              console.log("HELLO", cat);
-              return (
-                <Picker.Item key={cat._id} label={cat.name} value={cat._id} />
-              );
-            })}
-          </Picker> */}
+        <Picker
+          selectedValue={picker}
+          mode="Dropdown"
+          iosIcon={<Icon name="arrow-down" color="#1662A2" />}
+          style={{
+            width: 360,
+            marginLeft: 10,
+            backgroundColor: "#fff",
+            marginTop: -5,
+          }}
+          onValueChange={(e) => [setPicker(e), setCategory(e)]}
+          headerBackButtonTextStyle="white"
+        >
+          {categories.map((cat) => {
+            return (
+              <Picker.Item key={cat._id} label={cat.name} value={cat._id} />
+            );
+          })}
+        </Picker>
       </FormContainer>
     </>
   );
@@ -243,7 +329,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-    height: 80,
+    height: 100,
+    marginTop: 3,
     backgroundColor: "white",
   },
 

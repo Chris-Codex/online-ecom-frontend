@@ -62,16 +62,22 @@ const FetchItems = (props) => {
                 >
                   <View
                     style={{
-                      marginLeft: 60,
+                      marginLeft: 110,
                       backgroundColor: "#1662A2",
                       width: 50,
-                      height: 20,
+                      height: 30,
                       alignItems: "center",
                       borderRadius: 10,
                       marginTop: -17,
                     }}
                   >
-                    <Text style={{ fontWeight: "bold", color: "#fff" }}>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        marginTop: 5,
+                        color: "#fff",
+                      }}
+                    >
                       Edit
                     </Text>
                   </View>
@@ -88,13 +94,20 @@ const FetchItems = (props) => {
                       marginRight: 20,
                       backgroundColor: "red",
                       width: 50,
-                      height: 20,
+                      height: 30,
+                      marginTop: 5,
                       alignItems: "center",
                       borderRadius: 10,
                       marginTop: -17,
                     }}
                   >
-                    <Text style={{ fontWeight: "bold", color: "#fff" }}>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        marginTop: 5,
+                        color: "#fff",
+                      }}
+                    >
                       Delete
                     </Text>
                   </View>
@@ -151,7 +164,7 @@ const styles = StyleSheet.create({
   addToCartContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 20,
+    marginTop: 38,
   },
 
   resultText1: {

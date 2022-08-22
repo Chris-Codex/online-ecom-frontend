@@ -13,12 +13,11 @@ import axios from "axios"
 import ProductDisplayItem from '../products/ProductDisplayItem'
 import ProductFilter from './ProductFilter';
 import FectchedCategory from './FectchedCategory';
-import Caurosel from "../carousel/Carousel";
+// import Caurosel from "../carousel/Carousel";
 
 
 
 // const data = require('../../data/products.json')
-const categories = require('../../data/categories.json')
 var {width} = Dimensions.get('window');
 const height = Dimensions.get('screen').height / 2.2;
 

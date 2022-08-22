@@ -65,7 +65,7 @@ const OneProduct = (props) => {
             style={{
               width: 130,
               height: 40,
-              marginLeft: 120,
+              marginLeft: 170,
               backgroundColor: "#1662A2",
               marginTop: 28,
               borderRadius: 10,
@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: "100%",
         height: 80,
+        marginTop: 20,
         backgroundColor: "#fff",
         
     },

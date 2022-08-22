@@ -12,11 +12,12 @@ const width = Dimensions.get('screen').width / 2 - 30;
 
 const ProductsCard = (props) => {
     const {_id, img, productName, productDescription, price, trademark,  keepTrackProducts} = props;
+    console.log("test",img);
     return (
 
              <View style={styles.cardContainer} key={_id}>
              <View style={styles.imgContainer}>
-                <Image resizeMode='contain' source={{ uri: img ? img : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}} style={styles.image} />
+                <Image resizeMode='contain' source={{ uri: img }} style={styles.image} />
              </View>
         
             <View style={styles.cardHolder}>

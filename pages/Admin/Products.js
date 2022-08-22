@@ -124,7 +124,7 @@ const Products = (props) => {
         </TouchableOpacity>
       </View>
 
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", alignSelf: "center" }}>
         <TouchableOpacity onPress={() => props.navigation.navigate("Orders")}>
           <View style={styles.order}>
             <Icon
@@ -244,8 +244,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "100%",
     height: 80,
+    marginTop: 20,
     backgroundColor: "white",
   },
 
@@ -265,13 +265,14 @@ const styles = StyleSheet.create({
   },
 
   search: {
-    width: 340,
+    width: 380,
     height: 50,
     backgroundColor: "#fff",
     opacity: 0.8,
     borderRadius: 10,
     marginTop: 10,
-    marginLeft: 10,
+
+    alignSelf: "center",
   },
 
   searchInput: {
@@ -301,7 +302,7 @@ const styles = StyleSheet.create({
   },
 
   order: {
-    width: 100,
+    width: 140,
     height: 50,
     backgroundColor: "#1662A2",
     borderBottomLeftRadius: 10,

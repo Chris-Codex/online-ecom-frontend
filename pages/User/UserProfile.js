@@ -22,7 +22,6 @@ const UserProfile = (props) => {
   const [userProfile, setUserProfile] = useState();
 
   useEffect(() => {
-    console.log("YYYYYYYYYYYYYY", userState.userProfile);
     if (userState.isAuth === false || userState.isAuth === null) {
       props.navigation.navigate("Login");
     }
