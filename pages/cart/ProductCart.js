@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     width: width,
     height: 40,
     borderRadius: 10,
-    marginTop: 25,
+    marginTop: 33,
     marginRight: 5,
   },
 
@@ -292,8 +292,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    height: 80,
-    marginTop: 20,
+    height: 110,
+    marginTop: -10,
     backgroundColor: "#fff",
   },
 

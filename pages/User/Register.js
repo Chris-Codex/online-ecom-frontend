@@ -25,12 +25,12 @@ const Login = (props) => {
   const [error, setError] = useState("");
 
   //User Authentication
-  const submitRegister = () => {
+  const submitRegister = (props) => {
     if (name === "" || email === "" || phoneNumber === "" || password === "") {
       setError("Please fill all fields");
     }
 
-    let userDetails = {
+    let details = {
       name: name,
       email: email,
       phoneNumber: phoneNumber,
@@ -39,7 +39,7 @@ const Login = (props) => {
     };
 
     axios
-      .post(`${baseUrlGenerator}onlineUser/register`, userDetails)
+      .post(`${baseUrlGenerator}onlineUser/register`, details)
       .then((res) => {
         if (res.status == 200) {
           Toast.show({
@@ -67,6 +67,45 @@ const Login = (props) => {
           topOffset: 50,
         });
       });
+
+    // fetch(`${baseUrlGenerator}onlineUser/register`, {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(details),
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     if (res.status == 200) {
+    //       console.log("RESPONSE", res);
+    //       Toast.show({
+    //         type: "success",
+    //         position: "top",
+    //         text1: "Registration Successful",
+    //         text2: "Please Login",
+    //         visibilityTime: 3000,
+    //         topOffset: 50,
+    //       });
+    //       console.log("RESPONSE", res);
+    //       setTimeout(() => {
+    //         props.navigation.navigate("Login");
+    //       }, 500);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("ERROR ERROR", err);
+    //     Toast.show({
+    //       type: "error",
+    //       position: "top",
+    //       text1: "Registration Failed",
+    //       text2: "Please Try Again",
+    //       visibilityTime: 3000,
+    //       autoHide: true,
+    //       topOffset: 50,
+    //     });
+    //   });
   };
 
   return (

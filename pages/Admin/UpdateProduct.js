@@ -23,8 +23,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import baseUrlGenerator from "../../generator/baseUrlGenerator";
 import axios from "axios";
 import { clearItemFromCart } from "../../App_Redux/Actions/productCartActions";
+import { updateProductService } from "../../services/products";
 
-const CustomisedForm = (props) => {
+const UpdateProduct = (props) => {
   const [picker, setPicker] = useState();
   const [trademark, setTrademark] = useState();
   const [name, setName] = useState();
@@ -42,6 +43,10 @@ const CustomisedForm = (props) => {
   const [subDescription, setSubDescription] = useState("");
   const [reviews, setReviews] = useState(0);
   const [item, setItem] = useState(null);
+
+  const { productList } = props.route?.params;
+
+  // console.log("productList: ", productList);
 
   useEffect(() => {
     // check if props params exist
@@ -141,48 +146,19 @@ const CustomisedForm = (props) => {
     formData.append("isFeatured", isFeatured);
     formData.append("reviews", reviews);
 
-    console.log("FORM DATA", formData);
+    // console.log("FORM DATA", formData);
 
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
-      },
-    };
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // };
+  };
 
-    if (item !== null) {
-    } else {
-      fetch(`${baseUrlGenerator}products`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          console.log("RES", res);
-          if (res.status == 200 || res.status == 201) {
-            Toast.show({
-              type: "success",
-              position: "top",
-              text1: "Registration Successful",
-              text2: "Please Login",
-              visibilityTime: 3000,
-              topOffset: 50,
-            });
-            console.log("PRODUCT ADDED", res);
-            setTimeout(() => {
-              props.navigation.navigate("Products");
-            }, 500);
-          }
-        })
-        .catch((err) => {
-          console.log("ERROR", err);
-        });
-    }
+  const onPressUpdateProduct = async (payload) => {
+    // console.log("[onPressUpdateProduct] payload: ", payload);
+    await updateProductService(payload);
   };
 
   return (
@@ -207,7 +183,7 @@ const CustomisedForm = (props) => {
           Products
         </Text>
 
-        <TouchableOpacity onPress={() => addProduct()}>
+        <TouchableOpacity onPress={() => onPressUpdateProduct(productList)}>
           <View
             style={{
               width: 150,
@@ -227,7 +203,7 @@ const CustomisedForm = (props) => {
                 marginTop: 7,
               }}
             >
-              Add Products
+              Update Products
             </Text>
           </View>
         </TouchableOpacity>
@@ -301,10 +277,10 @@ const CustomisedForm = (props) => {
           mode="Dropdown"
           iosIcon={<Icon name="arrow-down" color="#1662A2" />}
           style={{
-            width: 360,
+            width: 345,
             marginLeft: 10,
             backgroundColor: "#fff",
-            marginTop: -5,
+            marginTop: -72,
           }}
           onValueChange={(e) => [setPicker(e), setCategory(e)]}
           headerBackButtonTextStyle="white"
@@ -376,4 +352,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomisedForm;
+export default UpdateProduct;

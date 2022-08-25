@@ -67,16 +67,30 @@ const Products = (props) => {
   };
 
   // delete product from api and update state
-  const deleteItem = (_id) => {
-    axios
-      .delete(`${baseUrlGenerator}products/${_id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+  const deleteItem = (id) => {
+    console.log("na here", id);
+    fetch(`${baseUrlGenerator}products/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
       .then((res) => {
-        const filtered = productsItem.filter((item) => item._id !== _id);
+        const filtered = productsItem.filter((item) => item.id !== id);
         setProductsItem(filtered);
       })
       .catch((err) => console.log("DELETE ERROR", err));
+
+    // axios
+    //   .delete(`${baseUrlGenerator}products/${id}`, {
+    //     headers: { Authorization: `Bearer ${token}` },
+    //   })
+    //   .then((res) => {
+    //     const filtered = productsItem.filter((item) => item.id !== id);
+    //     setProductsItem(filtered);
+    //   })
+    //   .catch((err) => console.log("DELETE ERROR", err));
   };
 
   return (
@@ -84,7 +98,7 @@ const Products = (props) => {
       <View style={styles.header}>
         <Text
           style={{
-            marginTop: 38,
+            marginTop: 55,
             marginLeft: 20,
             fontSize: 20,
             fontWeight: "bold",
@@ -105,7 +119,7 @@ const Products = (props) => {
               height: 40,
               marginRight: 20,
               backgroundColor: "red",
-              marginTop: 33,
+              marginTop: 55,
               borderRadius: 10,
             }}
           >
@@ -212,7 +226,7 @@ const Products = (props) => {
         </View>
       </View>
 
-      <View>
+      <View style={{ marginBottom: 250 }}>
         {isLoading ? (
           <View style={{ marginTop: 50 }}>
             <ActivityIndicator
@@ -244,8 +258,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    height: 80,
-    marginTop: 20,
+    height: 110,
     backgroundColor: "white",
   },
 
@@ -271,7 +284,6 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     borderRadius: 10,
     marginTop: 10,
-
     alignSelf: "center",
   },
 

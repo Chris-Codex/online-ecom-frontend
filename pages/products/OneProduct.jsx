@@ -167,8 +167,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: "center",
         width: "100%",
-        height: 80,
-        marginTop: 20,
+        height: 120,
+        marginTop: -10,
         backgroundColor: "#fff",
         
     },

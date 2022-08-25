@@ -5,6 +5,7 @@ import Categories from "../pages/Admin/Categories";
 import Products from "../pages/Admin/Products";
 import Orders from "../pages/Admin/Orders";
 import CustomisedForm from "../pages/Admin/CustomisedForm";
+import UpdateProduct from "../pages/Admin/UpdateProduct";
 
 const stack = createStackNavigator();
 
@@ -34,9 +35,18 @@ const Admin_NavStack = () => {
           headerShown: false,
         }}
       />
+
       <stack.Screen
         name="CustomisedForm"
         component={CustomisedForm}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <stack.Screen
+        name="UpdateProduct"
+        component={UpdateProduct}
         options={{
           headerShown: false,
         }}

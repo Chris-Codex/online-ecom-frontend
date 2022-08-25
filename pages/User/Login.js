@@ -67,6 +67,7 @@ const Login = (props) => {
           id={"email"}
           name={"email"}
         />
+
         <FormInput
           placeholder="Enter your Password"
           value={password}
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: 360,
     height: "70%",
-    marginTop: 50,
+    marginTop: 120,
     marginLeft: 17,
     borderRadius: 20,
     marginBottom: 50,

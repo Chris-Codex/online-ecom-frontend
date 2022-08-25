@@ -12,18 +12,47 @@ import { connect } from "react-redux";
 import * as actions from "../../../App_Redux/Actions/productCartActions";
 import Icon from "react-native-vector-icons/Ionicons";
 
+import Toast from "react-native-toast-message";
+import axios from "axios";
+import baseUrlGenerator from "../../../generator/baseUrlGenerator";
+
 var { width } = Dimensions.get("window");
 const height = Dimensions.get("window").height;
 
 const Confirm = (props) => {
-  // connect to server to get the data
-  const ordersComfirmation = () => {
-    setTimeout(() => {
-      props.clearCart();
-      props.navigation.navigate("Cart");
-    }, 500);
-  };
   const confirmOrders = props.route.params;
+
+  const ordersComfirmation = () => {
+    const order = confirmOrders.order.order;
+
+    axios
+      .post(`${baseUrlGenerator}onlineOrder`, order)
+      .then((res) => {
+        console.log("MAKE IT RAIN", res);
+        if (res.status == 200 || res.status == 201) {
+          Toast.show({
+            topOffset: 60,
+            type: "Success",
+            text1: "Order completed",
+            text2: "",
+          });
+          setTimeout(() => {
+            props.clearCart();
+            props.navigation.navigate("Cart");
+          }, 500);
+        }
+      })
+      .catch((error) => {
+        console.log("CCCCCCC", error);
+        Toast.show({
+          topOffset: 60,
+          type: "Success",
+          text1: "Something went wrong. Pls try process again",
+          text2: "",
+        });
+      });
+  };
+
   return (
     <ScrollView style={styles.ScrollViewContainer}>
       <View
@@ -68,29 +97,29 @@ const Confirm = (props) => {
             </Text>
 
             <View style={styles.orderDetails}>
-              <Text style={{ marginLeft: 10, marginTop: 5 }}>
+              <View style={{ marginLeft: 10, marginTop: 5 }}>
                 <Text style={{ fontWeight: "bold" }}>Address:</Text>&nbsp;&nbsp;
                 <Text style={{ marginLeft: 30 }}>
                   {confirmOrders.order.address}
                 </Text>
-              </Text>
-              <Text style={{ marginLeft: 10, marginTop: 5 }}>
+              </View>
+              <View style={{ marginLeft: 10, marginTop: 5 }}>
                 <Text style={{ fontWeight: "bold" }}>Address 2:</Text>
                 &nbsp;&nbsp;
                 <Text>{confirmOrders.order.secondAddress}</Text>
-              </Text>
-              <Text style={{ marginLeft: 10, marginTop: 5 }}>
+              </View>
+              <View style={{ marginLeft: 10, marginTop: 5 }}>
                 <Text style={{ fontWeight: "bold" }}>City:</Text>&nbsp;&nbsp;
                 <Text>{confirmOrders.order.city}</Text>
-              </Text>
-              <Text style={{ marginLeft: 10, marginTop: 5 }}>
+              </View>
+              <View style={{ marginLeft: 10, marginTop: 5 }}>
                 <Text style={{ fontWeight: "bold" }}>Zip:</Text>&nbsp;&nbsp;
                 <Text>{confirmOrders.order.zip}</Text>
-              </Text>
-              <Text style={{ marginLeft: 10, marginTop: 5 }}>
+              </View>
+              <View style={{ marginLeft: 10, marginTop: 5 }}>
                 <Text style={{ fontWeight: "bold" }}>Country:</Text>&nbsp;&nbsp;
                 <Text>{confirmOrders.order.country}</Text>
-              </Text>
+              </View>
             </View>
           </View>
 

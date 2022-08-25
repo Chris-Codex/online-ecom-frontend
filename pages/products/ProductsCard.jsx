@@ -22,18 +22,18 @@ const ProductsCard = (props) => {
         
             <View style={styles.cardHolder}>
                 <Text style={styles.productTitle}>
-                    {productName.length > 20 ? productName.substring(0, 20) + '...' : productName}
-                </Text>
-                <Text style={styles.productDescription}>
-                    {productDescription. length > 20 ? productDescription.substring(0, 20) + '...' : productDescription}
+                    {productName.length > 13 ? productName.substring(0, 13) + '...' : productName}
                 </Text>
                 <Text style={styles.tradeMark}>
                     {trademark. length > 20 ? trademark.substring(0, 20) + '...' : trademark}
                 </Text>
+                <Text style={styles.productDescription}>
+                    {productDescription. length > 20 ? productDescription.substring(0, 20) + '...' : productDescription}
+                </Text>
+                 <Text style={styles.priceText}>${price}</Text>
                 
-                <View style={styles.priceContainer}>
-                    <Text style={styles.priceText}>${price}</Text>
-                    
+                
+                <View style={styles.priceContainer}> 
                     {  keepTrackProducts > 0 ? (
                     <TouchableOpacity onPress={() => {
                         props.addItemToCart(props),
@@ -44,8 +44,8 @@ const ProductsCard = (props) => {
                             text2: 'Complete your purchase in the cart',
                         })
                     }}>
-                        <View style={{marginTop: 17, flexDirection: "row", backgroundColor: "#1662A2", width: 90, height: 24, borderRadius: 7, justifyContent: "center"}}>
-                            <Icon name="plus" style={{marginTop:4}} size={16} color="#fff" />
+                        <View style={{marginTop: -17, flexDirection: "row", backgroundColor: "#1662A2", width: 70, height: 32, borderRadius: 7, alignSelf: "flex-end"}}>
+                            <Icon name="plus" style={{marginLeft: 7, alignSelf: "center"}} size={16} color="#fff" />
                             <Text style={styles.addProduct}>Add</Text>
                         </View>
                     </TouchableOpacity>
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     },
 
     imgContainer: {
-        backgroundColor: 'red',
         marginTop: 30,
         width: width - 20,
         resizeMode: 'contain',
@@ -100,15 +99,16 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: 162,
+        width: 150,
         marginTop: 10,
         borderRadius: 10,
-        height: width - 20 - 49,
+        height: width - 20 - 56,
         backgroundColor: 'transparent',
+        alignSelf: 'center',
     },
 
     productTitle: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: 'bold',
         marginLeft: 10,
         marginTop: -2,
@@ -117,15 +117,16 @@ const styles = StyleSheet.create({
     productDescription: {
         margin: 10,
         fontWeight: 'bold',
-        marginTop: 4,
+        marginTop: 2,
+        fontSize: 14
     },
 
     addProduct: {
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: 'bold',
         color: '#fff',
-        marginLeft: 5,
-        marginTop: 3
+        marginLeft: 7,
+        marginTop: 5
     },
 
     tradeMark: {
@@ -137,14 +138,14 @@ const styles = StyleSheet.create({
     },
 
     priceContainer: {
-        flexDirection: 'row',
-        marginTop: 10,
+        marginTop: -10
     },
 
     priceText: {
         marginLeft: 10,
         fontWeight: 'bold',
         fontSize: 15,
+        marginTop: -4,
     },
 
     addText: {
@@ -159,6 +160,7 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: 'red',
         marginLeft: 10,
+        marginTop: 10
     }
 
 
