@@ -26,15 +26,15 @@ import { clearItemFromCart } from "../../App_Redux/Actions/productCartActions";
 import { updateProductService } from "../../services/products";
 
 const UpdateProduct = (props) => {
-  const [picker, setPicker] = useState();
-  const [trademark, setTrademark] = useState();
-  const [name, setName] = useState();
-  const [price, setPrice] = useState();
-  const [description, setDescription] = useState();
-  const [keepTrackStock, setKeepTrackStock] = useState();
-  const [image, setImage] = useState();
-  const [realImage, setRealImage] = useState("");
-  const [category, setCategory] = useState();
+  const [picker, setPicker] = useState("");
+  const [trademark, setTrademark] = useState("");
+  const [productName, setProductName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [keepTrackStock, setKeepTrackStock] = useState("");
+  const [image, setImage] = useState("");
+  const [realImage, setRealImage] = useState();
+  const [category, setCategory] = useState({});
   const [categories, setCategories] = useState([]);
   const [token, setToken] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -51,17 +51,17 @@ const UpdateProduct = (props) => {
   useEffect(() => {
     // check if props params exist
     if (!props.route.params) {
-      console.log("PULL OUT", props.route.params);
+      // console.log("PULL OUT", props.route.params);
       setItem(null);
     } else {
       setItem(props.route.params.productList);
       setTrademark(props.route.params.productList.trademark);
-      setName(props.route.params.productList.productName);
+      setProductName(props.route.params.productList.productName);
       setPrice(props.route.params.productList.price.toString());
       setDescription(props.route.params.productList.productDescription);
       setRealImage(props.route.params.productList.img);
       setImage(props.route.params.productList.img);
-      setCategory(props.route.params.productList.category._id);
+      setCategory(props.route.params.productList.category);
       setKeepTrackStock(
         props.route.params.productList.keepTrackProducts.toString()
       );
@@ -78,7 +78,7 @@ const UpdateProduct = (props) => {
       .get(`${baseUrlGenerator}onlineCategory`)
       .then((res) => {
         setCategories(res.data);
-        console.log("CATEGORIES", res.data);
+        // console.log("CATEGORIES", res.data);
       })
       .catch((err) => console.log(err));
 
@@ -113,52 +113,21 @@ const UpdateProduct = (props) => {
     }
   };
 
-  // Add product to api
-  const addProduct = () => {
-    if (
-      name === "" ||
-      price === "" ||
-      description === "" ||
-      category === "" ||
-      image === "" ||
-      subDescription === ""
-    ) {
-      setErrorMessage("Please fill all fields");
-    }
-
-    let formData = new FormData();
-
-    const newImageUrl = "file:///" + image.split("file:/").join("");
-
-    formData.append("productName", name);
-    formData.append("productDescription", description);
-    formData.append("subDescription", subDescription);
-    formData.append("img", {
-      uri: newImageUrl,
-      name: newImageUrl.split("/").pop(),
-      type: mime.getType(newImageUrl),
-    });
-    formData.append("trademark", trademark);
-    formData.append("price", price);
-    formData.append("category", category);
-    formData.append("keepTrackProducts", keepTrackStock);
-    formData.append("rating", rating);
-    formData.append("isFeatured", isFeatured);
-    formData.append("reviews", reviews);
-
-    // console.log("FORM DATA", formData);
-
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // };
-  };
-
   const onPressUpdateProduct = async (payload) => {
+    const formData = {
+      trademark: trademark,
+      productName: productName,
+      price: price,
+      productDescription: description,
+      img: image,
+      keepTrackProducts: keepTrackStock,
+      imgs: realImage,
+      category: category,
+    };
+
     // console.log("[onPressUpdateProduct] payload: ", payload);
-    await updateProductService(payload);
+
+    await updateProductService(payload, formData);
   };
 
   return (
@@ -238,8 +207,8 @@ const UpdateProduct = (props) => {
 
         <FormInput
           placeholder="Enter Product Name"
-          onChangeText={(text) => setName(text)}
-          value={name}
+          onChangeText={(text) => setProductName(text)}
+          value={productName}
           id="name"
           name="name"
         />

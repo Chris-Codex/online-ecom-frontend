@@ -68,29 +68,33 @@ const Products = (props) => {
 
   // delete product from api and update state
   const deleteItem = (id) => {
-    console.log("na here", id);
-    fetch(`${baseUrlGenerator}products/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        const filtered = productsItem.filter((item) => item.id !== id);
-        setProductsItem(filtered);
-      })
-      .catch((err) => console.log("DELETE ERROR", err));
-
-    // axios
-    //   .delete(`${baseUrlGenerator}products/${id}`, {
-    //     headers: { Authorization: `Bearer ${token}` },
-    //   })
+    // console.log("na here", id);
+    // fetch(`${baseUrlGenerator}products/${id}`, {
+    //   method: "DELETE",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    //   .then((res) => res.json())
     //   .then((res) => {
     //     const filtered = productsItem.filter((item) => item.id !== id);
     //     setProductsItem(filtered);
     //   })
     //   .catch((err) => console.log("DELETE ERROR", err));
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .delete(`${baseUrlGenerator}products/${id}`, config)
+      .then((res) => {
+        const filtered = productsItem.filter((item) => item.id !== id);
+        setProductsItem(filtered);
+      })
+      .catch((err) => console.log("DELETE ERROR", err));
   };
 
   return (

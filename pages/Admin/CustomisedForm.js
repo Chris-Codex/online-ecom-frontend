@@ -46,7 +46,7 @@ const CustomisedForm = (props) => {
   useEffect(() => {
     // check if props params exist
     if (!props.route.params) {
-      console.log("PULL OUT", props.route.params);
+      // console.log("PULL OUT", props.route.params);
       setItem(null);
     } else {
       setItem(props.route.params.productList);
@@ -73,7 +73,7 @@ const CustomisedForm = (props) => {
       .get(`${baseUrlGenerator}onlineCategory`)
       .then((res) => {
         setCategories(res.data);
-        console.log("CATEGORIES", res.data);
+        // console.log("CATEGORIES", res.data);
       })
       .catch((err) => console.log(err));
 
@@ -141,7 +141,7 @@ const CustomisedForm = (props) => {
     formData.append("isFeatured", isFeatured);
     formData.append("reviews", reviews);
 
-    console.log("FORM DATA", formData);
+    // console.log("FORM DATA", formData);
 
     const config = {
       headers: {
@@ -163,7 +163,7 @@ const CustomisedForm = (props) => {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log("RES", res);
+          // console.log("RES", res);
           if (res.status == 200 || res.status == 201) {
             Toast.show({
               type: "success",

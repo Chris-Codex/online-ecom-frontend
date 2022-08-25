@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { deleteProductService } from "../../services/products";
 
 // image dimensions
 const Imagewidth = Dimensions.get("screen").width / 2 - 60;
@@ -19,8 +20,9 @@ const height = Dimensions.get("screen").height / 4.7;
 
 const FetchItems = (props) => {
   const products = props;
+  console.log("PRODUCTS", products);
 
-  console.log("PRODUCTS", products.img);
+  // console.log("PRODUCTS", products.img);
 
   return (
     <ScrollView>
@@ -89,11 +91,7 @@ const FetchItems = (props) => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => {
-                  //delete product by id
-                  props.deleteItem(products.id);
-                  // console.log(products.id);
-                }}
+                onPress={() => deleteProductService(products.id)}
               >
                 <View
                   style={{
