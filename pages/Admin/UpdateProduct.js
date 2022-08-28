@@ -125,9 +125,18 @@ const UpdateProduct = (props) => {
       category: category,
     };
 
-    // console.log("[onPressUpdateProduct] payload: ", payload);
-
     await updateProductService(payload, formData);
+    Toast.show({
+      type: "success",
+      position: "top",
+      text1: "Update was Successful",
+      text2: "Griffith Store",
+      visibilityTime: 3000,
+      topOffset: 50,
+    });
+    setTimeout(() => {
+      props.navigation.navigate("Products");
+    }, 500);
   };
 
   return (

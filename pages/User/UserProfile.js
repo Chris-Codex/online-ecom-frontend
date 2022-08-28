@@ -32,9 +32,10 @@ const UserProfile = (props) => {
             headers: { Authorization: `Bearer ${res}` },
           })
           .then((user) => {
+            AsyncStorage.setItem("user", JSON.stringify(user.data));
             setUserProfile(user.data);
-            console.log(user);
-            console.log(user.data);
+            //console.log(user);
+            console.log("na me", user.data);
           });
       })
       .catch((err) => console.log("USERPROFILE", err));

@@ -5,7 +5,7 @@ import baseUrlGenerator from "../../generator/baseUrlGenerator";
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
-export const login = (user, dispatch) => {
+export const login = async (user, dispatch) => {
   fetch(`${baseUrlGenerator}onlineUser/login`, {
     method: "POST",
     body: JSON.stringify(user),
@@ -16,9 +16,11 @@ export const login = (user, dispatch) => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log("abi my eye dey pain me", data);
       if (data) {
         const token = data.token;
         AsyncStorage.setItem("token", token);
+        //AsyncStorage.setItem("userwithID", data._id);
         const decoded = jwt_decode(token);
         dispatch(setCurrentUser(decoded, user));
       } else {

@@ -14,6 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import FormContainer from "../welcomeHeader/ReusableForms/FormContainer";
 import FormInput from "../welcomeHeader/ReusableForms/FormInput";
 import FormError from "../welcomeHeader/ReusableForms/FormError";
+import { userRegistration } from "../../services/products";
 
 var { width } = Dimensions.get("window").width / 1.2;
 
@@ -26,6 +27,7 @@ const Login = (props) => {
 
   //User Authentication
   const submitRegister = (props) => {
+    console.log("PROPS", props);
     if (name === "" || email === "" || phoneNumber === "" || password === "") {
       setError("Please fill all fields");
     }
@@ -39,7 +41,7 @@ const Login = (props) => {
     };
 
     axios
-      .post(`${baseUrlGenerator}onlineUser/register`, details)
+      .post(`${baseUrlGenerator}onlineUser`, details)
       .then((res) => {
         if (res.status == 200) {
           Toast.show({
@@ -108,6 +110,18 @@ const Login = (props) => {
     //   });
   };
 
+  const onPressRegisterUser = async (payload) => {
+    const formData = {
+      name: name,
+      email: email,
+      phoneNumber: phoneNumber,
+      password: password,
+      isAdmin: false,
+    };
+
+    await userRegistration(payload, formData);
+  };
+
   return (
     <View style={styles.Container}>
       <View style={{ flexDirection: "row" }}>
@@ -171,7 +185,7 @@ const Login = (props) => {
             </TouchableOpacity>
           </View>
           {error ? <FormError error={error} /> : null}
-          <TouchableOpacity onPress={() => submitRegister()}>
+          <TouchableOpacity onPress={() => onPressRegisterUser()}>
             <View style={styles.registerBtn}>
               <Text style={styles.logText}>REGISTER</Text>
             </View>

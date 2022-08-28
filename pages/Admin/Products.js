@@ -68,20 +68,6 @@ const Products = (props) => {
 
   // delete product from api and update state
   const deleteItem = (id) => {
-    // console.log("na here", id);
-    // fetch(`${baseUrlGenerator}products/${id}`, {
-    //   method: "DELETE",
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     const filtered = productsItem.filter((item) => item.id !== id);
-    //     setProductsItem(filtered);
-    //   })
-    //   .catch((err) => console.log("DELETE ERROR", err));
-
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -93,6 +79,17 @@ const Products = (props) => {
       .then((res) => {
         const filtered = productsItem.filter((item) => item.id !== id);
         setProductsItem(filtered);
+        Toast.show({
+          type: "success",
+          position: "top",
+          text1: "Update was Successful",
+          text2: "Griffith Store",
+          visibilityTime: 3000,
+          topOffset: 50,
+        });
+        setTimeout(() => {
+          props.navigation.navigate("Products");
+        }, 500);
       })
       .catch((err) => console.log("DELETE ERROR", err));
   };

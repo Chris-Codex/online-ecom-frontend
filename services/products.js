@@ -56,3 +56,38 @@ export const deleteProductService = async (product_id) => {
     throw error;
   }
 };
+
+export const OrderService = async (payload) => {
+  console.log("[deleteProductService] product_id: ", payload);
+  const token = await getToken();
+
+  try {
+    await axios.post(`${BASE_API_ENDPOINT}onlineOrder`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.log("[OrderService] error: ", error);
+    throw error;
+  }
+};
+
+export const userRegistration = async (payload, formData) => {
+  console.log("[DISPLAY formData]: ", formData);
+  console.log("[DISPLAY payload]: ", payload);
+  const registration_data = {
+    name: formData.name,
+    email: formData.email,
+    phoneNumber: formData.phoneNumber,
+    password: formData.password,
+    isAdmin: false,
+  };
+
+  try {
+    await axios.post(`${BASE_API_ENDPOINT}onlineUser`, registration_data);
+  } catch (error) {
+    console.log("[userRegistration] error: ", error);
+    throw error;
+  }
+};
