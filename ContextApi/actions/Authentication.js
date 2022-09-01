@@ -20,7 +20,9 @@ export const login = async (user, dispatch) => {
       if (data) {
         const token = data.token;
         AsyncStorage.setItem("token", token);
-        //AsyncStorage.setItem("userwithID", data._id);
+        AsyncStorage.setItem("userwithID", data._id);
+        AsyncStorage.setItem("user", data);
+
         const decoded = jwt_decode(token);
         dispatch(setCurrentUser(decoded, user));
       } else {

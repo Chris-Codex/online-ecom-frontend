@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,8 @@ import { Item, Picker, Select } from "native-base";
 import FormContainer from "../../welcomeHeader/ReusableForms/FormContainer";
 import FormInput from "../../welcomeHeader/ReusableForms/FormInput";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AuthenticateGlobal from "../../../ContextApi/store/AuthenticateGlobal";
 
 import { connect } from "react-redux";
 
@@ -22,18 +24,32 @@ const { width } = Dimensions.get("window").width;
 const countries = require("../../../data/countries.json");
 
 const ProductCheckout = (props) => {
-  const [orders, setOrders] = useState();
-  const [address, setAddress] = useState();
-  const [secondAddress, setSecondAddress] = useState();
-  const [city, setCity] = useState();
-  const [state, setState] = useState();
-  const [zip, setZip] = useState();
-  const [country, setCountry] = useState();
-  const [phone, setPhone] = useState();
-  const [email, setEmail] = useState();
+  const { userState } = useContext(AuthenticateGlobal);
+
+  const [orders, setOrders] = useState([]);
+  const [address, setAddress] = useState("");
+  const [secondAddress, setSecondAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [country, setCountry] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [user, setUser] = useState();
 
   useEffect(() => {
     setOrders(props.cartList);
+
+    if (userState.isAuth) {
+      setUser(userState.userProfile._id);
+    } else {
+      props.navigation.navigate("Cart");
+      Toast.show({
+        topOffset: 60,
+        type: "error",
+        text1: "Please login to checkout",
+      });
+    }
 
     return () => {
       setOrders([]);
@@ -41,32 +57,22 @@ const ProductCheckout = (props) => {
   }, []);
 
   //pass information to Payment component
-  const Checkout = () => {
+  const Checkout = async () => {
+    const user = await AsyncStorage.getItem("user");
     props.navigation.navigate("Payment", {
       orders: orders,
       address: address,
       secondAddress: secondAddress,
       city: city,
       state: state,
+      orderDate: Date.now(),
       zip: zip,
       country: country,
       phone: phone,
+      status: "3",
       email: email,
+      user,
     });
-
-    // let order = {
-    //   city,
-    //   country,
-    //   dateOrdered: Date.now(),
-    //   order,
-    //   phone,
-    //   state,
-    //   zip,
-    //   email,
-    //   address,
-    //   secondAddress,
-    // };
-    // props.navigation.navigate("Payment", { order: order });
   };
 
   return (

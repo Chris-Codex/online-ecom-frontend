@@ -72,7 +72,7 @@ const AppStacks = () => {
         }}
       />
 
-      {userState?.userProfile?.isAdmin !== undefined && (
+      {userState?.userProfile?.isAdmin ? (
         <Tab.Screen
           name="Admin"
           component={AdminNavigation}
@@ -83,7 +83,9 @@ const AppStacks = () => {
             ),
           }}
         />
-      )}
+      ) : null}
+
+      {console.log("DISPLAY USER", userState?.userProfile)}
 
       <Tab.Screen
         name="User"

@@ -23,14 +23,6 @@ const height = Dimensions.get("window").height;
 
 const Confirm = (props) => {
   const confirmOrders = props.route.params;
-  const [token, setToken] = useState();
-
-  // get token from async storage
-
-  // .then(() => {
-  //   setToken("token");
-  // })
-  // .catch((err) => console.log("TOKEN", err));
 
   const ordersComfirmation = async () => {
     const tokens = await AsyncStorage.getItem("token");
@@ -58,30 +50,6 @@ const Confirm = (props) => {
     };
     console.log("[Confirm Orders]:", orderUpload);
 
-    // axios
-    //   .post(`${BASE_API_ENDPOINT}onlineOrder`, config, orderUpload)
-    //   .then((res) => {
-    //     if (res.status == 200 || res.status == 201) {
-    //       Toast.show({
-    //         topOffset: 60,
-    //         type: "success",
-    //         text1: "Order completed",
-    //       });
-    //       setTimeout(() => {
-    //         props.clearCart();
-    //         props.navigation.navigate("Cart");
-    //       }, 500);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("[Error 1]:", error); // 401
-    //     Toast.show({
-    //       topOffset: 60,
-    //       type: "error",
-    //       text1: "Something went wrong. Pls try process again",
-    //     });
-    //   });
-
     fetch(`${BASE_API_ENDPOINT}onlineOrder`, {
       method: "POST",
       headers: {
@@ -92,20 +60,20 @@ const Confirm = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log("RES", res);
-        if (res.status == 200 || res.status == 201) {
-          Toast.show({
-            type: "success",
-            position: "top",
-            text1: "Order Successful",
-            text2: "Congratulations",
-            visibilityTime: 3000,
-            topOffset: 50,
-          });
-          setTimeout(() => {
-            props.navigation.navigate("Carts");
-          }, 500);
+        if (res.status == 200 || res.status == 300) {
         }
+        Toast.show({
+          type: "success",
+          position: "top",
+          text1: "Order Successful",
+          text2: "Congratulations",
+          visibilityTime: 3000,
+          topOffset: 50,
+        });
+        setTimeout(() => {
+          props.clearCart();
+          props.navigation.navigate("Cart");
+        }, 500);
       })
       .catch((err) => {
         console.log("ERROR", err);

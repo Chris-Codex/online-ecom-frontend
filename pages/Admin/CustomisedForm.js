@@ -164,20 +164,21 @@ const CustomisedForm = (props) => {
         .then((res) => res.json())
         .then((res) => {
           // console.log("RES", res);
-          if (res.status == 200 || res.status == 201) {
-            Toast.show({
-              type: "success",
-              position: "top",
-              text1: "Registration Successful",
-              text2: "Please Login",
-              visibilityTime: 3000,
-              topOffset: 50,
-            });
-            console.log("PRODUCT ADDED", res);
-            setTimeout(() => {
-              props.navigation.navigate("Products");
-            }, 500);
-          }
+          // if (res.status == 200 || res.status == 201) {
+
+          // }
+          Toast.show({
+            type: "success",
+            position: "top",
+            text1: "Product Added",
+            text2: "Successful",
+            visibilityTime: 3000,
+            topOffset: 50,
+          });
+          console.log("PRODUCT ADDED", res);
+          setTimeout(() => {
+            props.navigation.navigate("Products");
+          }, 500);
         })
         .catch((err) => {
           console.log("ERROR", err);
@@ -301,10 +302,10 @@ const CustomisedForm = (props) => {
           mode="Dropdown"
           iosIcon={<Icon name="arrow-down" color="#1662A2" />}
           style={{
-            width: 360,
+            width: 343,
             marginLeft: 10,
             backgroundColor: "#fff",
-            marginTop: -5,
+            marginTop: -2,
           }}
           onValueChange={(e) => [setPicker(e), setCategory(e)]}
           headerBackButtonTextStyle="white"
@@ -326,7 +327,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     height: 100,
-    marginTop: 3,
+    marginTop: 40,
     backgroundColor: "white",
   },
 

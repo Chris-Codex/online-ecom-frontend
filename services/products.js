@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getToken } from "../core/storage";
+import Toast from "react-native-toast-message";
 
 const BASE_API_ENDPOINT = "http://10.0.2.2:5000/ecommerce_api/";
 
@@ -45,49 +46,27 @@ export const deleteProductService = async (product_id) => {
   console.log("[deleteProductService] product_id: ", product_id);
   const token = await getToken();
 
-  try {
-    await axios.delete(`${BASE_API_ENDPOINT}products/${product_id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error) {
-    console.log("[deleteProductService] error: ", error);
-    throw error;
-  }
-};
-
-export const OrderService = async (payload) => {
-  console.log("[deleteProductService] product_id: ", payload);
-  const token = await getToken();
-
-  try {
-    await axios.post(`${BASE_API_ENDPOINT}onlineOrder`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error) {
-    console.log("[OrderService] error: ", error);
-    throw error;
-  }
-};
-
-export const userRegistration = async (payload, formData) => {
-  console.log("[DISPLAY formData]: ", formData);
-  console.log("[DISPLAY payload]: ", payload);
-  const registration_data = {
-    name: formData.name,
-    email: formData.email,
-    phoneNumber: formData.phoneNumber,
-    password: formData.password,
-    isAdmin: false,
-  };
-
-  try {
-    await axios.post(`${BASE_API_ENDPOINT}onlineUser`, registration_data);
-  } catch (error) {
-    console.log("[userRegistration] error: ", error);
-    throw error;
-  }
+  fetch(`${BASE_API_ENDPOINT}products/${product_id}`, {
+    method: "DELETE",
+    headers: {
+      //"Content-Type": "application/json",
+      //Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      Toast.show({
+        type: "success",
+        position: "top",
+        text1: "Product Deleted",
+        text2: "Successful",
+        visibilityTime: 3000,
+        topOffset: 50,
+      });
+      setTimeout(() => {
+        props.navigation.navigate("Products");
+      }, 500);
+    })
+    .catch((error) => console.log("Error Message", error));
 };

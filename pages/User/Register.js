@@ -7,28 +7,32 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import axios from "axios";
 import baseUrlGenerator from "../../generator/baseUrlGenerator";
 import Toast from "react-native-toast-message";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import FormContainer from "../welcomeHeader/ReusableForms/FormContainer";
 import FormInput from "../welcomeHeader/ReusableForms/FormInput";
 import FormError from "../welcomeHeader/ReusableForms/FormError";
-import { userRegistration } from "../../services/products";
 
 var { width } = Dimensions.get("window").width / 1.2;
 
 const Login = (props) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [phoneNumber, setPhone] = useState();
+  const [password, setPassword] = useState();
+  const [country, setCountry] = useState();
+  const [error, setError] = useState();
 
   //User Authentication
-  const submitRegister = (props) => {
-    console.log("PROPS", props);
-    if (name === "" || email === "" || phoneNumber === "" || password === "") {
+  const submitRegister = () => {
+    if (
+      name === "" ||
+      email === "" ||
+      phoneNumber === "" ||
+      password === "" ||
+      country === ""
+    ) {
       setError("Please fill all fields");
     }
 
@@ -37,25 +41,34 @@ const Login = (props) => {
       email: email,
       phoneNumber: phoneNumber,
       password: password,
+      country: country,
       isAdmin: false,
     };
 
-    axios
-      .post(`${baseUrlGenerator}onlineUser`, details)
+    fetch(`${baseUrlGenerator}onlineUser`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(details),
+    })
+      .then((res) => res.json())
       .then((res) => {
-        if (res.status == 200) {
-          Toast.show({
-            type: "success",
-            position: "top",
-            text1: "Registration Successful",
-            text2: "Please Login",
-            visibilityTime: 3000,
-            topOffset: 50,
-          });
-          setTimeout(() => {
-            props.navigation.navigate("Login");
-          }, 500);
-        }
+        // if (res.status === 200 || res.status === 201) {
+
+        Toast.show({
+          type: "success",
+          position: "top",
+          text1: "Registration Successful",
+          text2: "Please Login",
+          visibilityTime: 3000,
+          topOffset: 50,
+        });
+        setTimeout(() => {
+          props.navigation.navigate("Login");
+        }, 500);
+        console.log("RESPONSE xxxxxxxxxxx", res);
       })
       .catch((err) => {
         console.log("ERROR ERROR", err);
@@ -69,57 +82,6 @@ const Login = (props) => {
           topOffset: 50,
         });
       });
-
-    // fetch(`${baseUrlGenerator}onlineUser/register`, {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(details),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     if (res.status == 200) {
-    //       console.log("RESPONSE", res);
-    //       Toast.show({
-    //         type: "success",
-    //         position: "top",
-    //         text1: "Registration Successful",
-    //         text2: "Please Login",
-    //         visibilityTime: 3000,
-    //         topOffset: 50,
-    //       });
-    //       console.log("RESPONSE", res);
-    //       setTimeout(() => {
-    //         props.navigation.navigate("Login");
-    //       }, 500);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log("ERROR ERROR", err);
-    //     Toast.show({
-    //       type: "error",
-    //       position: "top",
-    //       text1: "Registration Failed",
-    //       text2: "Please Try Again",
-    //       visibilityTime: 3000,
-    //       autoHide: true,
-    //       topOffset: 50,
-    //     });
-    //   });
-  };
-
-  const onPressRegisterUser = async (payload) => {
-    const formData = {
-      name: name,
-      email: email,
-      phoneNumber: phoneNumber,
-      password: password,
-      isAdmin: false,
-    };
-
-    await userRegistration(payload, formData);
   };
 
   return (
@@ -166,6 +128,14 @@ const Login = (props) => {
           />
 
           <FormInput
+            placeholder="Enter your Country"
+            value={country}
+            onChangeText={(text) => setCountry(text)}
+            id={"country"}
+            name={"country"}
+          />
+
+          <FormInput
             placeholder="Enter your Password"
             value={password}
             onChangeText={(text) => setPassword(text)}
@@ -185,7 +155,7 @@ const Login = (props) => {
             </TouchableOpacity>
           </View>
           {error ? <FormError error={error} /> : null}
-          <TouchableOpacity onPress={() => onPressRegisterUser()}>
+          <TouchableOpacity onPress={() => submitRegister()}>
             <View style={styles.registerBtn}>
               <Text style={styles.logText}>REGISTER</Text>
             </View>

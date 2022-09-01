@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { userLogout } from "../../ContextApi/actions/Authentication";
+import AuthenticateGlobal from "../../ContextApi/store/AuthenticateGlobal";
 
 
 const Header = (props) => {
+  const { userState } = useContext(AuthenticateGlobal);
     return (
          <View style={styles.header}>
         <Text
@@ -17,10 +21,10 @@ const Header = (props) => {
         </Text>
 
         <TouchableOpacity
-        // onPress={() => {
-        //   AsyncStorage.removeItem("token");
-        //   userLogout(userState.dispatch);
-        // }}
+        onPress={() => {
+          AsyncStorage.removeItem("token");
+          userLogout(userState.dispatch);
+        }}
         >
           <View
             style={{
@@ -56,6 +60,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 80,
     backgroundColor: "white",
+    marginTop: 50
   },
 })
 

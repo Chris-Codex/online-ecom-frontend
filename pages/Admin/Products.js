@@ -30,16 +30,14 @@ const Products = (props) => {
   const [token, setToken] = useState();
 
   useFocusEffect(
-    useCallback(() => {
+    useCallback(async () => {
       // Do something when the screen is focused
       setIsLoading(true);
       // get token from async storage
-      AsyncStorage.getItem("token")
-        .then(() => {
-          setToken("token");
-        })
-        .catch((err) => console.log("TOKEN", err));
-
+      const token = await AsyncStorage.getItem("token");
+      setToken(token);
+      // const token = user.token;
+      //console.log("ssssssss", user);
       // get products from api
       axios.get(`${baseUrlGenerator}products`).then((res) => {
         setProductsItem(res.data);
@@ -67,7 +65,7 @@ const Products = (props) => {
   };
 
   // delete product from api and update state
-  const deleteItem = (id) => {
+  const deleteItem = async (id) => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -77,19 +75,20 @@ const Products = (props) => {
     axios
       .delete(`${baseUrlGenerator}products/${id}`, config)
       .then((res) => {
-        const filtered = productsItem.filter((item) => item.id !== id);
-        setProductsItem(filtered);
-        Toast.show({
-          type: "success",
-          position: "top",
-          text1: "Update was Successful",
-          text2: "Griffith Store",
-          visibilityTime: 3000,
-          topOffset: 50,
-        });
-        setTimeout(() => {
-          props.navigation.navigate("Products");
-        }, 500);
+        console.log(res);
+        // const filtered = productsItem.filter((item) => item.id !== id);
+        // setProductsItem(filtered);
+        // Toast.show({
+        //   type: "success",
+        //   position: "top",
+        //   text1: "Update was Successful",
+        //   text2: "Griffith Store",
+        //   visibilityTime: 3000,
+        //   topOffset: 50,
+        // });
+        // setTimeout(() => {
+        //   props.navigation.navigate("Products");
+        // }, 500);
       })
       .catch((err) => console.log("DELETE ERROR", err));
   };
@@ -99,7 +98,7 @@ const Products = (props) => {
       <View style={styles.header}>
         <Text
           style={{
-            marginTop: 55,
+            marginTop: 70,
             marginLeft: 20,
             fontSize: 20,
             fontWeight: "bold",
@@ -120,7 +119,7 @@ const Products = (props) => {
               height: 40,
               marginRight: 20,
               backgroundColor: "red",
-              marginTop: 55,
+              marginTop: 62,
               borderRadius: 10,
             }}
           >

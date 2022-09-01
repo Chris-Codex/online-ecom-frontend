@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
   Dimensions,
   StyleSheet,
-  Button,
   TouchableOpacity,
   Image,
-  ScrollView,
 } from "react-native";
 
 //connects to store to have access to the state
 import { connect } from "react-redux";
 import * as actions from "../../App_Redux/Actions/productCartActions";
+import AuthenticateGlobal from "../../ContextApi/store/AuthenticateGlobal";
 
 // IconCart is the component that is connected to the store to selected the cartList
 import IconCart from "../welcomeHeader/IconCart";
@@ -25,6 +24,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 const { width } = Dimensions.get("window").width;
 
 const ProductCart = (props) => {
+  const { userState } = useContext(AuthenticateGlobal);
   //get total price of cart
   const getTotalPrice = () => {
     let total = 0;
@@ -72,7 +72,7 @@ const ProductCart = (props) => {
                     <TouchableOpacity
                       style={styles.deleteBtn}
                       onPress={() => {
-                        props.removeFromCart(data.item._id);
+                        props.removeFromCart(data.item.id);
                       }}
                     >
                       <Icon name="trash" size={30} color={"white"} />
@@ -128,34 +128,65 @@ const ProductCart = (props) => {
                 Total: € {getTotalPrice()}
               </Text>
             </View>
+
             <View style={{ marginTop: 12 }}>
-              <TouchableOpacity
-                onPress={() => props.navigation.navigate("CartCheckout")}
-              >
-                <View
-                  style={{
-                    width: 320,
-                    height: 60,
-                    alignItems: "center",
-                    marginLeft: 40,
-                    marginRight: 20,
-                    backgroundColor: "#1662A2",
-                    paddingBottom: 20,
-                    borderRadius: 20,
-                  }}
+              {userState.isAuth ? (
+                <TouchableOpacity
+                  onPress={() => props.navigation.navigate("Shipping")}
                 >
-                  <Text
+                  <View
                     style={{
-                      marginTop: 17,
-                      fontSize: 20,
-                      color: "#fff",
-                      fontWeight: "bold",
+                      width: 320,
+                      height: 60,
+                      alignItems: "center",
+                      marginLeft: 40,
+                      marginRight: 20,
+                      backgroundColor: "#1662A2",
+                      paddingBottom: 20,
+                      borderRadius: 20,
                     }}
                   >
-                    Proceed to Cart
-                  </Text>
-                </View>
-              </TouchableOpacity>
+                    <Text
+                      style={{
+                        marginTop: 17,
+                        fontSize: 20,
+                        color: "#fff",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Proceed to Checkout
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => props.navigation.navigate("HomePage")}
+                >
+                  <View
+                    style={{
+                      width: 320,
+                      height: 60,
+                      alignItems: "center",
+                      marginLeft: 40,
+                      marginRight: 20,
+                      backgroundColor: "#1662A2",
+                      paddingBottom: 20,
+                      borderRadius: 20,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        marginTop: 17,
+                        fontSize: 20,
+                        color: "#fff",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Pls Login
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </>
@@ -293,7 +324,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     height: 110,
-    marginTop: -10,
+    marginTop: 10,
     backgroundColor: "#fff",
   },
 
