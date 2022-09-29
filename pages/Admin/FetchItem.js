@@ -12,6 +12,10 @@ import {
 import { TouchableHighlight } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { deleteProductService } from "../../services/products";
+import { getToken } from "../../core/storage";
+import Toast from "react-native-toast-message";
+
+const BASE_API_ENDPOINT = "http://10.0.2.2:5000/ecommerce_api/";
 
 // image dimensions
 const Imagewidth = Dimensions.get("screen").width / 2 - 60;
@@ -21,6 +25,35 @@ const height = Dimensions.get("screen").height / 4.7;
 const FetchItems = (props) => {
   const products = props;
   console.log("PRODUCTS", products);
+
+  const deleteProductService = async (product_id) => {
+    console.log("[deleteProductService] product_id: ", product_id);
+    const token = await getToken();
+  
+    fetch(`${BASE_API_ENDPOINT}products/${product_id}`, {
+      method: "DELETE",
+      headers: {
+        //"Content-Type": "application/json",
+        //Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        Toast.show({
+          type: "success",
+          position: "top",
+          text1: "Product Deleted",
+          text2: "Successful",
+          visibilityTime: 3000,
+          topOffset: 50,
+        });
+        
+           props.navigation.navigate("Home");
+        
+      })
+      .catch((error) => console.log("Error Message", error));
+  };
 
   // console.log("PRODUCTS", products.img);
 

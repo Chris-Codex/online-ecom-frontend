@@ -59,40 +59,44 @@ const Login = (props) => {
         <Text style={styles.title}>GRIFFITH-STORE</Text>
       </View>
 
-      <FormContainer title={"User Login"}>
-        <FormInput
-          placeholder="Enter your E-mail"
-          value={email}
-          onChangeText={(text) => setEmail(text.toLowerCase())}
-          id={"email"}
-          name={"email"}
-        />
+      <View style={{ marginTop: -200 }}>
+        <FormContainer title={"User Login"}>
+          <FormInput
+            placeholder="Enter your E-mail"
+            value={email}
+            onChangeText={(text) => setEmail(text.toLowerCase())}
+            id={"email"}
+            name={"email"}
+          />
 
-        <FormInput
-          placeholder="Enter your Password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          id={"password"}
-          name={"password"}
-          secureTextEntry={true}
-        />
-        <View style={{ flexDirection: "row", marginLeft: 75 }}>
-          <Text>Don't have an account: </Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("Register")}
-          >
-            <View>
-              <Text style={{ fontWeight: "bold", fontSize: 15 }}>Register</Text>
+          <FormInput
+            placeholder="Enter your Password"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            id={"password"}
+            name={"password"}
+            secureTextEntry={true}
+          />
+          <View style={{ flexDirection: "row", marginLeft: 75 }}>
+            <Text>Don't have an account: </Text>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("Register")}
+            >
+              <View>
+                <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+                  Register
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          {error ? <FormError error={error} /> : null}
+          <TouchableOpacity onPress={() => submitLogin()}>
+            <View style={styles.loginContainer}>
+              <Text style={styles.logText}>LOG IN</Text>
             </View>
           </TouchableOpacity>
-        </View>
-        {error ? <FormError error={error} /> : null}
-        <TouchableOpacity onPress={() => submitLogin()}>
-          <View style={styles.loginContainer}>
-            <Text style={styles.logText}>LOG IN</Text>
-          </View>
-        </TouchableOpacity>
-      </FormContainer>
+        </FormContainer>
+      </View>
     </View>
   );
 };
@@ -101,12 +105,12 @@ const styles = StyleSheet.create({
   Container: {
     flex: 1,
     backgroundColor: "#fff",
-    width: 360,
-    height: "70%",
-    marginTop: 120,
-    marginLeft: 17,
+    width: 390,
+    height: "100%",
+    marginTop: 10,
+    marginLeft: 2,
+    marginRight: -2,
     borderRadius: 20,
-    marginBottom: 50,
   },
 
   title: {

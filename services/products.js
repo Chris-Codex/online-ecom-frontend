@@ -42,31 +42,4 @@ export const updateProductService = async (payload, formData) => {
   }
 };
 
-export const deleteProductService = async (product_id) => {
-  console.log("[deleteProductService] product_id: ", product_id);
-  const token = await getToken();
 
-  fetch(`${BASE_API_ENDPOINT}products/${product_id}`, {
-    method: "DELETE",
-    headers: {
-      //"Content-Type": "application/json",
-      //Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      Toast.show({
-        type: "success",
-        position: "top",
-        text1: "Product Deleted",
-        text2: "Successful",
-        visibilityTime: 3000,
-        topOffset: 50,
-      });
-      setTimeout(() => {
-        props.navigation.navigate("Products");
-      }, 500);
-    })
-    .catch((error) => console.log("Error Message", error));
-};

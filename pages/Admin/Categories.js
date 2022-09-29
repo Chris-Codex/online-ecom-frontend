@@ -24,7 +24,6 @@ import { clearItemFromCart } from "../../App_Redux/Actions/productCartActions";
 var { width } = Dimensions.get("window");
 
 const CategoryItem = (props) => {
-  console.log("TEST", props.item._id);
   return (
     <View style={styles.categoryContainer}>
       <Text style={{ marginLeft: 10, marginTop: 15 }}>{props.item.name}</Text>

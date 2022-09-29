@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 60,
     backgroundColor: "white",
-    marginTop: -90,
+    marginTop: -120,
   },
 
   headerText: {

@@ -15,7 +15,15 @@ const { width } = Dimensions.get("window").width;
 
 const ProductCartList = (props) => {
   const data = props.product;
-  const [quantity, setQuantity] = useState(props.quantity);
+  const [quantity, setQuantity] = useState(1);
+
+  const handleDecrement = () => {
+    setQuantity((prevCount) => prevCount - 1);
+  };
+
+  const handleIncrement = () => {
+    setQuantity((prevCount) => prevCount + 1);
+  };
 
   return (
     <View style={styles.cartItem} key={Math.random()}>
@@ -31,7 +39,7 @@ const ProductCartList = (props) => {
             style={styles.image}
           />
         </View>
-        <View style={{ marginLeft: -50 }}>
+        <View style={{ marginLeft: 10 }}>
           <Text
             style={{
               fontSize: 18,
@@ -40,8 +48,8 @@ const ProductCartList = (props) => {
               color: "#1662A2",
             }}
           >
-            {data.productName.length > 20
-              ? data.productName.substring(0, 20) + "..."
+            {data.productName.length > 30
+              ? data.productName.substring(0, 30) + "..."
               : data.productName}
           </Text>
           <Text
@@ -52,8 +60,8 @@ const ProductCartList = (props) => {
               color: "#999",
             }}
           >
-            {data.productDescription.length > 20
-              ? data.productDescription.substring(0, 20) + "..."
+            {data.productDescription.length > 38
+              ? data.productDescription.substring(0, 38) + "..."
               : data.productDescription}
           </Text>
           <Text
@@ -68,7 +76,7 @@ const ProductCartList = (props) => {
           </Text>
         </View>
 
-        <View
+        {/* <View
           style={{
             marginTop: 10,
             marginRight: 5,
@@ -77,19 +85,19 @@ const ProductCartList = (props) => {
           }}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => handleDecrement()}>
               <View style={styles.borderBtn}>
                 <Text style={styles.borderBtnText}>-</Text>
               </View>
             </TouchableOpacity>
 
             <Text style={{ marginLeft: 5, marginRight: 5, fontWeight: "bold" }}>
-              {data.quantity}
+              {quantity}
             </Text>
 
             <TouchableOpacity
               onPress={() => {
-                props.increaseQuantity(data.id);
+                handleIncrement();
               }}
             >
               <View style={styles.borderBtn}>
@@ -97,7 +105,7 @@ const ProductCartList = (props) => {
               </View>
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
       </View>
     </View>
   );
@@ -137,7 +145,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: width,
     height: 110,
-    justifyContent: "space-between",
     marginBottom: 5,
   },
 

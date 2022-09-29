@@ -1,8 +1,8 @@
-import React, {useState, useCallback} from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import React, {useState, useCallback} from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 import { View, StyleSheet,  ScrollView, Text, TextInput, Image, Dimensions, ActivityIndicator } from 'react-native';
-import Icon from "react-native-vector-icons/MaterialIcons";
-import IconCart from "../welcomeHeader/IconCart";
+import Icon from "react-native-vector-icons/MaterialIcons"
+import IconCart from "../welcomeHeader/IconCart"
 
 
 import baseUrlGenerator from "../../generator/baseUrlGenerator"
@@ -11,8 +11,8 @@ import axios from "axios"
 
 
 import ProductDisplayItem from '../products/ProductDisplayItem'
-import ProductFilter from './ProductFilter';
-import FectchedCategory from './FectchedCategory';
+import ProductFilter from './ProductFilter'
+import FectchedCategory from './FectchedCategory'
 // import Caurosel from "../carousel/Carousel";
 
 

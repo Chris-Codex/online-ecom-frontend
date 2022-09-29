@@ -20,6 +20,7 @@ import Header from "../welcomeHeader/Header";
 
 const UserProfile = (props) => {
   const { userState } = useContext(AuthenticateGlobal);
+  const context = useContext(AuthenticateGlobal);
   const [userProfile, setUserProfile] = useState();
   const [storeOrders, setStoreOrders] = useState();
   const [token, setToken] = useState();
@@ -51,11 +52,19 @@ const UserProfile = (props) => {
         .then((item) => {
           const data = item.data;
           const userOrders = data;
-          console.log("YYYYYY", userOrders.userProfile._id);
-          const storeOrder = userOrders.filter((order) => {
-            order.userProfile._id === userState.userProfile._id;
-          });
-          console.log("DONT DISAPPEAR", storeOrder);
+          console.log("YYYYYY", userOrders);
+          const storeOrder = userOrders?.filter(
+            (order) => {
+              return order?.user?._id === userState?.userProfile?._id;
+            }
+
+            // order?.user?._id.includes(`62ce7f81045966947cf31234`);
+            // console.log("[ORDER]:", order)
+            // console.log("DONT DISAPPEAR", userState?.userProfile?._id);
+            // console.log("ORDER USER", order.user);
+            // console.log("ORDER USER ID", order?.user?._id);
+          );
+
           setStoreOrders(storeOrder);
         })
         .catch((error) => console.log("Error loading Orders", error));
@@ -84,7 +93,7 @@ const UserProfile = (props) => {
         <TouchableOpacity
           onPress={() => {
             AsyncStorage.removeItem("token");
-            userLogout(userState.dispatch);
+            userLogout(context?.dispatch);
           }}
         >
           <View
@@ -167,34 +176,25 @@ const UserProfile = (props) => {
             Phone: &nbsp;&nbsp;&nbsp;{" "}
             {userProfile ? userProfile.phoneNumber : ""}
           </Text>
-          <Text
-            style={{
-              fontSize: 16,
-              marginLeft: 20,
-              marginTop: 5,
-              fontWeight: "bold",
-              color: "#000",
-            }}
-          >
-            Address: &nbsp;&nbsp;&nbsp; {userProfile ? userProfile.street : ""}
-          </Text>
+          
         </View>
       </View>
 
-      <View>
-        <Text>Hello </Text>
+      <ScrollView>
         <View>
-          {storeOrders ? (
-            storeOrders.map((item) => {
-              return <OrderCard key={item.id} {...item} />;
-            })
-          ) : (
-            <View>
-              <Text>No orders Available</Text>
-            </View>
-          )}
+          <View>
+            {storeOrders ? (
+              storeOrders.map((item) => {
+                return <OrderCard key={item.id} {...item} />;
+              })
+            ) : (
+              <View>
+                <Text>No orders Available</Text>
+              </View>
+            )}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 };

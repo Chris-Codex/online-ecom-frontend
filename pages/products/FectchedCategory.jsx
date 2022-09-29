@@ -44,15 +44,6 @@ const styles = StyleSheet.create({
    
     },
 
-    // center: {
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     backgroundColor: '#F9F2F2',
-    //     marginTop: 10,
-    //     borderRadius: 10,
-    // },
-
     isActive: {
        color: "#1662A2",
     paddingBottom: 5,

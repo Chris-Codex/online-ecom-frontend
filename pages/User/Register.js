@@ -45,7 +45,7 @@ const Login = (props) => {
       isAdmin: false,
     };
 
-    fetch(`${baseUrlGenerator}onlineUser`, {
+    fetch(`${baseUrlGenerator}onlineUser/register`, {
       method: "POST",
       headers: {
         Accept: "application/json",

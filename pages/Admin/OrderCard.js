@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Toast from "react-native-toast-message";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -10,6 +10,7 @@ import Highlight from "../welcomeHeader/css/Highlight";
 import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
 import { useEffect } from "react";
+import AuthenticateGlobal from "../../ContextApi/store/AuthenticateGlobal";
 
 const statusLevels = [
   { name: "pending", statusLevel: "3" },
@@ -17,6 +18,7 @@ const statusLevels = [
   { name: "delivered", statusLevel: "1" },
 ];
 const OrderCard = (props) => {
+  const { userState } = useContext(AuthenticateGlobal);
   console.log("[OrderCard]:", props);
   const [orderStatus, setOrderStatus] = useState();
   const [statusText, setStatusText] = useState();
@@ -40,10 +42,14 @@ const OrderCard = (props) => {
       setOrderStatus(<Highlight limited></Highlight>);
       setStatusText("shipped");
       setCardColor("#AF1C40");
-    } else {
+    } else if (props.status == "1") {
       setOrderStatus(<Highlight available></Highlight>);
       setStatusText("delivered");
       setCardColor("#EBF2F4");
+    } else {
+      setOrderStatus(<Highlight unavailable></Highlight>);
+      setStatusText("pending");
+      setCardColor("#E74C3C");
     }
 
     return () => {
@@ -97,7 +103,7 @@ const OrderCard = (props) => {
           topOffset: 50,
         });
         setTimeout(() => {
-          props.navigation.navigate("Products");
+          props.navigation?.navigate("Products");
         }, 500);
       })
       .catch((error) => console.log("Error loading Orders", error));
@@ -144,55 +150,59 @@ const OrderCard = (props) => {
             <Text style={styles.tot}>{props.country}</Text>
           </View>
 
-          <Picker
-            mode="dropdown"
-            iosIcon={<Icon name="arrow-down" color="#1662A2" />}
-            style={{
-              width: 300,
-              marginLeft: 4,
-              backgroundColor: "#DAEBF3",
-              marginTop: 20,
-            }}
-            selectedValue={statusChange}
-            onValueChange={(e) => setStatusChange(e)}
-            headerTitleStyle="Select Card"
-            headerBackButtonTextStyle="#EBF2F4"
-          >
-            {statusLevels.map((item, index) => {
-              return (
-                <Picker.Item
-                  key={item.statusLevel}
-                  label={item.name}
-                  value={item.statusLevel}
-                />
-              );
-            })}
-          </Picker>
-
-          <TouchableOpacity onPress={() => updateOrder()}>
-            <View
+          {userState?.userProfile?.isAdmin && (
+            <Picker
+              mode="dropdown"
+              iosIcon={<Icon name="arrow-down" color="#1662A2" />}
               style={{
-                width: 140,
-                height: 40,
-                marginLeft: 90,
-                backgroundColor: "red",
-                marginTop: 10,
-                borderRadius: 10,
+                width: 300,
+                marginLeft: 4,
+                backgroundColor: "#DAEBF3",
+                marginTop: 20,
               }}
+              selectedValue={statusChange}
+              onValueChange={(e) => setStatusChange(e)}
+              headerTitleStyle="Select Card"
+              headerBackButtonTextStyle="#EBF2F4"
             >
-              <Text
+              {statusLevels.map((item, index) => {
+                return (
+                  <Picker.Item
+                    key={item.statusLevel}
+                    label={item.name}
+                    value={item.statusLevel}
+                  />
+                );
+              })}
+            </Picker>
+          )}
+
+          {userState?.userProfile?.isAdmin && (
+            <TouchableOpacity onPress={() => updateOrder()}>
+              <View
                 style={{
-                  fontSize: 17,
-                  fontWeight: "bold",
-                  color: "#fff",
-                  marginLeft: 15,
-                  marginTop: 7,
+                  width: 140,
+                  height: 40,
+                  marginLeft: 90,
+                  backgroundColor: "red",
+                  marginTop: 10,
+                  borderRadius: 10,
                 }}
               >
-                Update Status
-              </Text>
-            </View>
-          </TouchableOpacity>
+                <Text
+                  style={{
+                    fontSize: 17,
+                    fontWeight: "bold",
+                    color: "#fff",
+                    marginLeft: 15,
+                    marginTop: 7,
+                  }}
+                >
+                  Update Status
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </>

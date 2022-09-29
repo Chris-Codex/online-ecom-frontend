@@ -15,6 +15,8 @@ import Toast from "react-native-toast-message";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { userLogout } from "../../../ContextApi/actions/Authentication";
+import StripApp from "../../Stripe/StripApp";
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 const BASE_API_ENDPOINT = "http://10.0.2.2:5000/ecommerce_api/";
 
@@ -23,13 +25,13 @@ const height = Dimensions.get("window").height;
 
 const Confirm = (props) => {
   const confirmOrders = props.route.params;
+  console.log("CONFIRM", confirmOrders.order.orders[0].productName);
 
   const ordersComfirmation = async () => {
     const tokens = await AsyncStorage.getItem("token");
     const userr = await AsyncStorage.getItem("user");
     const user = await JSON.parse(userr);
     const order = confirmOrders.order;
-    console.log("[Confirm SSSSSS]:", user);
 
     const orderUpload = {
       orderList: [
@@ -38,12 +40,14 @@ const Confirm = (props) => {
           product: order.orders[0].id,
         },
       ],
+
       shippers_addressOne: order.address,
       shippers_addressTwo: order.address,
       city: order.city,
       zip: order.zip,
       country: order.country,
       phone: user.phoneNumber,
+      email: user.email,
       status: "pending",
       totalAmount: order.orders[0].price,
       user: user._id,
@@ -70,10 +74,9 @@ const Confirm = (props) => {
           visibilityTime: 3000,
           topOffset: 50,
         });
-        setTimeout(() => {
-          props.clearCart();
-          props.navigation.navigate("Cart");
-        }, 500);
+
+        props.clearCart();
+        props.navigation.navigate("Cart");
       })
       .catch((err) => {
         console.log("ERROR", err);
@@ -124,27 +127,59 @@ const Confirm = (props) => {
             </Text>
 
             <View style={styles.orderDetails}>
-              <View style={{ marginLeft: 10, marginTop: 5 }}>
+              <View
+                style={{ marginLeft: 10, flexDirection: "row", marginTop: 5 }}
+              >
+                <Text style={{ fontWeight: "bold" }}>Phone:</Text>
+                <Text style={{ marginLeft: 30 }}>
+                  {confirmOrders.order.phone}
+                </Text>
+              </View>
+
+              <View
+                style={{ marginLeft: 10, flexDirection: "row", marginTop: 5 }}
+              >
+                <Text style={{ fontWeight: "bold" }}>Email:</Text>
+                <Text style={{ marginLeft: 30 }}>
+                  {confirmOrders.order.email}
+                </Text>
+              </View>
+
+              <View
+                style={{ marginLeft: 10, flexDirection: "row", marginTop: 5 }}
+              >
                 <Text style={{ fontWeight: "bold" }}>Address:</Text>
                 <Text style={{ marginLeft: 30 }}>
                   {confirmOrders.order.address}
                 </Text>
               </View>
-              <View style={{ marginLeft: 10, marginTop: 5 }}>
+
+              <View
+                style={{ marginLeft: 10, flexDirection: "row", marginTop: 5 }}
+              >
                 <Text style={{ fontWeight: "bold" }}>Address 2:</Text>
 
                 <Text>{confirmOrders.order.secondAddress}</Text>
               </View>
-              <View style={{ marginLeft: 10, marginTop: 5 }}>
-                <Text style={{ fontWeight: "bold" }}>City:</Text>
+
+              <View
+                style={{ marginLeft: 10, flexDirection: "row", marginTop: 5 }}
+              >
+                <Text style={{ fontWeight: "bold" }}>City: &nbsp;&nbsp;</Text>
                 <Text>{confirmOrders.order.city}</Text>
               </View>
-              <View style={{ marginLeft: 10, marginTop: 5 }}>
-                <Text style={{ fontWeight: "bold" }}>Zip:</Text>
+
+              <View
+                style={{ marginLeft: 10, flexDirection: "row", marginTop: 5 }}
+              >
+                <Text style={{ fontWeight: "bold" }}>Zip: &nbsp;&nbsp;</Text>
                 <Text>{confirmOrders.order.zip}</Text>
               </View>
-              <View style={{ marginLeft: 10, marginTop: 5 }}>
-                <Text style={{ fontWeight: "bold" }}>Country:</Text>
+
+              <View
+                style={{ marginLeft: 10, flexDirection: "row", marginTop: 5 }}
+              >
+                <Text style={{ fontWeight: "bold" }}>Country:&nbsp;&nbsp;</Text>
                 <Text>{confirmOrders.order.country}</Text>
               </View>
             </View>
@@ -196,31 +231,15 @@ const Confirm = (props) => {
         </>
       ) : null}
 
-      <TouchableOpacity onPress={ordersComfirmation}>
-        <View
-          style={{
-            width: 300,
-            height: 60,
-            backgroundColor: "#1662A2",
-            borderRadius: 10,
-            marginBottom: 30,
-            marginTop: 20,
-            alignSelf: "center",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 20,
-              color: "#fff",
-              fontWeight: "bold",
-              alignSelf: "center",
-              marginTop: 15,
-            }}
-          >
-            Confirm Orders
-          </Text>
-        </View>
-      </TouchableOpacity>
+      <StripeProvider publishableKey="pk_test_51Le5cmGi435cP5wAes9XUHnwYdaxQmtzfi0qI9eIqWKxO5tToXvyBkUjLdHShuR0P9DSkcWU2kRiLegZB1Y0AQt300Z9BKEr60">
+        <StripApp
+          customerPhoneNumber={confirmOrders.order.orders[0].phone}
+          customerEmail={confirmOrders.order.orders[0].email}
+          productName={confirmOrders.order.orders[0].productName}
+          productPrice={confirmOrders.order.orders[0].price}
+          confirmOrder={ordersComfirmation}
+        />
+      </StripeProvider>
     </ScrollView>
   );
 };
@@ -229,6 +248,7 @@ const styles = StyleSheet.create({
   ScrollViewContainer: {
     height: height,
     backgroundColor: "#fff",
+    marginTop: 30,
     padding: 10,
     alignContent: "center",
   },

@@ -3,18 +3,20 @@ import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { RadioButton } from "react-native-paper";
 import { Picker } from "@react-native-picker/picker";
+import StripApp from "../../Stripe/StripApp";
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 const paymentMethod = [
-  { name: "Cash on Delivery", value: 1 },
-  { name: "Credit Card", value: 2 },
-  { name: "Debit Card", value: 3 },
+  // { name: "Cash on Delivery", value: 1 },
+  // { name: "Credit Card", value: 2 },
+  { name: "Debit Card", value: 2 },
 ];
 
 //paymentment cards
 const paymentCards = [
   { name: "Visa", value: 1 },
-  { name: "Verve", value: 2 },
-  { name: "Master", value: 3 },
+  // { name: "Verve", value: 2 },
+  // { name: "Master", value: 3 },
 ];
 
 const ProductPayment = (props) => {
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 50,
     backgroundColor: "#1662A2",
-    marginTop: 1,
+    marginTop: 30,
   },
 
   titleText: {

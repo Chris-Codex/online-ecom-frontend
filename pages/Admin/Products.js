@@ -76,19 +76,12 @@ const Products = (props) => {
       .delete(`${baseUrlGenerator}products/${id}`, config)
       .then((res) => {
         console.log(res);
-        // const filtered = productsItem.filter((item) => item.id !== id);
-        // setProductsItem(filtered);
-        // Toast.show({
-        //   type: "success",
-        //   position: "top",
-        //   text1: "Update was Successful",
-        //   text2: "Griffith Store",
-        //   visibilityTime: 3000,
-        //   topOffset: 50,
-        // });
-        // setTimeout(() => {
-        //   props.navigation.navigate("Products");
-        // }, 500);
+
+        axios.get(`${baseUrlGenerator}products`).then((res) => {
+          setProductsItem(res.data);
+          setFilter(res.data);
+          setIsLoading(false);
+        });
       })
       .catch((err) => console.log("DELETE ERROR", err));
   };

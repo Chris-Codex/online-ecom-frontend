@@ -9,12 +9,12 @@ import {
 } from "react-native";
 
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Item, Picker, Select } from "native-base";
 import FormContainer from "../../welcomeHeader/ReusableForms/FormContainer";
 import FormInput from "../../welcomeHeader/ReusableForms/FormInput";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthenticateGlobal from "../../../ContextApi/store/AuthenticateGlobal";
+import { Picker, Item } from "@react-native-picker/picker";
 
 import { connect } from "react-redux";
 
@@ -25,7 +25,7 @@ const countries = require("../../../data/countries.json");
 
 const ProductCheckout = (props) => {
   const { userState } = useContext(AuthenticateGlobal);
-
+  const [picker, setPicker] = useState();
   const [orders, setOrders] = useState([]);
   const [address, setAddress] = useState("");
   const [secondAddress, setSecondAddress] = useState("");
@@ -36,6 +36,7 @@ const ProductCheckout = (props) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [user, setUser] = useState();
+  const [error, setError] = "";
 
   useEffect(() => {
     setOrders(props.cartList);
@@ -83,13 +84,20 @@ const ProductCheckout = (props) => {
         enableOnAndroid={true}
       >
         <FormContainer title="Shipping/Delivery Address">
-          {/* <FormInput
+          <FormInput
             placeholder={"Phone"}
             onChangeText={(text) => setPhone(text)}
             value={phone}
             keyboardType={"numeric"}
             name={"phone"}
-          /> */}
+          />
+
+          <FormInput
+            placeholder={"Email"}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+            name={"email"}
+          />
 
           <FormInput
             placeholder={"Address 1"}
@@ -112,13 +120,6 @@ const ProductCheckout = (props) => {
             name={"City"}
           />
 
-          {/* <FormInput
-            placeholder={"State"}
-            onChangeText={(text) => setState(text)}
-            value={state}
-            name={"State"}
-          /> */}
-
           <FormInput
             placeholder={"Zip Code"}
             onChangeText={(text) => setZip(text)}
@@ -127,41 +128,52 @@ const ProductCheckout = (props) => {
             name={"Zip Code"}
           />
 
-          {/* <FormInput
-            placeholder={"Email"}
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-            name={"Email"}
-          /> */}
+          <Picker
+            selectedValue={country}
+            mode="Dropdown"
+            iosIcon={<Icon name="arrow-down" color="#1662A2" />}
+            style={{
+              width: 343,
+              marginLeft: 10,
+              backgroundColor: "#fff",
+              marginTop: -2,
+            }}
+            onValueChange={(e) => setCountry(e)}
+            placeholder="Select your country"
+            placeholderStyle={{ color: "#bfc6ea" }}
+            headerBackButtonTextStyle="white"
+          >
+            {countries.map((country) => {
+              const { name, code, iso } = country;
+              return <Picker.Item key={name} label={name} value={iso} />;
+            })}
+          </Picker>
 
-          <FormInput
-            placeholder={"Country"}
-            onChangeText={(text) => setCountry(text)}
-            value={country}
-            name={"Country"}
-          />
-
-          {/* <Item Picker>
-            <Picker
-              mode="dropdown"
-              iosIcon={<Icon name="ios-arrow-down-outline" />}
-              style={{ width: undefined }}
-              placeholder="Select your country"
-              placeholderStyle={{ color: "#bfc6ea" }}
-              placeholderIconColor="#007aff"
-              selectedValue={country}
-              onValueChange={(e) => setCountry(e)}
+          <TouchableOpacity onPress={() => Checkout()}>
+            <View
+              style={{
+                width: 300,
+                height: 60,
+                backgroundColor: "#1662A2",
+                borderRadius: 10,
+                marginBottom: 30,
+                marginTop: 20,
+                alignSelf: "center",
+              }}
             >
-              {countries.map((country) => {
-                const { name, code, iso } = country;
-                console.log("XXXXXXXXXXXXXXXXXXXXXXX:", country);
-                return <Picker.Item key={name} label={code} value={iso} />;
-              })}
-            </Picker>
-          </Item> */}
-          <View style={{ width: "100%", alignItems: "center" }}>
-            <Button title="Checkout" onPress={() => Checkout()} />
-          </View>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: "#fff",
+                  fontWeight: "bold",
+                  alignSelf: "center",
+                  marginTop: 15,
+                }}
+              >
+                Checkout
+              </Text>
+            </View>
+          </TouchableOpacity>
         </FormContainer>
       </KeyboardAwareScrollView>
     </View>
